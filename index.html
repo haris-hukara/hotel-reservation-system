@@ -1,0 +1,236 @@
+<style>
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    /* font-size: 10px; */
+
+    /* 10px / 16px = 0.625 = 62.5% */
+    /* Percentage of user's browser font-size setting */
+    font-size: 62.5%;
+  }
+
+  body {
+    background-color: #f5f6fa;
+    background-image: url("Group 50.png");
+    background-size: cover;
+    font-family: "Poppins", sans-serif;
+  }
+
+  .main {
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #ffffff;
+    width: 70em;
+    height: 60em;
+    margin: 7em auto;
+    border-radius: 1em;
+    box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .logo {
+    display: inline-block;
+    color: #2a303b;
+    font-size: 3.6em;
+    font-weight: 500;
+    text-shadow: 0px 3px 5px rgba(28, 195, 178, 0.15);
+  }
+
+  .logo span {
+    color: #1cc3b2;
+  }
+
+  .login {
+    text-align: center;
+    color: #212529;
+    font-family: "Poppins", sans-serif;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 2em;
+  }
+
+  form.form1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 82%;
+  }
+
+  .form-field {
+    width: 100%;
+    color: rgb(38, 50, 56);
+    font-weight: 400;
+    font-size: 1.4em;
+    letter-spacing: 1px;
+    background: rgba(136, 126, 126, 0.01);
+    padding: 0.9em 0px;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    box-sizing: border-box;
+    border: 1.8px solid rgba(0, 0, 0, 0.05);
+    margin-bottom: 50px;
+    text-align: center;
+    margin-bottom: 2em;
+    font-family: "Poppins", sans-serif;
+  }
+
+  .form-field:focus {
+    border: 1.8px solid #1cc3b2 !important;
+    transition: 0.5s ease-out;
+  }
+
+  .form-field::placeholder {
+    color: #636a76;
+  }
+
+  .submit {
+    width: 100%;
+    cursor: pointer;
+    text-transform: uppercase;
+    display: inline-block;
+    border-radius: 10px;
+    color: #fff;
+    background: #1cc3b2;
+    text-align: center;
+    border: 0;
+    padding: 1em 0;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+  }
+
+  .submit:hover {
+    background: #20a799;
+    transition: 0.3s ease-in;
+  }
+
+  .forgot:link,
+  .forgot:visited {
+    text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+    text-decoration: underline;
+    font-size: 1.3em;
+    color: #7a7a7a;
+  }
+  .forgot:hover,
+  .forgot:active {
+    color: #1cc3b2;
+    transition: 0.3s ease-in;
+  }
+
+  .form-links {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 2.4em;
+    padding-bottom: 0.6em;
+  }
+
+  .forgot {
+    text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+    text-decoration: underline;
+    font-size: 12px;
+    color: #7a7a7a;
+  }
+
+  a {
+    text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+    color: #7a7a7a;
+    text-decoration: none;
+  }
+
+  label {
+    color: #212529;
+    font-size: 1.4em;
+    margin-bottom: 0.5em;
+  }
+
+  @media (max-width: 600px) {
+    .main {
+      border-radius: 0px;
+    }
+  }
+</style>
+<html>
+  <head>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Ubuntu"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,500;0,600;0,700;1,200&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="path/to/font-awesome/css/font-awesome.min.css"
+    />
+    <title>Log in</title>
+  </head>
+
+  <body>
+    <div class="main">
+      <div class="form-heading">
+        <p class="logo">Hotel <span>S</span>ea</p>
+        <p class="login">Login</p>
+      </div>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="43.541"
+        viewBox="0 0 1920.153 43.541"
+        width="700"
+      >
+        <path
+          id="Path_18"
+          data-name="Path 18"
+          d="M-43.475,11.044S521.191-30.5,938.916-30.5s937.609,41.543,937.609,41.543"
+          transform="translate(43.548 31.499)"
+          fill="none"
+          stroke="#1cc3b2"
+          stroke-width="6"
+        ></path>
+      </svg>
+      <!-- <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="1920.153"
+        height="43.541"
+        viewBox="0 0 1920.153 43.541"
+      >
+        <path
+          id="Path_18"
+          data-name="Path 18"
+          d="M-43.475,11.044S521.191-30.5,938.916-30.5s937.609,41.543,937.609,41.543"
+          transform="translate(43.548 31.499)"
+          fill="none"
+          stroke="#1cc3b2"
+          stroke-width="2"
+        />
+      </svg> -->
+
+      <form class="form1">
+        <label for="email">Email</label>
+        <input class="form-field" type="text" placeholder="Email" />
+        <label for="password">Password</label>
+        <input class="form-field" type="password" placeholder="Password" />
+        <a class="submit">Login</a>
+        <div class="form-links">
+          <a class="forgot" href="#">Forgot Password? </a
+          ><a class="forgot" href="#">Register Here </a>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
