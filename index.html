@@ -7,7 +7,6 @@
 
   html {
     /* font-size: 10px; */
-
     /* 10px / 16px = 0.625 = 62.5% */
     /* Percentage of user's browser font-size setting */
     font-size: 62.5%;
@@ -20,33 +19,40 @@
     font-family: "Poppins", sans-serif;
   }
 
-  .main {
-    padding: 2em;
+  .form-main {
+    padding: 3em 2em;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
     background-color: #ffffff;
-    width: 70em;
-    height: 60em;
+    max-width: 70em;
     margin: 7em auto;
     border-radius: 1em;
     box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.1);
   }
 
-  .logo {
+  .form-logo {
     display: inline-block;
     color: #2a303b;
     font-size: 3.6em;
     font-weight: 500;
-    text-shadow: 0px 3px 5px rgba(28, 195, 178, 0.15);
+
+    text-shadow: 0px 3px 5px rgba(28, 195, 178, 0.20);
   }
 
-  .logo span {
+  .form-logo span {
     color: #1cc3b2;
   }
 
-  .login {
+  .form-heading{
+    text-align: center;
+  }
+  
+  
+
+  
+  .form-subheading {
     text-align: center;
     color: #212529;
     font-family: "Poppins", sans-serif;
@@ -155,18 +161,28 @@
   }
 
   @media (max-width: 600px) {
-    .main {
+    .form-main {
       border-radius: 0px;
     }
   }
 </style>
+<!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="css/style.css" />
+    <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      <link rel="manifest" href="/site.webmanifest">
+      <link rel="stylesheet" href="css/style.css" />
     <link
       href="https://fonts.googleapis.com/css?family=Ubuntu"
       rel="stylesheet"
     />
+    
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -178,48 +194,34 @@
       rel="stylesheet"
       href="path/to/font-awesome/css/font-awesome.min.css"
     />
-    <title>Log in</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Hotel Sea | Log in</title>
   </head>
 
   <body>
-    <div class="main">
+    <div class="form-main">
       <div class="form-heading">
-        <p class="logo">Hotel <span>S</span>ea</p>
-        <p class="login">Login</p>
+        <p class="form-logo">Hotel <span>S</span>ea</p>
+        <p class="form-subheading">Login</p>
       </div>
       <svg
+        class="form-svg"
         xmlns="http://www.w3.org/2000/svg"
-        height="43.541"
         viewBox="0 0 1920.153 43.541"
+        height="80"
         width="700"
       >
         <path
           id="Path_18"
+          class="form_svg_path"
           data-name="Path 18"
           d="M-43.475,11.044S521.191-30.5,938.916-30.5s937.609,41.543,937.609,41.543"
           transform="translate(43.548 31.499)"
           fill="none"
           stroke="#1cc3b2"
-          stroke-width="6"
+          stroke-width="8"
         ></path>
       </svg>
-      <!-- <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="1920.153"
-        height="43.541"
-        viewBox="0 0 1920.153 43.541"
-      >
-        <path
-          id="Path_18"
-          data-name="Path 18"
-          d="M-43.475,11.044S521.191-30.5,938.916-30.5s937.609,41.543,937.609,41.543"
-          transform="translate(43.548 31.499)"
-          fill="none"
-          stroke="#1cc3b2"
-          stroke-width="2"
-        />
-      </svg> -->
-
       <form class="form1">
         <label for="email">Email</label>
         <input class="form-field" type="text" placeholder="Email" />
@@ -232,5 +234,71 @@
         </div>
       </form>
     </div>
-  </body>
+    <div class="form-main">
+      <div class="form-heading">
+        <p class="form-logo">Hotel <span>S</span>ea</p>
+        <p class="form-subheading">Registration</p>
+      </div>
+      <svg
+        class="form-svg"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1920.153 43.541"
+        height="80"
+        width="700"
+      >
+        <path
+          id="Path_18"
+          class="form_svg_path"
+          data-name="Path 18"
+          d="M-43.475,11.044S521.191-30.5,938.916-30.5s937.609,41.543,937.609,41.543"
+          transform="translate(43.548 31.499)"
+          fill="none"
+          stroke="#1cc3b2"
+          stroke-width="8"
+        ></path>
+      </svg>
+      <form class="form1">
+        <label for="email">Email</label>
+        <input class="form-field" type="text" placeholder="Email" />
+        <label for="password">Password</label>
+        <input class="form-field" type="password" placeholder="Password" />
+        <a class="submit">Login</a>
+        <div class="form-links">
+          <a class="forgot" href="#">Forgot Password? </a
+          ><a class="forgot" href="#">Register Here </a>
+        </div>
+      </form>
+    </div>
+
+    <script>
+    $(function() {
+        //  Here I use .on instead of direct reference to the event as this is just good practice4 with jQuery
+        //  You'll later learn you can use this with prewritten methods to "turn on/off" methods asigned to specific events
+        $(window).on('resize', function(e) {
+          
+
+          for(var i = 0; i < $(".form-svg").length; i++){
+
+          if($(window).width() > 700){
+            $(".form_svg_path")[i].setAttribute("stroke-width",8);
+          }
+          if($(window).width() < 700){
+            var stroke = (700 - $(window).width())/100 + 10 ;
+            $(".form_svg_path")[i].setAttribute("stroke-width",stroke);
+          }
+          
+          if($(window).width() < 300){
+            var stroke = (700 - $(window).width())/100 + 15 ;
+            $(".form_svg_path")[i].setAttribute("stroke-width",stroke);
+          }
+
+          $(".form-svg")[i].setAttribute("width", document.getElementsByClassName("form-main")[0].offsetWidth);
+        }
+
+
+        } )
+    })
+    </script>
+  
+</body>
 </html>
