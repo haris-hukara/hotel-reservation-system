@@ -1,172 +1,200 @@
-<style>
-  * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-  }
+<!DOCTYPE html>
 
-  html {
-    /* font-size: 10px; */
-
-    /* 10px / 16px = 0.625 = 62.5% */
-    /* Percentage of user's browser font-size setting */
-    font-size: 62.5%;
-  }
-
-  body {
-    background-color: #f5f6fa;
-    background-image: url("Group 50.png");
-    background-size: cover;
-    font-family: "Poppins", sans-serif;
-  }
-
-  .main {
-    padding: 2em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    background-color: #ffffff;
-    width: 70em;
-    height: 60em;
-    margin: 7em auto;
-    border-radius: 1em;
-    box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.1);
-  }
-
-  .logo {
-    display: inline-block;
-    color: #2a303b;
-    font-size: 3.6em;
-    font-weight: 500;
-    text-shadow: 0px 3px 5px rgba(28, 195, 178, 0.15);
-  }
-
-  .logo span {
-    color: #1cc3b2;
-  }
-
-  .login {
-    text-align: center;
-    color: #212529;
-    font-family: "Poppins", sans-serif;
-    text-transform: uppercase;
-    font-weight: 400;
-    font-size: 2em;
-  }
-
-  form.form1 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 82%;
-  }
-
-  .form-field {
-    width: 100%;
-    color: rgb(38, 50, 56);
-    font-weight: 400;
-    font-size: 1.4em;
-    letter-spacing: 1px;
-    background: rgba(136, 126, 126, 0.01);
-    padding: 0.9em 0px;
-    border: none;
-    border-radius: 10px;
-    outline: none;
-    box-sizing: border-box;
-    border: 1.8px solid rgba(0, 0, 0, 0.05);
-    margin-bottom: 50px;
-    text-align: center;
-    margin-bottom: 2em;
-    font-family: "Poppins", sans-serif;
-  }
-
-  .form-field:focus {
-    border: 1.8px solid #1cc3b2 !important;
-    transition: 0.5s ease-out;
-  }
-
-  .form-field::placeholder {
-    color: #636a76;
-  }
-
-  .submit {
-    width: 100%;
-    cursor: pointer;
-    text-transform: uppercase;
-    display: inline-block;
-    border-radius: 10px;
-    color: #fff;
-    background: #1cc3b2;
-    text-align: center;
-    border: 0;
-    padding: 1em 0;
-    font-family: "Poppins", sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
-  }
-
-  .submit:hover {
-    background: #20a799;
-    transition: 0.3s ease-in;
-  }
-
-  .forgot:link,
-  .forgot:visited {
-    text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
-    text-decoration: underline;
-    font-size: 1.3em;
-    color: #7a7a7a;
-  }
-  .forgot:hover,
-  .forgot:active {
-    color: #1cc3b2;
-    transition: 0.3s ease-in;
-  }
-
-  .form-links {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    margin-top: 2.4em;
-    padding-bottom: 0.6em;
-  }
-
-  .forgot {
-    text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
-    text-decoration: underline;
-    font-size: 12px;
-    color: #7a7a7a;
-  }
-
-  a {
-    text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
-    color: #7a7a7a;
-    text-decoration: none;
-  }
-
-  label {
-    color: #212529;
-    font-size: 1.4em;
-    margin-bottom: 0.5em;
-  }
-
-  @media (max-width: 600px) {
-    .main {
-      border-radius: 0px;
-    }
-  }
-</style>
 <html>
   <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        /* font-size: 10px; */
+        /* 10px / 16px = 0.625 = 62.5% */
+        /* Percentage of user's browser font-size setting */
+        font-size: 62.5%;
+      }
+
+      body {
+        background-color: #f5f6fa;
+        background-image: url("Group 50.png");
+        background-size: cover;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .form-main {
+        padding: 3em 2em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        background-color: #ffffff;
+        max-width: 70em;
+        margin: 7em auto;
+        border-radius: 1em;
+        box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-logo {
+        display: inline-block;
+        color: #2a303b;
+        font-size: 3.6em;
+        font-weight: 500;
+
+        text-shadow: 0px 3px 5px rgba(28, 195, 178, 0.2);
+      }
+
+      .form-logo span {
+        color: #1cc3b2;
+      }
+
+      .form-heading {
+        text-align: center;
+      }
+
+      .form-subheading {
+        text-align: center;
+        color: #212529;
+        font-family: "Poppins", sans-serif;
+        text-transform: uppercase;
+        font-weight: 400;
+        font-size: 2em;
+      }
+
+      form.form1 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 82%;
+      }
+
+      .form-2-fields {
+        width: 100%;
+        display: flex;
+        column-gap: 2em;
+      }
+
+      div.form-2-fields > * {
+        width: 50%;
+      }
+
+      .form-field {
+        width: 100%;
+        color: rgb(38, 50, 56);
+        font-weight: 400;
+        font-size: 1.4em;
+        letter-spacing: 1px;
+        background: rgba(136, 126, 126, 0.01);
+        padding: 0.9em 0px;
+        border: none;
+        border-radius: 10px;
+        outline: none;
+        box-sizing: border-box;
+        border: 1.8px solid rgba(0, 0, 0, 0.05);
+        margin-bottom: 50px;
+        text-align: center;
+        margin-bottom: 2em;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .form-field:focus {
+        border: 1.8px solid #1cc3b2 !important;
+        transition: 0.5s ease-out;
+      }
+
+      .form-field::placeholder {
+        color: #636a76;
+      }
+
+      .submit {
+        width: 100%;
+        cursor: pointer;
+        text-transform: uppercase;
+        display: inline-block;
+        border-radius: 10px;
+        color: #fff;
+        background: #1cc3b2;
+        text-align: center;
+        border: 0;
+        padding: 1em 0;
+        font-family: "Poppins", sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+      }
+
+      .submit:hover {
+        background: #20a799;
+        transition: 0.3s ease-in;
+      }
+
+      .forgot:link,
+      .forgot:visited {
+        text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+        text-decoration: underline;
+        font-size: 1.3em;
+        color: #7a7a7a;
+      }
+      .forgot:hover,
+      .forgot:active {
+        color: #1cc3b2;
+        transition: 0.3s ease-in;
+      }
+
+      .form-links {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 2.4em;
+        padding-bottom: 0.6em;
+      }
+
+      .forgot {
+        text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+        text-decoration: underline;
+        font-size: 12px;
+        color: #7a7a7a;
+      }
+
+      .label-title {
+        margin-bottom: 0.6em;
+        text-align: center;
+      }
+
+      a {
+        text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+        color: #7a7a7a;
+        text-decoration: none;
+      }
+
+      label {
+        color: #212529;
+        font-size: 1.4em;
+      }
+
+      @media (max-width: 600px) {
+        .form-main {
+          border-radius: 0px;
+        }
+      }
+    </style>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="stylesheet" href="css/style.css" />
     <link
       href="https://fonts.googleapis.com/css?family=Ubuntu"
       rel="stylesheet"
     />
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -178,59 +206,219 @@
       rel="stylesheet"
       href="path/to/font-awesome/css/font-awesome.min.css"
     />
-    <title>Log in</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Hotel Sea | Log in</title>
   </head>
 
   <body>
-    <div class="main">
+    <div class="form-main">
       <div class="form-heading">
-        <p class="logo">Hotel <span>S</span>ea</p>
-        <p class="login">Login</p>
+        <p class="form-logo">Hotel <span>S</span>ea</p>
+        <p class="form-subheading">Login</p>
       </div>
       <svg
+        class="form-svg"
         xmlns="http://www.w3.org/2000/svg"
-        height="43.541"
         viewBox="0 0 1920.153 43.541"
+        height="80"
         width="700"
       >
         <path
-          id="Path_18"
+          class="form_svg_path"
           data-name="Path 18"
           d="M-43.475,11.044S521.191-30.5,938.916-30.5s937.609,41.543,937.609,41.543"
           transform="translate(43.548 31.499)"
           fill="none"
           stroke="#1cc3b2"
-          stroke-width="6"
+          stroke-width="8"
         ></path>
       </svg>
-      <!-- <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="1920.153"
-        height="43.541"
-        viewBox="0 0 1920.153 43.541"
-      >
-        <path
-          id="Path_18"
-          data-name="Path 18"
-          d="M-43.475,11.044S521.191-30.5,938.916-30.5s937.609,41.543,937.609,41.543"
-          transform="translate(43.548 31.499)"
-          fill="none"
-          stroke="#1cc3b2"
-          stroke-width="2"
-        />
-      </svg> -->
-
       <form class="form1">
-        <label for="email">Email</label>
-        <input class="form-field" type="text" placeholder="Email" />
-        <label for="password">Password</label>
-        <input class="form-field" type="password" placeholder="Password" />
-        <a class="submit">Login</a>
+        <div class="label-title">
+          <label for="email">Email</label>
+        </div>
+        <input id="email" class="form-field" type="text" placeholder="Email" />
+        <div class="label-title">
+          <label for="password">Password</label>
+        </div>
+        <input
+          id="password"
+          class="form-field"
+          type="password"
+          placeholder="Password"
+        />
+        <button type="submit" class="submit">Login</button>
         <div class="form-links">
           <a class="forgot" href="#">Forgot Password? </a
           ><a class="forgot" href="#">Register Here </a>
         </div>
       </form>
     </div>
+    <div class="form-main">
+      <div class="form-heading">
+        <p class="form-logo">Hotel <span>S</span>ea</p>
+        <p class="form-subheading">Registration</p>
+      </div>
+      <svg
+        class="form-svg"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1920.153 43.541"
+        height="80"
+        width="700"
+      >
+        <path
+          class="form_svg_path"
+          data-name="Path 18"
+          d="M-43.475,11.044S521.191-30.5,938.916-30.5s937.609,41.543,937.609,41.543"
+          transform="translate(43.548 31.499)"
+          fill="none"
+          stroke="#1cc3b2"
+          stroke-width="8"
+        ></path>
+      </svg>
+      <form class="form1">
+        <div class="label-title">
+          <label for="email">Email</label>
+        </div>
+        <input
+          id="email"
+          class="form-field"
+          type="text"
+          placeholder="John.Doe@mail.com"
+        />
+        <div class="label-title">
+          <label for="password">Password</label>
+        </div>
+        <input
+          id="password"
+          class="form-field"
+          type="password"
+          placeholder="Password"
+        />
+        <div class="form-2-fields">
+          <div>
+            <div class="label-title">
+              <label for="first_name">First name</label>
+            </div>
+            <input
+              id="first_name"
+              class="form-field"
+              type="text"
+              placeholder="John"
+            />
+          </div>
+          <div>
+            <div class="label-title">
+              <label for="last_name">Last name</label>
+            </div>
+            <input
+              id="last_name"
+              class="form-field"
+              type="text"
+              placeholder="Doe"
+            />
+          </div>
+        </div>
+        <div class="form-2-fields">
+          <div>
+            <div class="label-title">
+              <label for="phone_number">Phone number</label>
+            </div>
+            <input
+              id="phone_number"
+              class="form-field"
+              type="tel"
+              placeholder="+387 60 000 000"
+            />
+          </div>
+          <div>
+            <div class="label-title">
+              <label for="birth_date">Birth date</label>
+            </div>
+            <input
+              id="birth_date"
+              class="form-field form-date"
+              type="date"
+              min="1920-01-01"
+              max="2022-12-31"
+            />
+          </div>
+        </div>
+        <div class="form-2-fields">
+          <div>
+            <div class="label-title">
+              <label for="country">Country</label>
+            </div>
+            <input
+              id="country"
+              class="form-field"
+              type="text"
+              placeholder="Croatia"
+            />
+          </div>
+          <div>
+            <div class="label-title">
+              <label for="city">City</label>
+            </div>
+            <input
+              id="city"
+              class="form-field"
+              type="text"
+              placeholder="Zagreb"
+            />
+          </div>
+        </div>
+
+        <button type="submit" class="submit">Register</button>
+        <div class="form-links">
+          <a class="forgot" href="#">Back to login </a>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        $("#birth_date").val("");
+        var today = new Date();
+        var max_date = today.getFullYear() + "-";
+        var month = today.getMonth() + 1;
+        if (month.toString().length == 1) {
+          max_date += "0";
+        }
+        max_date += month + "-";
+        if (today.getDate().toString().length == 1) {
+          max_date += "0";
+        }
+        max_date += today.getDate();
+        $("#birth_date").attr("max", max_date);
+      });
+      // document.getElementById("birth_date").valueAsDate = new Date();
+
+      $(function () {
+        //  Here I use .on instead of direct reference to the event as this is just good practice4 with jQuery
+        //  You'll later learn you can use this with prewritten methods to "turn on/off" methods asigned to specific events
+        $(window).on("resize", function (e) {
+          for (var i = 0; i < $(".form-svg").length; i++) {
+            if ($(window).width() > 700) {
+              $(".form_svg_path")[i].setAttribute("stroke-width", 8);
+            }
+            if ($(window).width() < 700) {
+              var stroke = (700 - $(window).width()) / 100 + 10;
+              $(".form_svg_path")[i].setAttribute("stroke-width", stroke);
+            }
+
+            if ($(window).width() < 300) {
+              var stroke = (700 - $(window).width()) / 100 + 15;
+              $(".form_svg_path")[i].setAttribute("stroke-width", stroke);
+            }
+
+            $(".form-svg")[i].setAttribute(
+              "width",
+              document.getElementsByClassName("form-main")[0].offsetWidth
+            );
+          }
+        });
+      });
+    </script>
   </body>
 </html>
