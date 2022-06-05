@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -89,13 +89,13 @@
         font-weight: 400;
         font-size: 1.4em;
         letter-spacing: 1px;
-        background: rgba(136, 126, 126, 0.01);
+        background-color: rgb(244, 244, 244);
         padding: 0.9em 0px;
         border: none;
         border-radius: 10px;
         outline: none;
         box-sizing: border-box;
-        border: 1.8px solid rgba(0, 0, 0, 0.05);
+        border: 1.8px solid rgba(0, 0, 0, 0);
         margin-bottom: 50px;
         text-align: center;
         margin-bottom: 2em;
@@ -160,11 +160,16 @@
         text-decoration: underline;
         font-size: 12px;
         color: #7a7a7a;
+        cursor: pointer;
       }
 
       .label-title {
         margin-bottom: 0.6em;
         text-align: center;
+      }
+
+      .hidden {
+        display: none !important;
       }
 
       a {
@@ -210,7 +215,7 @@
   </head>
 
   <body>
-    <div class="form-main">
+    <div id="login-form-container" class="form-main">
       <div class="form-heading">
         <p class="form-logo">Hotel <span>S</span>ea</p>
         <p class="form-subheading">Login</p>
@@ -232,7 +237,7 @@
           stroke-width="8"
         ></path>
       </svg>
-      <form class="form1">
+      <form id="login-form" class="form1" role="form">
         <div class="label-title">
           <label for="email">Email</label>
         </div>
@@ -248,12 +253,12 @@
         />
         <button type="submit" class="submit">Login</button>
         <div class="form-links">
-          <a class="forgot" href="#">Forgot Password? </a
-          ><a class="forgot" href="#">Register Here </a>
+          <a class="forgot" onclick="showForgotForm()">Forgot Password? </a
+          ><a class="forgot" onclick="showRegisterForm()">Register Here </a>
         </div>
       </form>
     </div>
-    <div class="form-main">
+    <div id="register-form-container" class="form-main hidden">
       <div class="form-heading">
         <p class="form-logo">Hotel <span>S</span>ea</p>
         <p class="form-subheading">Registration</p>
@@ -275,7 +280,7 @@
           stroke-width="8"
         ></path>
       </svg>
-      <form class="form1">
+      <form id="login-form" class="form1" role="form">
         <div class="label-title">
           <label for="email">Email</label>
         </div>
@@ -370,7 +375,86 @@
 
         <button type="submit" class="submit">Register</button>
         <div class="form-links">
-          <a class="forgot" href="#">Back to login </a>
+          <a class="forgot" onclick="showLoginForm()">Back to login </a>
+        </div>
+      </form>
+    </div>
+    <div id="forgot-form-container" class="form-main hidden">
+      <div class="form-heading">
+        <p class="form-logo">Hotel <span>S</span>ea</p>
+        <p class="form-subheading">Forgot password</p>
+      </div>
+      <svg
+        class="form-svg"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1920.153 43.541"
+        height="80"
+        width="700"
+      >
+        <path
+          class="form_svg_path"
+          data-name="Path 18"
+          d="M-43.475,11.044S521.191-30.5,938.916-30.5s937.609,41.543,937.609,41.543"
+          transform="translate(43.548 31.499)"
+          fill="none"
+          stroke="#1cc3b2"
+          stroke-width="8"
+        ></path>
+      </svg>
+      <form id="login-form" class="form1" role="form">
+        <div class="label-title">
+          <label for="email">Email</label>
+        </div>
+        <input id="email" class="form-field" type="text" placeholder="Email" />
+
+        <button type="submit" class="submit">Login</button>
+        <div class="form-links">
+          <a class="forgot" onclick="showLoginForm()">Back to login </a>
+        </div>
+      </form>
+    </div>
+    <div id="change-password-form-container" class="form-main hidden">
+      <div class="form-heading">
+        <p class="form-logo">Hotel <span>S</span>ea</p>
+        <p class="form-subheading">Password reset</p>
+      </div>
+      <svg
+        class="form-svg"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1920.153 43.541"
+        height="80"
+        width="700"
+      >
+        <path
+          class="form_svg_path"
+          data-name="Path 18"
+          d="M-43.475,11.044S521.191-30.5,938.916-30.5s937.609,41.543,937.609,41.543"
+          transform="translate(43.548 31.499)"
+          fill="none"
+          stroke="#1cc3b2"
+          stroke-width="8"
+        ></path>
+      </svg>
+      <form id="login-form" class="form1" role="form">
+        <div class="label-title">
+          <label for="password">Password</label>
+        </div>
+        <input
+          id="password"
+          class="form-field"
+          type="password"
+          placeholder="Password"
+        />
+        <input
+          id="change-password-token"
+          class="form1"
+          type="hidden"
+          name="token"
+        />
+
+        <button type="submit" class="submit">Login</button>
+        <div class="form-links">
+          <a class="forgot" onclick="showLoginForm()">Back to login </a>
         </div>
       </form>
     </div>
@@ -393,31 +477,66 @@
       });
       // document.getElementById("birth_date").valueAsDate = new Date();
 
-      $(function () {
-        //  Here I use .on instead of direct reference to the event as this is just good practice4 with jQuery
-        //  You'll later learn you can use this with prewritten methods to "turn on/off" methods asigned to specific events
-        $(window).on("resize", function (e) {
-          for (var i = 0; i < $(".form-svg").length; i++) {
-            if ($(window).width() > 700) {
-              $(".form_svg_path")[i].setAttribute("stroke-width", 8);
-            }
-            if ($(window).width() < 700) {
-              var stroke = (700 - $(window).width()) / 100 + 10;
-              $(".form_svg_path")[i].setAttribute("stroke-width", stroke);
-            }
+      resizeSVG();
+      function resizeSVG() {
+        $(function () {
+          $(window).on("resize", function (e) {
+            for (var i = 0; i < $(".form-svg").length; i++) {
+              if ($(window).width() > 700) {
+                $(".form_svg_path")[i].setAttribute("stroke-width", 8);
+              }
+              if ($(window).width() < 700) {
+                var stroke = (700 - $(window).width()) / 100 + 10;
+                $(".form_svg_path")[i].setAttribute("stroke-width", stroke);
+              }
 
-            if ($(window).width() < 300) {
-              var stroke = (700 - $(window).width()) / 100 + 15;
-              $(".form_svg_path")[i].setAttribute("stroke-width", stroke);
-            }
+              if ($(window).width() < 300) {
+                var stroke = (700 - $(window).width()) / 100 + 15;
+                $(".form_svg_path")[i].setAttribute("stroke-width", stroke);
+              }
 
-            $(".form-svg")[i].setAttribute(
-              "width",
-              document.getElementsByClassName("form-main")[0].offsetWidth
-            );
-          }
+              $(".form-svg")[i].setAttribute(
+                "width",
+                document.getElementsByClassName("form-main")[i].offsetWidth
+              );
+            }
+          });
         });
-      });
+      }
+      // change
+      var urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.has("token")) {
+        $("#change-password-token").val(urlParams.get("token"));
+        showChangePasswordForm();
+      }
+
+      function showChangePasswordForm() {
+        $("#change-password-form-container").removeClass("hidden");
+        $("#login-form-container").addClass("hidden");
+        $("#register-form-container").addClass("hidden");
+        $("#register-form-container").addClass("hidden");
+        $(window).resize();
+      }
+
+      function showForgotForm() {
+        $("#login-form-container").addClass("hidden");
+        $("#forgot-form-container").removeClass("hidden");
+        $(window).resize();
+      }
+
+      function showRegisterForm() {
+        $("#login-form-container").addClass("hidden");
+        $("#register-form-container").removeClass("hidden");
+        $(window).resize();
+      }
+
+      function showLoginForm() {
+        $("#login-form-container").removeClass("hidden");
+        $("#register-form-container").addClass("hidden");
+        $("#forgot-form-container").addClass("hidden");
+        $("#change-password-form-container").addClass("hidden");
+        $(window).resize();
+      }
     </script>
   </body>
 </html>
