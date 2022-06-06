@@ -83,28 +83,33 @@
         width: 50%;
       }
 
+      .input-container {
+        margin-bottom: 2em;
+        width: 100%;
+        border-radius: 10px;
+        background-color: rgb(247, 247, 247);
+        border: 1.8px solid rgba(0, 0, 0, 0.08);
+      }
+
+      .input-container:focus-within {
+        border: 1.8px solid #1cc3b2 !important;
+        transition: 0.5s ease-out;
+      }
+
       .form-field {
         width: 100%;
         color: rgb(38, 50, 56);
         font-weight: 400;
         font-size: 1.4em;
         letter-spacing: 1px;
-        background-color: rgb(244, 244, 244);
         padding: 0.9em 0px;
-        border: none;
         border-radius: 10px;
         outline: none;
         box-sizing: border-box;
-        border: 1.8px solid rgba(0, 0, 0, 0);
-        margin-bottom: 50px;
+        border: 0px solid rgba(0, 0, 0, 0);
         text-align: center;
-        margin-bottom: 2em;
         font-family: "Poppins", sans-serif;
-      }
-
-      .form-field:focus {
-        border: 1.8px solid #1cc3b2 !important;
-        transition: 0.5s ease-out;
+        background-color: inherit;
       }
 
       .form-field::placeholder {
@@ -127,6 +132,7 @@
         font-weight: 500;
         letter-spacing: 1px;
         box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+        margin-top: 1em;
       }
 
       .submit:hover {
@@ -172,6 +178,18 @@
         display: none !important;
       }
 
+      label[id$="-error"] {
+        position: relative;
+        display: block;
+        background-color: #df4857;
+        padding: 0.25em;
+        color: #fff;
+        font-size: 12px;
+        text-align: center;
+        border-top: 1.8px solid #c31c1c;
+        border-radius: 0 0 0.7em 0.7em;
+      }
+
       a {
         text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
         color: #7a7a7a;
@@ -190,6 +208,8 @@
       }
     </style>
 
+    <!-- Toastr CSS -->
+    <link href="toastr.min.css" rel="stylesheet" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -215,252 +235,344 @@
   </head>
 
   <body>
-    <div id="login-form-container" class="form-main">
-      <div class="form-heading">
-        <p class="form-logo">Hotel <span>S</span>ea</p>
-        <p class="form-subheading">Login</p>
+    <div class="background">
+      <div id="login-form-container" class="form-main">
+        <div class="form-heading">
+          <p class="form-logo">Hotel <span>S</span>ea</p>
+          <p class="form-subheading">Login</p>
+        </div>
+        <svg
+          class="form-svg"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1920.153 43.541"
+          height="80"
+          width="700"
+        >
+          <path
+            class="form_svg_path"
+            data-name="Path 18"
+            d="M-43.475,11.044S521.191-30.5,938.916-30.5s937.609,41.543,937.609,41.543"
+            transform="translate(43.548 31.499)"
+            fill="none"
+            stroke="#1cc3b2"
+            stroke-width="8"
+          ></path>
+        </svg>
+        <form id="login-form" class="form1" role="form">
+          <div class="label-title">
+            <label for="email">Email</label>
+          </div>
+          <div class="input-container">
+            <input
+              required=""
+              name="email"
+              class="form-field"
+              type="email"
+              minlength="5"
+              maxlength="255"
+              placeholder="John.Doe@mail.com"
+            />
+          </div>
+          <div class="label-title">
+            <label for="password">Password</label>
+          </div>
+          <div class="input-container">
+            <input
+              required=""
+              name="password"
+              class="form-field"
+              minlength="8"
+              maxlength="255"
+              type="password"
+              placeholder="Password"
+            />
+          </div>
+          <button id="login-link" type="submit" class="submit">Login</button>
+          <div class="form-links">
+            <a class="forgot" onclick="Login.showForgotForm()"
+              >Forgot Password? </a
+            ><a class="forgot" onclick="Login.showRegisterForm()"
+              >Register Here
+            </a>
+          </div>
+        </form>
       </div>
-      <svg
-        class="form-svg"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1920.153 43.541"
-        height="80"
-        width="700"
-      >
-        <path
-          class="form_svg_path"
-          data-name="Path 18"
-          d="M-43.475,11.044S521.191-30.5,938.916-30.5s937.609,41.543,937.609,41.543"
-          transform="translate(43.548 31.499)"
-          fill="none"
-          stroke="#1cc3b2"
-          stroke-width="8"
-        ></path>
-      </svg>
-      <form id="login-form" class="form1" role="form">
-        <div class="label-title">
-          <label for="email">Email</label>
-        </div>
-        <input id="email" class="form-field" type="text" placeholder="Email" />
-        <div class="label-title">
-          <label for="password">Password</label>
-        </div>
-        <input
-          id="password"
-          class="form-field"
-          type="password"
-          placeholder="Password"
-        />
-        <button type="submit" class="submit">Login</button>
-        <div class="form-links">
-          <a class="forgot" onclick="showForgotForm()">Forgot Password? </a
-          ><a class="forgot" onclick="showRegisterForm()">Register Here </a>
-        </div>
-      </form>
-    </div>
-    <div id="register-form-container" class="form-main hidden">
-      <div class="form-heading">
-        <p class="form-logo">Hotel <span>S</span>ea</p>
-        <p class="form-subheading">Registration</p>
-      </div>
-      <svg
-        class="form-svg"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1920.153 43.541"
-        height="80"
-        width="700"
-      >
-        <path
-          class="form_svg_path"
-          data-name="Path 18"
-          d="M-43.475,11.044S521.191-30.5,938.916-30.5s937.609,41.543,937.609,41.543"
-          transform="translate(43.548 31.499)"
-          fill="none"
-          stroke="#1cc3b2"
-          stroke-width="8"
-        ></path>
-      </svg>
-      <form id="login-form" class="form1" role="form">
-        <div class="label-title">
-          <label for="email">Email</label>
-        </div>
-        <input
-          id="email"
-          class="form-field"
-          type="text"
-          placeholder="John.Doe@mail.com"
-        />
-        <div class="label-title">
-          <label for="password">Password</label>
-        </div>
-        <input
-          id="password"
-          class="form-field"
-          type="password"
-          placeholder="Password"
-        />
-        <div class="form-2-fields">
-          <div>
-            <div class="label-title">
-              <label for="first_name">First name</label>
-            </div>
-            <input
-              id="first_name"
-              class="form-field"
-              type="text"
-              placeholder="John"
-            />
-          </div>
-          <div>
-            <div class="label-title">
-              <label for="last_name">Last name</label>
-            </div>
-            <input
-              id="last_name"
-              class="form-field"
-              type="text"
-              placeholder="Doe"
-            />
-          </div>
-        </div>
-        <div class="form-2-fields">
-          <div>
-            <div class="label-title">
-              <label for="phone_number">Phone number</label>
-            </div>
-            <input
-              id="phone_number"
-              class="form-field"
-              type="tel"
-              placeholder="+387 60 000 000"
-            />
-          </div>
-          <div>
-            <div class="label-title">
-              <label for="birth_date">Birth date</label>
-            </div>
-            <input
-              id="birth_date"
-              class="form-field form-date"
-              type="date"
-              min="1920-01-01"
-              max="2022-12-31"
-            />
-          </div>
-        </div>
-        <div class="form-2-fields">
-          <div>
-            <div class="label-title">
-              <label for="country">Country</label>
-            </div>
-            <input
-              id="country"
-              class="form-field"
-              type="text"
-              placeholder="Croatia"
-            />
-          </div>
-          <div>
-            <div class="label-title">
-              <label for="city">City</label>
-            </div>
-            <input
-              id="city"
-              class="form-field"
-              type="text"
-              placeholder="Zagreb"
-            />
-          </div>
-        </div>
 
-        <button type="submit" class="submit">Register</button>
-        <div class="form-links">
-          <a class="forgot" onclick="showLoginForm()">Back to login </a>
+      <div id="register-form-container" class="form-main hidden">
+        <div class="form-heading">
+          <p class="form-logo">Hotel <span>S</span>ea</p>
+          <p class="form-subheading">Registration</p>
         </div>
-      </form>
-    </div>
-    <div id="forgot-form-container" class="form-main hidden">
-      <div class="form-heading">
-        <p class="form-logo">Hotel <span>S</span>ea</p>
-        <p class="form-subheading">Forgot password</p>
-      </div>
-      <svg
-        class="form-svg"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1920.153 43.541"
-        height="80"
-        width="700"
-      >
-        <path
-          class="form_svg_path"
-          data-name="Path 18"
-          d="M-43.475,11.044S521.191-30.5,938.916-30.5s937.609,41.543,937.609,41.543"
-          transform="translate(43.548 31.499)"
-          fill="none"
-          stroke="#1cc3b2"
-          stroke-width="8"
-        ></path>
-      </svg>
-      <form id="login-form" class="form1" role="form">
-        <div class="label-title">
-          <label for="email">Email</label>
-        </div>
-        <input id="email" class="form-field" type="text" placeholder="Email" />
+        <svg
+          class="form-svg"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1920.153 43.541"
+          height="80"
+          width="700"
+        >
+          <path
+            class="form_svg_path"
+            data-name="Path 18"
+            d="M-43.475,11.044S521.191-30.5,938.916-30.5s937.609,41.543,937.609,41.543"
+            transform="translate(43.548 31.499)"
+            fill="none"
+            stroke="#1cc3b2"
+            stroke-width="8"
+          ></path>
+        </svg>
+        <form id="register-form" class="form1" role="form">
+          <div class="label-title">
+            <label for="email">Email</label>
+          </div>
+          <div class="input-container">
+            <input
+              required=""
+              name="email"
+              class="form-field"
+              type="email"
+              placeholder="John.Doe@mail.com"
+            />
+          </div>
+          <div class="label-title">
+            <label for="password">Password</label>
+          </div>
+          <div class="input-container">
+            <input
+              required=""
+              minlength="8"
+              maxlength="255"
+              name="password"
+              class="form-field"
+              type="password"
+              placeholder="Password"
+            />
+          </div>
+          <div class="form-2-fields">
+            <div>
+              <div class="label-title">
+                <label for="first_name">First name</label>
+              </div>
+              <div class="input-container">
+                <input
+                  required=""
+                  name="first_name"
+                  class="form-field"
+                  type="text"
+                  placeholder="John"
+                />
+              </div>
+            </div>
+            <div>
+              <div class="label-title">
+                <label for="last_name">Last name</label>
+              </div>
+              <div class="input-container">
+                <input
+                  required=""
+                  name="last_name"
+                  class="form-field"
+                  type="text"
+                  placeholder="Doe"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="form-2-fields">
+            <div>
+              <div class="label-title">
+                <label for="phone_number">Phone number</label>
+              </div>
+              <div class="input-container">
+                <input
+                  required=""
+                  name="phone_number"
+                  class="form-field"
+                  type="digits"
+                  placeholder="+387 60 000 000"
+                />
+              </div>
+            </div>
+            <div>
+              <div class="label-title">
+                <label for="birth_date">Birth date</label>
+              </div>
+              <div class="input-container">
+                <input
+                  id="birth_date"
+                  required=""
+                  name="birth_date"
+                  class="form-field form-date"
+                  type="date"
+                  min="1920-01-01"
+                  max="2022-12-31"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="form-2-fields">
+            <div>
+              <div class="label-title">
+                <label for="country">Country</label>
+              </div>
+              <div class="input-container">
+                <input
+                  required=""
+                  name="country"
+                  class="form-field"
+                  type="text"
+                  placeholder="Croatia"
+                />
+              </div>
+            </div>
+            <div>
+              <div class="label-title">
+                <label for="city">City</label>
+              </div>
+              <div class="input-container">
+                <input
+                  required=""
+                  name="city"
+                  class="form-field"
+                  type="text"
+                  placeholder="Zagreb"
+                />
+              </div>
+            </div>
+          </div>
 
-        <button type="submit" class="submit">Login</button>
-        <div class="form-links">
-          <a class="forgot" onclick="showLoginForm()">Back to login </a>
-        </div>
-      </form>
-    </div>
-    <div id="change-password-form-container" class="form-main hidden">
-      <div class="form-heading">
-        <p class="form-logo">Hotel <span>S</span>ea</p>
-        <p class="form-subheading">Password reset</p>
+          <button type="submit" class="submit">Register</button>
+          <div class="form-links">
+            <a class="forgot" onclick="Login.showLoginForm()">Back to login </a>
+          </div>
+        </form>
       </div>
-      <svg
-        class="form-svg"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1920.153 43.541"
-        height="80"
-        width="700"
-      >
-        <path
-          class="form_svg_path"
-          data-name="Path 18"
-          d="M-43.475,11.044S521.191-30.5,938.916-30.5s937.609,41.543,937.609,41.543"
-          transform="translate(43.548 31.499)"
-          fill="none"
-          stroke="#1cc3b2"
-          stroke-width="8"
-        ></path>
-      </svg>
-      <form id="login-form" class="form1" role="form">
-        <div class="label-title">
-          <label for="password">Password</label>
+      <div id="forgot-form-container" class="form-main hidden">
+        <div class="form-heading">
+          <p class="form-logo">Hotel <span>S</span>ea</p>
+          <p class="form-subheading">Forgot password</p>
         </div>
-        <input
-          id="password"
-          class="form-field"
-          type="password"
-          placeholder="Password"
-        />
-        <input
-          id="change-password-token"
-          class="form1"
-          type="hidden"
-          name="token"
-        />
+        <svg
+          class="form-svg"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1920.153 43.541"
+          height="80"
+          width="700"
+        >
+          <path
+            class="form_svg_path"
+            data-name="Path 18"
+            d="M-43.475,11.044S521.191-30.5,938.916-30.5s937.609,41.543,937.609,41.543"
+            transform="translate(43.548 31.499)"
+            fill="none"
+            stroke="#1cc3b2"
+            stroke-width="8"
+          ></path>
+        </svg>
+        <form id="forgot-form" class="form1" role="form">
+          <div class="label-title">
+            <label for="email">Email</label>
+          </div>
+          <div class="input-container">
+            <input
+              required=""
+              name="email"
+              class="form-field"
+              type="email"
+              minlength="5"
+              maxlength="255"
+              placeholder="John.Doe@mail.com"
+            />
+          </div>
 
-        <button type="submit" class="submit">Login</button>
-        <div class="form-links">
-          <a class="forgot" onclick="showLoginForm()">Back to login </a>
+          <button type="submit" class="submit">Send recovery link</button>
+          <div class="form-links">
+            <a class="forgot" onclick="Login.showLoginForm()">Back to login </a>
+          </div>
+        </form>
+      </div>
+      <div id="change-password-form-container" class="form-main hidden">
+        <div class="form-heading">
+          <p class="form-logo">Hotel <span>S</span>ea</p>
+          <p class="form-subheading">Password reset</p>
         </div>
-      </form>
+        <svg
+          class="form-svg"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1920.153 43.541"
+          height="80"
+          width="700"
+        >
+          <path
+            class="form_svg_path"
+            data-name="Path 18"
+            d="M-43.475,11.044S521.191-30.5,938.916-30.5s937.609,41.543,937.609,41.543"
+            transform="translate(43.548 31.499)"
+            fill="none"
+            stroke="#1cc3b2"
+            stroke-width="8"
+          ></path>
+        </svg>
+        <form id="change-password-form" class="form1" role="form">
+          <div class="label-title">
+            <label for="password">Password</label>
+          </div>
+          <div class="input-container">
+            <input
+              required=""
+              minlength="8"
+              maxlength="255"
+              name="password"
+              class="form-field"
+              type="password"
+              placeholder="Password"
+            />
+          </div>
+          <input
+            required=""
+            id="change-password-token"
+            name="token"
+            class="form1"
+            type="hidden"
+            name="token"
+          />
+
+          <button type="submit" class="submit">Login</button>
+          <div class="form-links">
+            <a class="forgot" onclick="Login.showLoginForm()">Back to login </a>
+          </div>
+        </form>
+      </div>
     </div>
+    <!-- Toastr JS -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+    <script src="login.js"></script>
 
     <script>
+      toastr.options = {
+        closeButton: false,
+        debug: false,
+        newestOnTop: true,
+        progressBar: true,
+        positionClass: "toast-top-right",
+        preventDuplicates: false,
+        onclick: null,
+        showDuration: "300",
+        hideDuration: "1000",
+        timeOut: "5000",
+        extendedTimeOut: "5000",
+        showEasing: "swing",
+        hideEasing: "linear",
+        showMethod: "fadeIn",
+        hideMethod: "fadeOut",
+      };
+
       $(document).ready(function () {
+        $("#login-form-container").find("form")[0].reset();
+        $("#register-form-container").find("form")[0].reset();
+
+        $("#forgot-form-container").find("form")[0].reset();
+
         $("#birth_date").val("");
         var today = new Date();
         var max_date = today.getFullYear() + "-";
@@ -503,40 +615,8 @@
           });
         });
       }
-      // change
-      var urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.has("token")) {
-        $("#change-password-token").val(urlParams.get("token"));
-        showChangePasswordForm();
-      }
 
-      function showChangePasswordForm() {
-        $("#change-password-form-container").removeClass("hidden");
-        $("#login-form-container").addClass("hidden");
-        $("#register-form-container").addClass("hidden");
-        $("#register-form-container").addClass("hidden");
-        $(window).resize();
-      }
-
-      function showForgotForm() {
-        $("#login-form-container").addClass("hidden");
-        $("#forgot-form-container").removeClass("hidden");
-        $(window).resize();
-      }
-
-      function showRegisterForm() {
-        $("#login-form-container").addClass("hidden");
-        $("#register-form-container").removeClass("hidden");
-        $(window).resize();
-      }
-
-      function showLoginForm() {
-        $("#login-form-container").removeClass("hidden");
-        $("#register-form-container").addClass("hidden");
-        $("#forgot-form-container").addClass("hidden");
-        $("#change-password-form-container").addClass("hidden");
-        $(window).resize();
-      }
+      Login.init();
     </script>
   </body>
 </html>
