@@ -43,16 +43,19 @@ class Login {
     $("#login-form-container").addClass("hidden");
     $("#register-form-container").addClass("hidden");
     $("#register-form-container").addClass("hidden");
+    $(window).resize();
   }
 
   static showForgotForm() {
     $("#login-form-container").addClass("hidden");
     $("#forgot-form-container").removeClass("hidden");
+    $(window).resize();
   }
 
   static showRegisterForm() {
     $("#login-form-container").addClass("hidden");
     $("#register-form-container").removeClass("hidden");
+    $(window).resize();
   }
 
   static showLoginForm() {
@@ -60,6 +63,7 @@ class Login {
     $("#register-form-container").addClass("hidden");
     $("#forgot-form-container").addClass("hidden");
     $("#change-password-form-container").addClass("hidden");
+    $(window).resize();
   }
 
   static doRegister() {
