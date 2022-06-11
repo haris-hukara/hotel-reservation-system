@@ -8,6 +8,12 @@
   position: relative;
 }
 
+.heading-background {
+  background-image: url("img/page-background.jpg");
+  background-size: cover;
+  padding: 8rem 0;
+}
+
 /**************************/
 /* NAVIGATION */
 /**************************/
@@ -68,9 +74,11 @@
 /**************************/
 
 .section-form {
-  background-image: url("img/background.png");
+  background-image: url("img/login-background.jpg");
+  max-width: 192rem;
+  height: 100rem;
   background-size: cover;
-  padding: 8rem 0;
+  padding: 6rem 0;
 }
 
 .section-form .login-form-container {
