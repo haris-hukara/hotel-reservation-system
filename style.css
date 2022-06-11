@@ -76,8 +76,8 @@
 .section-form {
   background-image: url("img/login-background.jpg");
   max-width: 192rem;
-  height: 100rem;
-  background-size: cover;
+  min-height: 85rem;
+  background-size: 192rem 120rem;
   padding: 6rem 0;
 }
 
