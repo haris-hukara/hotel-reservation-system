@@ -114,6 +114,14 @@
 /* ROOM CARD */
 /**************************/
 
+.section-room {
+  margin: 8rem 0;
+}
+
+.rooms-list:last-child {
+  margin-bottom: 8rem;
+}
+
 .room-card {
   display: flex;
   width: 100%;
@@ -133,6 +141,12 @@
 
 .room-img-conatiner > img {
   height: inherit;
+  transition: 0.6s ease-out;
+}
+
+.room-img-conatiner > img:hover {
+  transform: scale(1.1);
+  transition: 0.6s ease-out;
 }
 
 .room-main {
@@ -217,6 +231,84 @@
   border: 1.8px solid rgba(0, 0, 0, 0);
   outline: none;
   cursor: pointer;
+}
+
+/**************************/
+/* PAGINATION */
+/**************************/
+
+.pagination-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-bottom: 4rem;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0.6rem 2.4rem rgba(0, 0, 0, 0.075);
+}
+
+.pagination-btn {
+  border: none;
+  box-shadow: 0 0.6rem 2.4rem rgba(0, 0, 0, 0.015);
+  height: 4.8rem;
+  width: 4.8rem;
+  border-radius: 1rem;
+  background-color: none;
+  cursor: pointer;
+}
+
+.pagination-btn:hover {
+  background-color: #2a303b;
+  transition: 0.2s ease-out;
+}
+
+.pagination-btn:hover .pagination-btn-icon {
+  stroke: #fff;
+}
+
+.pagination-btn-icon {
+  height: 2.4rem;
+  width: 2.4rem;
+  stroke: #2a303b;
+}
+
+.page-link:link,
+.page-link:visited {
+  font-size: 1.8rem;
+  color: #2a303b;
+  text-decoration: none;
+  height: 4.8rem;
+  width: 4.8rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-link:hover,
+.page-link:active {
+  background-color: #2a303b;
+  color: #fff;
+  transition: 0.2s ease-in;
+}
+
+.page-link.page-link--current {
+  background-color: rgb(28, 195, 178);
+  color: #fff;
+  transition: 0.2s ease-in;
+}
+
+.dots {
+  color: #2a303b;
+  font-size: 1.8rem;
 }
 
 /**************************/
