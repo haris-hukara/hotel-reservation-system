@@ -40,7 +40,7 @@
     <title>Hotel Sea | Log in</title>
   </head>
 
-  <body class="sticky">
+  <body class="sticky bg-color">
     <header class="header">
       <a href="#" class="logo">Hotel <span>S</span>ea</a>
 
@@ -73,10 +73,104 @@
     </header>
     
       <main>
-        <div>
-          <figure class="heading-background"></figure>
+       
+        <div class="heading-background">
+          <h1 class="page-heading">Rooms</h1>
         </div>
-        
+
+        <div class="container">
+          <div class="filters-container">
+            <div>
+              <div class="filters-wraper">
+                <label class="mb-1rem" for="">Check in</label>
+                <input class="filters-input" type="date" name="" id="" />
+              </div>
+            </div>
+            <div>
+              <div class="filters-wraper">
+                <label class="mb-1rem" for="">Check out</label>
+                <input class="filters-input" type="date" name="" id="" />
+              </div>
+            </div>
+      
+            <div class="filters-small-field-wrap">
+              <div class="filters-wraper">
+                <label class="mb-1rem" for="">Rooms</label>
+                <input
+                  class="filters-input filters-small-input"
+                  type="number"
+                  name=""
+                  id=""
+                />
+              </div>
+              <div class="filters-wraper">
+                <label class="mb-1rem" for="">Adults</label>
+                <input
+                  class="filters-input filters-small-input"
+                  type="number"
+                  name=""
+                  id=""
+                />
+              </div>
+              <div class="filters-wraper">
+                <label class="mb-1rem" for="">Children</label>
+                <input
+                  class="filters-input filters-small-input"
+                  type="number"
+                  name=""
+                  id=""
+                />
+              </div>
+            </div>
+      
+            <div class="filters-button-wrap">
+              <button class="filters-button">Check avaliability</button>
+            </div>
+          </div>
+
+          <div class="room-card">
+            <div class="room-img-conatiner">
+            <img src="img/room-1.png" alt="room-picture">
+          </div>
+            <div class="room-main">
+              <div class="room-head">
+                <h2>Standar Room</h2>
+                <p>From $99/night</p>
+              </div>
+              <p class="room-description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id hic repudiandae ut, fugit magni esse minima maiores doloribus possimus nam.</p>
+              <div class="room-services">
+                <div class="room-service">
+                  <ion-icon name="wifi-outline"></ion-icon>
+                  <p class="room-service-name">Wifi</p>
+                </div>
+                <div class="room-service">
+                  <ion-icon name="fast-food-outline"></ion-icon>
+                  <p class="room-service-name">Breakfast</p>
+                </div>
+                <div class="room-service">
+                  <ion-icon name="car-sport-outline"></ion-icon>
+                  <p class="room-service-name">Parking</p>
+                </div>
+                <div class="room-service">
+                  <ion-icon name="desktop-outline"></ion-icon>
+                  <p class="room-service-name">TV</p>
+                </div>
+                <div class="room-service">
+                  <ion-icon name="paw-outline"></ion-icon>
+                  <p class="room-service-name">Pet free</p>
+                </div>
+                <div class="room-service">
+                  <ion-icon name="barbell-outline"></ion-icon>
+                  <p class="room-service-name">Gym</p>
+                </div>
+              </div>
+              <div class="filters-button-wrap">
+                <button class="room-button">Disocver more</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
       </main>
     </div>
    
