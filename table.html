@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Toastr CSS -->
+    <link href="toastr.min.css" rel="stylesheet" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule=""
+      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <link rel="stylesheet" href="general.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="queries.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Ubuntu"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,500;0,600;0,700;1,200&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="jquery.dataTables.min.css" />
+    <script src="jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="table.css" />
+    <title>Hotel Sea | Log in</title>
+  </head>
+
+  <body class="sticky bg-color">
+    <script>
+      $(document).ready(function () {
+        $("#myTable").DataTable();
+        $("#myTable_filter").remove();
+        $("#myTable_wrapper").prepend($("#table-head"));
+        $("#table-head").prepend($("#myTable_length"));
+      });
+    </script>
+    <header class="header">
+      <a href="#" class="logo">Hotel <span>S</span>ea</a>
+
+      <nav class="main-nav">
+        <ul class="main-nav-list">
+          <li><a class="main-nav-link" href="#">Home</a></li>
+          <li><a class="main-nav-link" href="#rooms">Rooms</a></li>
+          <li>
+            <a class="main-nav-link" href="#about">About us</a>
+          </li>
+          <li><a class="main-nav-link" href="#contact">Contact</a></li>
+          <li><a class="main-nav-link nav-cta" href="#login">Login</a></li>
+        </ul>
+      </nav>
+
+      <button class="btn-mobile-nav">
+        <ion-icon
+          class="icon-mobile-nav md hydrated"
+          name="menu-outline"
+          role="img"
+          aria-label="menu outline"
+        ></ion-icon>
+        <ion-icon
+          class="icon-mobile-nav md hydrated"
+          name="close-outline"
+          role="img"
+          aria-label="close outline"
+        ></ion-icon>
+      </button>
+    </header>
+    
+      <main>
+       
+        <div class="heading-background">
+          <h1 class="page-heading">Reservations</h1>
+        </div>
+
+        <div class="container">
+          <div class="section-table">
+            <div id="table-head">
+              <h2 id="my-table-name">Reservations table</h2>
+              <div class="my-table-function-wrap">
+                <p id="my-table-function">Add reservation</p>
+                <ion-icon class="small-icon" name="add-outline"></ion-icon>
+              </div>
+            </div>
+            <table id="myTable">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Guest ID</th>
+                  <th>Room ID</th>
+                  <th>Date of reservation</th>
+                  <th>Check-in date</th>
+                  <th>Check-out date</th>
+                </tr>
+              </thead>
+      
+              <tbody>
+                <tr>
+                
+                <th> <ion-icon class="small-icon" name="pencil-outline"></ion-icon> 1 </th>
+                  <td>100</td>
+                  <td>500</td>
+                  <td>22/04/2022</td>
+                  <td>25/04/2022</td>
+                  <td>29/04/2022</td>
+                </tr>
+                <tr>
+                  <th><ion-icon class="small-icon" name="pencil-outline"></ion-icon>2</th>
+                  <td>101</td>
+                  <td>500</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                </tr>
+                <tr>
+                  <th><ion-icon class="small-icon" name="pencil-outline"></ion-icon>3</th>
+                  <td>102</td>
+                  <td>500</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                </tr>
+                <tr>
+                  <th><ion-icon class="small-icon" name="pencil-outline"></ion-icon>4</th>
+                  <td>103</td>
+                  <td>500</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                </tr>
+                <tr>
+                
+                <th> <ion-icon class="small-icon" name="pencil-outline"></ion-icon> 1 </th>
+                  <td>100</td>
+                  <td>500</td>
+                  <td>22/04/2022</td>
+                  <td>25/04/2022</td>
+                  <td>29/04/2022</td>
+                </tr>
+                <tr>
+                  <th><ion-icon class="small-icon" name="pencil-outline"></ion-icon>2</th>
+                  <td>101</td>
+                  <td>500</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                </tr>
+                <tr>
+                  <th><ion-icon class="small-icon" name="pencil-outline"></ion-icon>3</th>
+                  <td>102</td>
+                  <td>500</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                </tr>
+                <tr>
+                  <th><ion-icon class="small-icon" name="pencil-outline"></ion-icon>4</th>
+                  <td>103</td>
+                  <td>500</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                </tr>
+                <tr>
+                
+                <th> <ion-icon class="small-icon" name="pencil-outline"></ion-icon> 1 </th>
+                  <td>100</td>
+                  <td>500</td>
+                  <td>22/04/2022</td>
+                  <td>25/04/2022</td>
+                  <td>29/04/2022</td>
+                </tr>
+                <tr>
+                  <th><ion-icon class="small-icon" name="pencil-outline"></ion-icon>2</th>
+                  <td>101</td>
+                  <td>500</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                </tr>
+                <tr>
+                  <th><ion-icon class="small-icon" name="pencil-outline"></ion-icon>3</th>
+                  <td>102</td>
+                  <td>500</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                </tr>
+                <tr>
+                  <th><ion-icon class="small-icon" name="pencil-outline"></ion-icon>4</th>
+                  <td>103</td>
+                  <td>500</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+         
+
+        </div>
+      </main>
+    </div>
+   
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule=""
+      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"
+    ></script>
+
+      <script
+        defer
+        src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"
+      ></script>
+    <script defer src="script.js"></script>
+    <!-- Toastr JS -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+    <script src="login.js"></script>
+
+    <script>
+      toastr.options = {
+        closeButton: false,
+        debug: false,
+        newestOnTop: true,
+        progressBar: true,
+        positionClass: "toast-top-right",
+        preventDuplicates: false,
+        onclick: null,
+        showDuration: "300",
+        hideDuration: "1000",
+        timeOut: "5000",
+        extendedTimeOut: "5000",
+        showEasing: "swing",
+        hideEasing: "linear",
+        showMethod: "fadeIn",
+        hideMethod: "fadeOut",
+      };
+
+      $(document).ready(function () {
+        $("#login-form-container").find("form")[0].reset();
+        $("#register-form-container").find("form")[0].reset();
+
+        $("#forgot-form-container").find("form")[0].reset();
+
+        $("#birth_date").val("");
+        var today = new Date();
+        var max_date = today.getFullYear() + "-";
+        var month = today.getMonth() + 1;
+        if (month.toString().length == 1) {
+          max_date += "0";
+        }
+        max_date += month + "-";
+        if (today.getDate().toString().length == 1) {
+          max_date += "0";
+        }
+        max_date += today.getDate();
+        $("#birth_date").attr("max", max_date);
+      });
+      // document.getElementById("birth_date").valueAsDate = new Date();
+
+      resizeSVG();
+      function resizeSVG() {
+        $(function () {
+          $(window).on("resize", function (e) {
+            for (var i = 0; i < $(".form-svg").length; i++) {
+              if ($(window).width() > 700) {
+                $(".form_svg_path")[i].setAttribute("stroke-width", 8);
+              }
+              if ($(window).width() < 700) {
+                var stroke = (700 - $(window).width()) / 100 + 10;
+                $(".form_svg_path")[i].setAttribute("stroke-width", stroke);
+              }
+
+              if ($(window).width() < 300) {
+                var stroke = (700 - $(window).width()) / 100 + 15;
+                $(".form_svg_path")[i].setAttribute("stroke-width", stroke);
+              }
+
+              $(".form-svg")[i].setAttribute(
+                "width",
+                document.getElementsByClassName("form-main")[i].offsetWidth
+              );
+            }
+          });
+        });
+      }
+
+      Login.init();
+      $(document).ready(function () {
+        $(window).resize();
+      });
+    </script>
+  </body>
+</html>
