@@ -38,7 +38,7 @@
   }
 
   .heading-tertiary {
-    font-size: 2.4rem;
+    font-size: 3.2rem;
   }
 
   .header {
@@ -47,10 +47,6 @@
 
   .main-nav-list {
     gap: 3.2rem;
-  }
-
-  .hero {
-    gap: 4.8rem;
   }
 
   .testimonials-container {
@@ -66,12 +62,6 @@
   html {
     /* 8px / 16px = 0.5 = 50% */
     font-size: 50%;
-  }
-
-  .hero {
-    grid-template-columns: 1fr;
-    padding: 0 8rem;
-    gap: 6.4rem;
   }
 
   .hero-text-box,
@@ -181,6 +171,10 @@
   .main-nav-link:visited {
     font-size: 3rem;
   }
+
+  .about-us-grid {
+    height: 30rem;
+  }
 }
 
 /**************************/
@@ -247,10 +241,6 @@
     padding: 2.4rem 0 6.4rem 0;
   }
 
-  .hero {
-    padding: 0 3.2rem;
-  }
-
   .hero-img {
     width: 80%;
   }
@@ -259,12 +249,12 @@
     height: 1.2rem;
   }
 
-  .step-img-box:nth-child(2) {
-    grid-row: 1;
+  #about-us-grid-2 {
+    grid-row: 4;
   }
 
-  .step-img-box:nth-child(6) {
-    grid-row: 5;
+  .about-us-grid {
+    height: 26rem;
   }
 
   .step-img-box {

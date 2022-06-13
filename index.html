@@ -40,7 +40,7 @@
     <title>Hotel Sea | Log in</title>
   </head>
 
-  <body class="">
+  <body class="sticky">
     <header class="header">
       <a href="#" class="logo">Hotel <span>S</span>ea</a>
 
@@ -71,347 +71,116 @@
         ></ion-icon>
       </button>
     </header>
-    
-      <main>
-        <div class="section-form">
-          <div id="login-form-container" class="form-main">
-            <div class="form-heading">
-              <p class="form-logo">Hotel <span>S</span>ea</p>
-              <p class="form-subheading">Login</p>
-            </div>
-            <svg
-              class="form-svg"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1920.153 43.541"
-              height="80"
-              width="700"
-            >
-              <path
-                class="form_svg_path"
-                data-name="Path 18"
-                d="M-43.475,11.044S521.191-30.5,938.916-30.5s937.609,41.543,937.609,41.543"
-                transform="translate(43.548 31.499)"
-                fill="none"
-                stroke="#1cc3b2"
-                stroke-width="8"
-              ></path>
-            </svg>
-            <form id="login-form" class="form1" role="form">
-              <div class="label-title">
-                <label for="email">Email</label>
-              </div>
-              <div class="input-container">
-                <input
-                  required=""
-                  name="email"
-                  class="form-field"
-                  type="email"
-                  minlength="5"
-                  maxlength="255"
-                  placeholder="John.Doe@mail.com"
-                />
-              </div>
-              <div class="label-title">
-                <label for="password">Password</label>
-              </div>
-              <div class="input-container">
-                <input
-                  required=""
-                  name="password"
-                  class="form-field"
-                  minlength="8"
-                  maxlength="255"
-                  type="password"
-                  placeholder="Password"
-                />
-              </div>
-              <button id="login-link" type="submit" class="submit">
-                Login
-              </button>
-              <div class="form-links">
-                <a
-                  class="forgot"
-                  href="javascript:void(0);"
-                  onclick="Login.showForgotForm()"
-                  >Forgot Password? </a
-                ><a
-                  class="forgot"
-                  href="javascript:void(0);"
-                  onclick="Login.showRegisterForm()"
-                  >Register Here
-                </a>
-              </div>
-            </form>
-          </div>
-
-          <div id="register-form-container" class="form-main hidden">
-            <div class="form-heading">
-              <p class="form-logo">Hotel <span>S</span>ea</p>
-              <p class="form-subheading">Registration</p>
-            </div>
-            <svg
-              class="form-svg"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1920.153 43.541"
-              height="80"
-              width="700"
-            >
-              <path
-                class="form_svg_path"
-                data-name="Path 18"
-                d="M-43.475,11.044S521.191-30.5,938.916-30.5s937.609,41.543,937.609,41.543"
-                transform="translate(43.548 31.499)"
-                fill="none"
-                stroke="#1cc3b2"
-                stroke-width="8"
-              ></path>
-            </svg>
-            <form id="register-form" class="form1" role="form">
-              <div class="label-title">
-                <label for="email">Email</label>
-              </div>
-              <div class="input-container">
-                <input
-                  required=""
-                  name="email"
-                  class="form-field"
-                  type="email"
-                  placeholder="John.Doe@mail.com"
-                />
-              </div>
-              <div class="label-title">
-                <label for="password">Password</label>
-              </div>
-              <div class="input-container">
-                <input
-                  required=""
-                  minlength="8"
-                  maxlength="255"
-                  name="password"
-                  class="form-field"
-                  type="password"
-                  placeholder="Password"
-                />
-              </div>
-              <div class="form-2-fields">
-                <div>
-                  <div class="label-title">
-                    <label for="first_name">First name</label>
-                  </div>
-                  <div class="input-container">
-                    <input
-                      required=""
-                      name="first_name"
-                      class="form-field"
-                      type="text"
-                      placeholder="John"
-                      minlength="2"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <div class="label-title">
-                    <label for="last_name">Last name</label>
-                  </div>
-                  <div class="input-container">
-                    <input
-                      required=""
-                      name="last_name"
-                      class="form-field"
-                      type="text"
-                      placeholder="Doe"
-                      minlength="2"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="form-2-fields">
-                <div>
-                  <div class="label-title">
-                    <label for="phone_number">Phone number</label>
-                  </div>
-                  <div class="input-container">
-                    <input
-                      required=""
-                      name="phone_number"
-                      class="form-field"
-                      type="text"
-                      placeholder="+387 60 000 000"
-                      minlength="9"
-                      maxlength="16"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <div class="label-title">
-                    <label for="birth_date">Birth date</label>
-                  </div>
-                  <div class="input-container">
-                    <input
-                      id="birth_date"
-                      required=""
-                      name="birth_date"
-                      class="form-field form-date"
-                      type="date"
-                      min="1920-01-01"
-                      max="2022-12-31"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="form-2-fields">
-                <div>
-                  <div class="label-title">
-                    <label for="country">Country</label>
-                  </div>
-                  <div class="input-container">
-                    <input
-                      required=""
-                      name="country"
-                      class="form-field"
-                      type="text"
-                      placeholder="Croatia"
-                      minlength="2"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <div class="label-title">
-                    <label for="city">City</label>
-                  </div>
-                  <div class="input-container">
-                    <input
-                      required=""
-                      name="city"
-                      class="form-field"
-                      type="text"
-                      placeholder="Zagreb"
-                      minlength="2"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <button type="submit" class="submit">Register</button>
-              <div class="form-links">
-                <a
-                  class="forgot"
-                  href="javascript:void(0);"
-                  onclick="Login.showLoginForm()"
-                  >Back to login
-                </a>
-              </div>
-            </form>
-          </div>
-          <div id="forgot-form-container" class="form-main hidden">
-            <div class="form-heading">
-              <p class="form-logo">Hotel <span>S</span>ea</p>
-              <p class="form-subheading">Forgot password</p>
-            </div>
-            <svg
-              class="form-svg"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1920.153 43.541"
-              height="80"
-              width="700"
-            >
-              <path
-                class="form_svg_path"
-                data-name="Path 18"
-                d="M-43.475,11.044S521.191-30.5,938.916-30.5s937.609,41.543,937.609,41.543"
-                transform="translate(43.548 31.499)"
-                fill="none"
-                stroke="#1cc3b2"
-                stroke-width="8"
-              ></path>
-            </svg>
-            <form id="forgot-form" class="form1" role="form">
-              <div class="label-title">
-                <label for="email">Email</label>
-              </div>
-              <div class="input-container">
-                <input
-                  required=""
-                  name="email"
-                  class="form-field"
-                  type="email"
-                  minlength="5"
-                  maxlength="255"
-                  placeholder="John.Doe@mail.com"
-                />
-              </div>
-
-              <button type="submit" class="submit">Send recovery link</button>
-              <div class="form-links">
-                <a
-                  class="forgot"
-                  href="javascript:void(0);"
-                  onclick="Login.showLoginForm()"
-                  >Back to login
-                </a>
-              </div>
-            </form>
-          </div>
-          <div id="change-password-form-container" class="form-main hidden">
-            <div class="form-heading">
-              <p class="form-logo">Hotel <span>S</span>ea</p>
-              <p class="form-subheading">Password reset</p>
-            </div>
-            <svg
-              class="form-svg"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1920.153 43.541"
-              height="80"
-              width="700"
-            >
-              <path
-                class="form_svg_path"
-                data-name="Path 18"
-                d="M-43.475,11.044S521.191-30.5,938.916-30.5s937.609,41.543,937.609,41.543"
-                transform="translate(43.548 31.499)"
-                fill="none"
-                stroke="#1cc3b2"
-                stroke-width="8"
-              ></path>
-            </svg>
-            <form id="change-password-form" class="form1" role="form">
-              <div class="label-title">
-                <label for="password">Password</label>
-              </div>
-              <div class="input-container">
-                <input
-                  required=""
-                  minlength="8"
-                  maxlength="255"
-                  name="password"
-                  class="form-field"
-                  type="password"
-                  placeholder="Password"
-                />
-              </div>
-              <input
-                required=""
-                id="change-password-token"
-                name="token"
-                class="form1"
-                type="hidden"
-              />
-
-              <button type="submit" class="submit">Login</button>
-              <div class="form-links">
-                <a
-                  class="forgot"
-                  href="javascript:void(0);"
-                  onclick="Login.showLoginForm()"
-                  >Back to login
-                </a>
-              </div>
-            </form>
+    <section class="section-hero">
+      <div class="hero">
+        <p class="hero-subheading">Hotel & Resort</p>
+        <h1 class="heading-primary">Welcome To Hotel Sea</h1>
+        <a href="#" class="btn btn--full">Discover More</a>
+      </div>
+    </section>
+    <div class="container">
+      <div id="home-filters" class="filters-container">
+        <div>
+          <div class="filters-wraper">
+            <label class="mb-1rem" for="">Check in</label>
+            <input class="filters-input" type="date" name="" id="" />
           </div>
         </div>
-      </main>
+        <div>
+          <div class="filters-wraper">
+            <label class="mb-1rem" for="">Check out</label>
+            <input class="filters-input" type="date" name="" id="" />
+          </div>
+        </div>
+
+        <div class="filters-small-field-wrap">
+          <div class="filters-wraper">
+            <label class="mb-1rem" for="">Rooms</label>
+            <input
+              class="filters-input filters-small-input"
+              type="number"
+              name=""
+              id=""
+            />
+          </div>
+          <div class="filters-wraper">
+            <label class="mb-1rem" for="">Adults</label>
+            <input
+              class="filters-input filters-small-input"
+              type="number"
+              name=""
+              id=""
+            />
+          </div>
+          <div class="filters-wraper">
+            <label class="mb-1rem" for="">Children</label>
+            <input
+              class="filters-input filters-small-input"
+              type="number"
+              name=""
+              id=""
+            />
+          </div>
+        </div>
+
+        <div class="filters-button-wrap">
+          <button class="filters-button">Check avaliability</button>
+        </div>
+      </div>
     </div>
-   
+    <main>
+      <section class="section-about" id="about">
+        <div class="container">
+          <div class="container grid grid--2-cols grid--center-v">
+            <!-- About us -->
+            <div class="about-text-box">
+              <p class="subheading">About us</p>
+              <h3 class="heading-tertiary">Welcome to Hotel Sea Resort</h3>
+              <p class="basic-description">
+                The Hotel Sea is the rihgt choice for visitors who are searching
+                for a combination of charm and a convenient position from where
+                to explore surroundings.
+              </p>
+            </div>
+
+            <div class="about-us-grid">
+              <figure class="about-item">
+                <img src="img/home-imgs/06.png" alt="" />
+              </figure>
+              <figure class="about-item grid-span-2-rows">
+                <img src="img/home-imgs/05.png" alt="" />
+              </figure>
+              <figure class="about-item">
+                <img src="img/home-imgs/02.png" alt="" />
+              </figure>
+            </div>
+
+            <div id="about-us-grid-2" class="about-us-grid">
+              <figure class="about-item grid-span-2-rows">
+                <img src="img/home-imgs/03.png" alt="" />
+              </figure>
+              <figure class="about-item">
+                <img src="img/home-imgs/04.png" alt="" />
+              </figure>
+              <figure class="about-item">
+                <img src="img/home-imgs/01.png" alt="" />
+              </figure>
+            </div>
+
+            <div class="about-text-box">
+              <p class="subheading">More info</p>
+              <h3 class="heading-tertiary">Three floors of Luxury</h3>
+              <p class="basic-description">
+                The rooms are arranged on the first, second and third floors. At
+                top floor there is a charming terrace and solarium. You can also
+                enjoy in beatuiful view from above.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
     <script
       type="module"
       src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"
@@ -421,10 +190,10 @@
       src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"
     ></script>
 
-      <script
-        defer
-        src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"
-      ></script>
+    <script
+      defer
+      src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"
+    ></script>
     <script defer src="script.js"></script>
     <!-- Toastr JS -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>

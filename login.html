@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Toastr CSS -->
+    <link href="toastr.min.css" rel="stylesheet" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule=""
+      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <link rel="stylesheet" href="general.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="queries.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Ubuntu"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,500;0,600;0,700;1,200&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Hotel Sea | Log in</title>
+  </head>
+
+  <body class="">
+    <header class="header">
+      <a href="#" class="logo">Hotel <span>S</span>ea</a>
+
+      <nav class="main-nav">
+        <ul class="main-nav-list">
+          <li><a class="main-nav-link" href="#">Home</a></li>
+          <li><a class="main-nav-link" href="#rooms">Rooms</a></li>
+          <li>
+            <a class="main-nav-link" href="#about">About us</a>
+          </li>
+          <li><a class="main-nav-link" href="#contact">Contact</a></li>
+          <li><a class="main-nav-link nav-cta" href="#login">Login</a></li>
+        </ul>
+      </nav>
+
+      <button class="btn-mobile-nav">
+        <ion-icon
+          class="icon-mobile-nav md hydrated"
+          name="menu-outline"
+          role="img"
+          aria-label="menu outline"
+        ></ion-icon>
+        <ion-icon
+          class="icon-mobile-nav md hydrated"
+          name="close-outline"
+          role="img"
+          aria-label="close outline"
+        ></ion-icon>
+      </button>
+    </header>
+    
+      <main>
+        <div class="section-form">
+          <div id="login-form-container" class="form-main">
+            <div class="form-heading">
+              <p class="form-logo">Hotel <span>S</span>ea</p>
+              <p class="form-subheading">Login</p>
+            </div>
+            <svg
+              class="form-svg"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1920.153 43.541"
+              height="80"
+              width="700"
+            >
+              <path
+                class="form_svg_path"
+                data-name="Path 18"
+                d="M-43.475,11.044S521.191-30.5,938.916-30.5s937.609,41.543,937.609,41.543"
+                transform="translate(43.548 31.499)"
+                fill="none"
+                stroke="#1cc3b2"
+                stroke-width="8"
+              ></path>
+            </svg>
+            <form id="login-form" class="form1" role="form">
+              <div class="label-title">
+                <label for="email">Email</label>
+              </div>
+              <div class="input-container">
+                <input
+                  required=""
+                  name="email"
+                  class="form-field"
+                  type="email"
+                  minlength="5"
+                  maxlength="255"
+                  placeholder="John.Doe@mail.com"
+                />
+              </div>
+              <div class="label-title">
+                <label for="password">Password</label>
+              </div>
+              <div class="input-container">
+                <input
+                  required=""
+                  name="password"
+                  class="form-field"
+                  minlength="8"
+                  maxlength="255"
+                  type="password"
+                  placeholder="Password"
+                />
+              </div>
+              <button id="login-link" type="submit" class="submit">
+                Login
+              </button>
+              <div class="form-links">
+                <a
+                  class="forgot"
+                  href="javascript:void(0);"
+                  onclick="Login.showForgotForm()"
+                  >Forgot Password? </a
+                ><a
+                  class="forgot"
+                  href="javascript:void(0);"
+                  onclick="Login.showRegisterForm()"
+                  >Register Here
+                </a>
+              </div>
+            </form>
+          </div>
+
+          <div id="register-form-container" class="form-main hidden">
+            <div class="form-heading">
+              <p class="form-logo">Hotel <span>S</span>ea</p>
+              <p class="form-subheading">Registration</p>
+            </div>
+            <svg
+              class="form-svg"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1920.153 43.541"
+              height="80"
+              width="700"
+            >
+              <path
+                class="form_svg_path"
+                data-name="Path 18"
+                d="M-43.475,11.044S521.191-30.5,938.916-30.5s937.609,41.543,937.609,41.543"
+                transform="translate(43.548 31.499)"
+                fill="none"
+                stroke="#1cc3b2"
+                stroke-width="8"
+              ></path>
+            </svg>
+            <form id="register-form" class="form1" role="form">
+              <div class="label-title">
+                <label for="email">Email</label>
+              </div>
+              <div class="input-container">
+                <input
+                  required=""
+                  name="email"
+                  class="form-field"
+                  type="email"
+                  placeholder="John.Doe@mail.com"
+                />
+              </div>
+              <div class="label-title">
+                <label for="password">Password</label>
+              </div>
+              <div class="input-container">
+                <input
+                  required=""
+                  minlength="8"
+                  maxlength="255"
+                  name="password"
+                  class="form-field"
+                  type="password"
+                  placeholder="Password"
+                />
+              </div>
+              <div class="form-2-fields">
+                <div>
+                  <div class="label-title">
+                    <label for="first_name">First name</label>
+                  </div>
+                  <div class="input-container">
+                    <input
+                      required=""
+                      name="first_name"
+                      class="form-field"
+                      type="text"
+                      placeholder="John"
+                      minlength="2"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <div class="label-title">
+                    <label for="last_name">Last name</label>
+                  </div>
+                  <div class="input-container">
+                    <input
+                      required=""
+                      name="last_name"
+                      class="form-field"
+                      type="text"
+                      placeholder="Doe"
+                      minlength="2"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="form-2-fields">
+                <div>
+                  <div class="label-title">
+                    <label for="phone_number">Phone number</label>
+                  </div>
+                  <div class="input-container">
+                    <input
+                      required=""
+                      name="phone_number"
+                      class="form-field"
+                      type="text"
+                      placeholder="+387 60 000 000"
+                      minlength="9"
+                      maxlength="16"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <div class="label-title">
+                    <label for="birth_date">Birth date</label>
+                  </div>
+                  <div class="input-container">
+                    <input
+                      id="birth_date"
+                      required=""
+                      name="birth_date"
+                      class="form-field form-date"
+                      type="date"
+                      min="1920-01-01"
+                      max="2022-12-31"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="form-2-fields">
+                <div>
+                  <div class="label-title">
+                    <label for="country">Country</label>
+                  </div>
+                  <div class="input-container">
+                    <input
+                      required=""
+                      name="country"
+                      class="form-field"
+                      type="text"
+                      placeholder="Croatia"
+                      minlength="2"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <div class="label-title">
+                    <label for="city">City</label>
+                  </div>
+                  <div class="input-container">
+                    <input
+                      required=""
+                      name="city"
+                      class="form-field"
+                      type="text"
+                      placeholder="Zagreb"
+                      minlength="2"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="submit">Register</button>
+              <div class="form-links">
+                <a
+                  class="forgot"
+                  href="javascript:void(0);"
+                  onclick="Login.showLoginForm()"
+                  >Back to login
+                </a>
+              </div>
+            </form>
+          </div>
+          <div id="forgot-form-container" class="form-main hidden">
+            <div class="form-heading">
+              <p class="form-logo">Hotel <span>S</span>ea</p>
+              <p class="form-subheading">Forgot password</p>
+            </div>
+            <svg
+              class="form-svg"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1920.153 43.541"
+              height="80"
+              width="700"
+            >
+              <path
+                class="form_svg_path"
+                data-name="Path 18"
+                d="M-43.475,11.044S521.191-30.5,938.916-30.5s937.609,41.543,937.609,41.543"
+                transform="translate(43.548 31.499)"
+                fill="none"
+                stroke="#1cc3b2"
+                stroke-width="8"
+              ></path>
+            </svg>
+            <form id="forgot-form" class="form1" role="form">
+              <div class="label-title">
+                <label for="email">Email</label>
+              </div>
+              <div class="input-container">
+                <input
+                  required=""
+                  name="email"
+                  class="form-field"
+                  type="email"
+                  minlength="5"
+                  maxlength="255"
+                  placeholder="John.Doe@mail.com"
+                />
+              </div>
+
+              <button type="submit" class="submit">Send recovery link</button>
+              <div class="form-links">
+                <a
+                  class="forgot"
+                  href="javascript:void(0);"
+                  onclick="Login.showLoginForm()"
+                  >Back to login
+                </a>
+              </div>
+            </form>
+          </div>
+          <div id="change-password-form-container" class="form-main hidden">
+            <div class="form-heading">
+              <p class="form-logo">Hotel <span>S</span>ea</p>
+              <p class="form-subheading">Password reset</p>
+            </div>
+            <svg
+              class="form-svg"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1920.153 43.541"
+              height="80"
+              width="700"
+            >
+              <path
+                class="form_svg_path"
+                data-name="Path 18"
+                d="M-43.475,11.044S521.191-30.5,938.916-30.5s937.609,41.543,937.609,41.543"
+                transform="translate(43.548 31.499)"
+                fill="none"
+                stroke="#1cc3b2"
+                stroke-width="8"
+              ></path>
+            </svg>
+            <form id="change-password-form" class="form1" role="form">
+              <div class="label-title">
+                <label for="password">Password</label>
+              </div>
+              <div class="input-container">
+                <input
+                  required=""
+                  minlength="8"
+                  maxlength="255"
+                  name="password"
+                  class="form-field"
+                  type="password"
+                  placeholder="Password"
+                />
+              </div>
+              <input
+                required=""
+                id="change-password-token"
+                name="token"
+                class="form1"
+                type="hidden"
+              />
+
+              <button type="submit" class="submit">Login</button>
+              <div class="form-links">
+                <a
+                  class="forgot"
+                  href="javascript:void(0);"
+                  onclick="Login.showLoginForm()"
+                  >Back to login
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+   
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule=""
+      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"
+    ></script>
+
+      <script
+        defer
+        src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"
+      ></script>
+    <script defer src="script.js"></script>
+    <!-- Toastr JS -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+    <script src="login.js"></script>
+
+    <script>
+      toastr.options = {
+        closeButton: false,
+        debug: false,
+        newestOnTop: true,
+        progressBar: true,
+        positionClass: "toast-top-right",
+        preventDuplicates: false,
+        onclick: null,
+        showDuration: "300",
+        hideDuration: "1000",
+        timeOut: "5000",
+        extendedTimeOut: "5000",
+        showEasing: "swing",
+        hideEasing: "linear",
+        showMethod: "fadeIn",
+        hideMethod: "fadeOut",
+      };
+
+      $(document).ready(function () {
+        $("#login-form-container").find("form")[0].reset();
+        $("#register-form-container").find("form")[0].reset();
+
+        $("#forgot-form-container").find("form")[0].reset();
+
+        $("#birth_date").val("");
+        var today = new Date();
+        var max_date = today.getFullYear() + "-";
+        var month = today.getMonth() + 1;
+        if (month.toString().length == 1) {
+          max_date += "0";
+        }
+        max_date += month + "-";
+        if (today.getDate().toString().length == 1) {
+          max_date += "0";
+        }
+        max_date += today.getDate();
+        $("#birth_date").attr("max", max_date);
+      });
+      // document.getElementById("birth_date").valueAsDate = new Date();
+
+      resizeSVG();
+      function resizeSVG() {
+        $(function () {
+          $(window).on("resize", function (e) {
+            for (var i = 0; i < $(".form-svg").length; i++) {
+              if ($(window).width() > 700) {
+                $(".form_svg_path")[i].setAttribute("stroke-width", 8);
+              }
+              if ($(window).width() < 700) {
+                var stroke = (700 - $(window).width()) / 100 + 10;
+                $(".form_svg_path")[i].setAttribute("stroke-width", stroke);
+              }
+
+              if ($(window).width() < 300) {
+                var stroke = (700 - $(window).width()) / 100 + 15;
+                $(".form_svg_path")[i].setAttribute("stroke-width", stroke);
+              }
+
+              $(".form-svg")[i].setAttribute(
+                "width",
+                document.getElementsByClassName("form-main")[i].offsetWidth
+              );
+            }
+          });
+        });
+      }
+
+      Login.init();
+      $(document).ready(function () {
+        $(window).resize();
+      });
+    </script>
+  </body>
+</html>

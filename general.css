@@ -23,16 +23,11 @@ Large: 1.8
 
 --- 02 COLORS
 
-- Primary: #e67e22
+- Primary: #1cc3b2
 - Tints:
-#fdf2e9
-#fae5d3
-#eb984e
 
 - Shades: 
-#cf711f
-#45260a
-
+#20a799
 - Accents:
 - Greys
 
@@ -145,6 +140,7 @@ body {
   font-size: 5.2rem;
   line-height: 1.05;
   margin-bottom: 3.2rem;
+  color: #fff;
 }
 
 .heading-secondary {
@@ -154,19 +150,25 @@ body {
 }
 
 .heading-tertiary {
-  font-size: 3rem;
+  font-size: 4.2rem;
   line-height: 1.2;
   margin-bottom: 3.2rem;
+  font-weight: 500;
 }
-
+.hero-subheading,
 .subheading {
   display: block;
   font-size: 1.6rem;
   font-weight: 500;
-  color: #cf711f;
+  color: #1cc3b2;
   text-transform: uppercase;
   margin-bottom: 1.6rem;
   letter-spacing: 0.75px;
+}
+
+.hero-subheading {
+  font-weight: 600;
+  color: #fff;
 }
 
 .btn,
@@ -175,10 +177,10 @@ body {
   display: inline-block;
 
   text-decoration: none;
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: 1.8rem;
+  font-weight: 500;
   padding: 1.6rem 3.2rem;
-  border-radius: 9px;
+  border-radius: 10px;
 
   /* Only necessary for .btn */
   border: none;
@@ -192,13 +194,13 @@ body {
 
 .btn--full:link,
 .btn--full:visited {
-  background-color: #e67e22;
+  background-color: #1cc3b2;
   color: #fff;
 }
 
 .btn--full:hover,
 .btn--full:active {
-  background-color: #cf711f;
+  background-color: #20a799;
 }
 
 .btn--outline:link,
@@ -232,7 +234,7 @@ body {
 .link:link,
 .link:visited {
   display: inline-block;
-  color: #e67e22;
+  color: #1cc3b2;
   text-decoration: none;
   border-bottom: 1px solid currentColor;
   padding-bottom: 2px;
@@ -241,7 +243,7 @@ body {
 
 .link:hover,
 .link:active {
-  color: #cf711f;
+  color: #20a799;
   border-bottom: 1px solid transparent;
 }
 
@@ -263,12 +265,12 @@ body {
 .list-icon {
   width: 3rem;
   height: 3rem;
-  color: #e67e22;
+  color: #1cc3b2;
 }
 
 *:focus {
   outline: none;
-  /* outline: 4px dotted #e67e22; */
+  /* outline: 4px dotted #1cc3b2; */
   /* outline-offset: 8px; */
   box-shadow: 0 0 0 0.4rem rgba(28, 195, 178, 0.5);
 }
@@ -286,6 +288,35 @@ body {
   text-align: center;
 }
 
+.basic-description {
+  font-size: 2rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.about-us-grid-2,
+.about-us-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  overflow: hidden;
+  height: 38rem;
+  gap: 1rem;
+}
+
+.grid-span-2-rows {
+  grid-row: span 2;
+}
+
 strong {
   font-weight: 500;
+}
+
+.section-hero {
+  height: 85vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("img/home-background.jpg");
+  max-width: 192rem;
 }
