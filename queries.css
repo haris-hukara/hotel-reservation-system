@@ -296,6 +296,14 @@
   .filters-container {
     grid-template-columns: 1fr;
   }
+
+  .room-main {
+    padding: 2rem;
+  }
+
+  .room-style {
+    gap: 2rem;
+  }
 }
 
 /* 
