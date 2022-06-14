@@ -11,6 +11,7 @@
 
   .heading-primary {
     font-size: 4.4rem;
+    text-align: center;
   }
 
   .gallery {
@@ -62,6 +63,15 @@
   html {
     /* 8px / 16px = 0.5 = 50% */
     font-size: 50%;
+  }
+  #home-filters {
+    transform: none;
+    margin-top: 4rem;
+  }
+
+  .section-hero {
+    height: 50vh;
+    margin-top: 8rem;
   }
 
   .hero-text-box,
@@ -175,6 +185,11 @@
   .about-us-grid {
     height: 30rem;
   }
+
+  .filters-container {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
 }
 
 /**************************/
@@ -281,6 +296,9 @@
   .cta-img-box {
     height: 32rem;
     grid-row: 1;
+  }
+  .filters-container {
+    grid-template-columns: 1fr;
   }
 }
 

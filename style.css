@@ -34,7 +34,6 @@
 
 .filters-container {
   display: grid;
-  height: 16rem;
   max-width: 130rem;
   background-color: #fff;
   box-shadow: 0 0.6rem 2.4rem rgba(0, 0, 0, 0.075);

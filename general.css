@@ -320,4 +320,5 @@ strong {
   align-items: center;
   background-image: url("img/home-background.jpg");
   max-width: 192rem;
+  background-size: cover;
 }
