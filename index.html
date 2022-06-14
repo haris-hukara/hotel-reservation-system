@@ -47,12 +47,11 @@
       <nav class="main-nav">
         <ul class="main-nav-list">
           <li><a class="main-nav-link" href="#">Home</a></li>
-          <li><a class="main-nav-link" href="#rooms">Rooms</a></li>
+          <li><a class="main-nav-link" href="rooms.html">Rooms</a></li>
           <li>
-            <a class="main-nav-link" href="#about">About us</a>
+            <a id="about-link" class="main-nav-link" href="#about">About us</a>
           </li>
-          <li><a class="main-nav-link" href="#contact">Contact</a></li>
-          <li><a class="main-nav-link nav-cta" href="#login">Login</a></li>
+          <li><a class="main-nav-link nav-cta" href="login.html">Login</a></li>
         </ul>
       </nav>
 
@@ -75,7 +74,7 @@
       <div class="hero">
         <p class="hero-subheading">Hotel & Resort</p>
         <h1 class="heading-primary">Welcome To Hotel Sea</h1>
-        <a href="#" class="btn btn--full">Discover More</a>
+        <a href="#about" class="btn btn--full">Discover More</a>
       </div>
     </section>
     <div class="container">
@@ -128,7 +127,7 @@
         </div>
       </div>
     </div>
-    <main>
+    <main class="main-home">
       <section class="section-about" id="about">
         <div class="container">
           <div class="container grid grid--2-cols grid--center-v">
@@ -220,6 +219,11 @@
       };
 
       $(document).ready(function () {
+        if (localStorage.getItem("nav") == "1") {
+          $("#about-link")[0].click();
+          localStorage.setItem("nav", 0);
+        }
+
         $("#login-form-container").find("form")[0].reset();
         $("#register-form-container").find("form")[0].reset();
 

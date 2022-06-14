@@ -18,6 +18,18 @@ allLinks.forEach(function (link) {
     e.preventDefault();
     const href = link.getAttribute("href");
 
+    if (!href.includes("#") && href.includes(".html")) {
+      window.location = href;
+    }
+
+    if (
+      href.includes("#about") &&
+      !window.location.href.includes("index.html")
+    ) {
+      localStorage.setItem("nav", 1);
+      window.location = "index.html";
+    }
+
     // Scroll back to top
     if (href === "#")
       window.scrollTo({
@@ -27,8 +39,12 @@ allLinks.forEach(function (link) {
 
     // Scroll to other links
     if (href !== "#" && href.startsWith("#")) {
+      const yOffset = -100;
       const sectionEl = document.querySelector(href);
-      sectionEl.scrollIntoView({ behavior: "smooth" });
+      const y =
+        sectionEl.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+      window.scrollTo({ top: y, behavior: "smooth" });
     }
 
     // Close mobile naviagtion

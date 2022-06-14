@@ -607,6 +607,10 @@ div.form-2-fields > * {
   flex-direction: column;
 }
 
+.main-home {
+  padding-bottom: 12rem;
+}
+
 #home-filters {
   transform: translateY(-50%);
 }
