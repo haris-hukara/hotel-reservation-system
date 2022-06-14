@@ -56,12 +56,6 @@
 }
 
 /**************************/
-/* BELOW 1000px (Tablets) */
-/**************************/
-@media (max-width: 62em) {
-}
-
-/**************************/
 /* BELOW 944px (Tablets) */
 /**************************/
 
@@ -256,10 +250,6 @@
   .btn:link,
   .btn:visited {
     padding: 2.4rem 1.6rem;
-  }
-
-  .section-hero {
-    padding: 2.4rem 0 6.4rem 0;
   }
 
   .hero-img {
