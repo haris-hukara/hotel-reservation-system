@@ -179,6 +179,16 @@
   overflow: hidden;
 }
 
+.room-style2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  box-shadow: 0 0.6rem 2.4rem rgba(0, 0, 0, 0.075);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
 .room-head {
   display: flex;
   width: 100%;
@@ -199,7 +209,8 @@
 
 .room-description {
   font-size: 1.6rem !important;
-  margin-bottom: 3.8rem;
+  margin-bottom: 4.6rem;
+  line-height: 1.4;
 }
 
 .room-services {
