@@ -341,8 +341,28 @@
   .rooms-grid-temp {
     grid-template-columns: 1fr;
   }
+
   .mt-1 {
     margin: 2rem 0 !important;
+  }
+
+  @media (max-width: 22rem) {
+    .filters-small-field-wrap {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .filters-small-input {
+      max-width: none;
+      width: 100%;
+    }
+
+    .filters-container {
+      padding: 3rem;
+    }
   }
 }
 
