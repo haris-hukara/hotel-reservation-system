@@ -8,6 +8,8 @@
 
     <!-- Toastr CSS -->
     <link href="toastr.min.css" rel="stylesheet" />
+
+    <!-- Fav icon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -37,6 +39,12 @@
       rel="stylesheet"
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <!-- Data tables -->
+    <link rel="stylesheet" href="assets/css/dataTables.responsive.css" />
+    <link rel="stylesheet" href="assets/css/jquery.dataTables.min.css" />
+    <script src="jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="assets/css/table.css" />
     <title>Hotel Sea | Log in</title>
   </head>
 
@@ -72,99 +80,20 @@
     </header>
     
       <main>
-        <div class="section-form">
-          <div id="login-form-container" class="form-main">
-            <div class="form-heading">
-              <p class="form-logo">Hotel <span>S</span>ea</p>
-              <p class="form-subheading">Login</p>
-            </div>
-            <svg
-              class="form-svg"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1920.153 43.541"
-              height="80"
-              width="700"
-            >
-              <path
-                class="form_svg_path"
-                data-name="Path 18"
-                d="M-43.475,11.044S521.191-30.5,938.916-30.5s937.609,41.543,937.609,41.543"
-                transform="translate(43.548 31.499)"
-                fill="none"
-                stroke="#1cc3b2"
-                stroke-width="8"
-              ></path>
-            </svg>
-            <form id="login-form" class="form1" role="form">
-              <div class="label-title">
-                <label for="email">Email</label>
-              </div>
-              <div class="input-container">
-                <input
-                  required=""
-                  name="email"
-                  class="form-field"
-                  type="email"
-                  minlength="5"
-                  maxlength="255"
-                  placeholder="John.Doe@mail.com"
-                />
-              </div>
-              <div class="label-title">
-                <label for="password">Password</label>
-              </div>
-              <div class="input-container">
-                <input
-                  required=""
-                  name="password"
-                  class="form-field"
-                  minlength="8"
-                  maxlength="255"
-                  type="password"
-                  placeholder="Password"
-                />
-              </div>
-              <button id="login-link" type="submit" class="submit">
-                Login
-              </button>
-              <div class="form-links">
-                <a
-                  class="forgot"
-                  href="javascript:void(0);"
-                  onclick="Login.showForgotForm()"
-                  >Forgot Password? </a
-                ><a
-                  class="forgot"
-                  href="javascript:void(0);"
-                  onclick="Login.showRegisterForm()"
-                  >Register Here
-                </a>
-              </div>
-            </form>
-          </div>
+        <div class="heading-background">
+          <h1 id="profile-page-heading" class="page-heading">My Profile</h1>
+        </div>
+        
+        <div class="container">
 
-          <div id="register-form-container" class="form-main hidden">
-            <div class="form-heading">
-              <p class="form-logo">Hotel <span>S</span>ea</p>
-              <p class="form-subheading">Registration</p>
-            </div>
-            <svg
-              class="form-svg"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1920.153 43.541"
-              height="80"
-              width="700"
-            >
-              <path
-                class="form_svg_path"
-                data-name="Path 18"
-                d="M-43.475,11.044S521.191-30.5,938.916-30.5s937.609,41.543,937.609,41.543"
-                transform="translate(43.548 31.499)"
-                fill="none"
-                stroke="#1cc3b2"
-                stroke-width="8"
-              ></path>
-            </svg>
+          <div class="profile-box">
+            <div class="profile-options">
+              <a id="my-profile-btn" class="profile-option-active" href="" onclick="showUserProfile()"> My profile</a>
+              <a id="my-reservations-btn" class="profile-option-inactive" href="" onclick="showUserReservations()"> My Reservations</a>
+          </div>
+          
+          <div id="user-profile-form-container" class="form-main">
+     
             <form id="register-form" class="form1" role="form">
               <div class="label-title">
                 <label for="email">Email</label>
@@ -290,127 +219,189 @@
                   </div>
                 </div>
               </div>
-
-              <button type="submit" class="submit">Register</button>
-              <div class="form-links">
-                <a
-                  class="forgot"
-                  href="javascript:void(0);"
-                  onclick="Login.showLoginForm()"
-                  >Back to login
-                </a>
-              </div>
+  
+              <button type="submit" class="submit">Submit</button>
+             
             </form>
           </div>
-          <div id="forgot-form-container" class="form-main hidden">
-            <div class="form-heading">
-              <p class="form-logo">Hotel <span>S</span>ea</p>
-              <p class="form-subheading">Forgot password</p>
+        </div>
+        
+          <div id="user-reservations-table" class="section-table hidden">
+            <div id="table-head">
+              <h2 id="my-table-name">Reservations table</h2>
+              <div class="my-table-function-wrap">
+                <p id="my-table-function">Add reservation</p>
+                <ion-icon class="small-icon" name="add-outline"></ion-icon>
+              </div>
             </div>
-            <svg
-              class="form-svg"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1920.153 43.541"
-              height="80"
-              width="700"
-            >
-              <path
-                class="form_svg_path"
-                data-name="Path 18"
-                d="M-43.475,11.044S521.191-30.5,938.916-30.5s937.609,41.543,937.609,41.543"
-                transform="translate(43.548 31.499)"
-                fill="none"
-                stroke="#1cc3b2"
-                stroke-width="8"
-              ></path>
-            </svg>
-            <form id="forgot-form" class="form1" role="form">
-              <div class="label-title">
-                <label for="email">Email</label>
-              </div>
-              <div class="input-container">
-                <input
-                  required=""
-                  name="email"
-                  class="form-field"
-                  type="email"
-                  minlength="5"
-                  maxlength="255"
-                  placeholder="John.Doe@mail.com"
-                />
-              </div>
-
-              <button type="submit" class="submit">Send recovery link</button>
-              <div class="form-links">
-                <a
-                  class="forgot"
-                  href="javascript:void(0);"
-                  onclick="Login.showLoginForm()"
-                  >Back to login
-                </a>
-              </div>
-            </form>
+            <table id="myTable">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Guest ID</th>
+                  <th>Room ID</th>
+                  <th>Date of reservation</th>
+                  <th>Check-in date</th>
+                  <th>Check-out date</th>
+                </tr>
+              </thead>
+      
+              <tbody>
+                <tr>
+                
+                <th> <ion-icon class="small-icon" name="pencil-outline"></ion-icon> 1 </th>
+                  <td>100</td>
+                  <td>500</td>
+                  <td>22/04/2022</td>
+                  <td>25/04/2022</td>
+                  <td>29/04/2022</td>
+                </tr>
+                <tr>
+                  <th><ion-icon class="small-icon" name="pencil-outline"></ion-icon>2</th>
+                  <td>101</td>
+                  <td>500</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                </tr>
+                <tr>
+                  <th><ion-icon class="small-icon" name="pencil-outline"></ion-icon>3</th>
+                  <td>102</td>
+                  <td>500</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                </tr>
+                <tr>
+                  <th><ion-icon class="small-icon" name="pencil-outline"></ion-icon>4</th>
+                  <td>103</td>
+                  <td>500</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                </tr>
+                <tr>
+                
+                <th> <ion-icon class="small-icon" name="pencil-outline"></ion-icon> 1 </th>
+                  <td>100</td>
+                  <td>500</td>
+                  <td>22/04/2022</td>
+                  <td>25/04/2022</td>
+                  <td>29/04/2022</td>
+                </tr>
+                <tr>
+                  <th><ion-icon class="small-icon" name="pencil-outline"></ion-icon>2</th>
+                  <td>101</td>
+                  <td>500</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                </tr>
+                <tr>
+                  <th><ion-icon class="small-icon" name="pencil-outline"></ion-icon>3</th>
+                  <td>102</td>
+                  <td>500</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                </tr>
+                <tr>
+                  <th><ion-icon class="small-icon" name="pencil-outline"></ion-icon>4</th>
+                  <td>103</td>
+                  <td>500</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                </tr>
+                <tr>
+                
+                <th> <ion-icon class="small-icon" name="pencil-outline"></ion-icon> 1 </th>
+                  <td>100</td>
+                  <td>500</td>
+                  <td>22/04/2022</td>
+                  <td>25/04/2022</td>
+                  <td>29/04/2022</td>
+                </tr>
+                <tr>
+                  <th><ion-icon class="small-icon" name="pencil-outline"></ion-icon>2</th>
+                  <td>101</td>
+                  <td>500</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                </tr>
+                <tr>
+                  <th><ion-icon class="small-icon" name="pencil-outline"></ion-icon>3</th>
+                  <td>102</td>
+                  <td>500</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                </tr>
+                <tr>
+                  <th><ion-icon class="small-icon" name="pencil-outline"></ion-icon>4</th>
+                  <td>103</td>
+                  <td>500</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                  <td>22/04/2022</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <div id="change-password-form-container" class="form-main hidden">
-            <div class="form-heading">
-              <p class="form-logo">Hotel <span>S</span>ea</p>
-              <p class="form-subheading">Password reset</p>
-            </div>
-            <svg
-              class="form-svg"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1920.153 43.541"
-              height="80"
-              width="700"
-            >
-              <path
-                class="form_svg_path"
-                data-name="Path 18"
-                d="M-43.475,11.044S521.191-30.5,938.916-30.5s937.609,41.543,937.609,41.543"
-                transform="translate(43.548 31.499)"
-                fill="none"
-                stroke="#1cc3b2"
-                stroke-width="8"
-              ></path>
-            </svg>
-            <form id="change-password-form" class="form1" role="form">
-              <div class="label-title">
-                <label for="password">Password</label>
-              </div>
-              <div class="input-container">
-                <input
-                  required=""
-                  minlength="8"
-                  maxlength="255"
-                  name="password"
-                  class="form-field"
-                  type="password"
-                  placeholder="Password"
-                />
-              </div>
-              <input
-                required=""
-                id="change-password-token"
-                name="token"
-                class="form1"
-                type="hidden"
-              />
 
-              <button type="submit" class="submit">Login</button>
-              <div class="form-links">
-                <a
-                  class="forgot"
-                  href="javascript:void(0);"
-                  onclick="Login.showLoginForm()"
-                  >Back to login
-                </a>
-              </div>
-            </form>
-          </div>
+        </div>
+          
+
+
+
+         
+
         </div>
       </main>
     </div>
    
+    
+    <script>
+      
+      $(document).ready(function () {
+        $("#myTable").DataTable();
+        $("#myTable_filter").remove();
+        $("#myTable_wrapper").prepend($("#table-head"));
+        $("#table-head").prepend($("#myTable_length"));
+      });
+
+
+    function showUserReservations() {
+    $("#user-reservations-table").removeClass("hidden");
+    $("#user-profile-form-container").addClass("hidden");
+
+    $("#my-profile-btn").removeClass("profile-option-active");
+    $("#my-profile-btn").addClass("profile-option-inactive");
+    
+    $("#my-reservations-btn").removeClass("profile-option-inactive");
+    $("#my-reservations-btn").addClass("profile-option-active");
+    $("#profile-page-heading").text("My Reservations");
+  }
+  
+  function showUserProfile() {
+    $("#user-profile-form-container").removeClass("hidden");
+    $("#user-reservations-table").addClass("hidden");
+    
+    $("#my-profile-btn").removeClass("profile-option-inactive");
+    $("#my-profile-btn").addClass("profile-option-active");
+    
+    $("#my-reservations-btn").removeClass("profile-option-active");
+    $("#my-reservations-btn").addClass("profile-option-inactive");
+    $("#profile-page-heading").text("My Profile");
+  }
+
+
+    </script>
+
+
+ <script src="//cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
+
     <script
       type="module"
       src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"

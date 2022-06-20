@@ -238,7 +238,7 @@
     grid-template-columns: 1fr !important;
   }
 
-  .room-main2 {
+  .room-main {
     padding: 2rem !important;
   }
 
@@ -328,10 +328,6 @@
   }
   .filters-container {
     grid-template-columns: 1fr;
-  }
-
-  .room-main {
-    padding: 2rem;
   }
 
   .room-style {
