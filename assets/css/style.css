@@ -9,7 +9,7 @@
 }
 
 .heading-background {
-  background-image: url("../../img/page-background.jpg");
+  background-image: url("../../assets/img/page-background.jpg");
   background-size: cover;
   padding: 8rem 0;
   margin-bottom: 4rem;
@@ -477,7 +477,7 @@
 /**************************/
 
 .section-form {
-  background-image: url("/../../img/login-background.jpg");
+  background-image: url("/../../assets/img/login-background.jpg");
   max-width: 192rem;
   min-height: 85rem;
   background-size: 192rem 120rem;

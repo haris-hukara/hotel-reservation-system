@@ -324,7 +324,7 @@ strong {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("../../img/home-background.jpg");
+  background-image: url("../../assets/img/home-background.jpg");
   max-width: 192rem;
   background-size: cover;
 }
