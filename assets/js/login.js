@@ -1,6 +1,7 @@
 class Login {
   static init() {
     $(document).ready(function () {
+      Login.resizeSVG();
       $("#login-form-container").find("form")[0].reset();
       $("#register-form-container").find("form")[0].reset();
 
