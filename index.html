@@ -5,10 +5,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- Toastr CSS -->
-    <link href="assets/css/toastr.min.css" rel="stylesheet" />
-
     <link
       rel="apple-touch-icon"
       sizes="180x180"
@@ -28,14 +24,8 @@
     />
     <link rel="manifest" href="favicon/site.webmanifest" />
 
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule=""
-      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"
-    ></script>
+    <!-- Toastr CSS -->
+    <link href="assets/css/toastr.min.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="assets/css/general.css" />
     <link rel="stylesheet" href="assets/css/style.css" />
@@ -51,7 +41,6 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,500;0,600;0,700;1,200&display=swap"
       rel="stylesheet"
     />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>Hotel Sea | Log in</title>
   </head>
 
@@ -86,214 +75,58 @@
         ></ion-icon>
       </button>
     </header>
-    <section class="section-hero">
-      <div class="hero">
-        <p class="hero-subheading">Hotel & Resort</p>
-        <h1 class="heading-primary">Welcome To Hotel Sea</h1>
-        <a href="#about" class="btn btn--full">Discover More</a>
-      </div>
-    </section>
-    <div class="container">
-      <div id="home-filters" class="filters-container">
-        <div>
-          <div class="filters-wraper">
-            <label class="mb-1rem" for="">Check in</label>
-            <input class="filters-input" type="date" name="" id="" />
-          </div>
-        </div>
-        <div>
-          <div class="filters-wraper">
-            <label class="mb-1rem" for="">Check out</label>
-            <input class="filters-input" type="date" name="" id="" />
-          </div>
-        </div>
 
-        <div class="filters-small-field-wrap">
-          <div class="filters-wraper">
-            <label class="mb-1rem" for="">Rooms</label>
-            <input
-              class="filters-input filters-small-input"
-              type="number"
-              name=""
-              id=""
-            />
-          </div>
-          <div class="filters-wraper">
-            <label class="mb-1rem" for="">Adults</label>
-            <input
-              class="filters-input filters-small-input"
-              type="number"
-              name=""
-              id=""
-            />
-          </div>
-          <div class="filters-wraper">
-            <label class="mb-1rem" for="">Children</label>
-            <input
-              class="filters-input filters-small-input"
-              type="number"
-              name=""
-              id=""
-            />
-          </div>
-        </div>
-
-        <div class="filters-button-wrap">
-          <a href="rooms.html" class="filters-button"> Check avaliability </a>
-        </div>
-      </div>
-    </div>
-    <main class="main-home">
-      <section class="section-about" id="about">
-        <div class="container">
-          <div class="container grid grid--2-cols grid--center-v">
-            <!-- About us -->
-            <div class="about-text-box">
-              <p class="subheading">About us</p>
-              <h3 class="heading-tertiary">Welcome to Hotel Sea Resort</h3>
-              <p class="basic-description">
-                The Hotel Sea is the rihgt choice for visitors who are searching
-                for a combination of charm and a convenient position from where
-                to explore surroundings.
-              </p>
-            </div>
-
-            <div class="about-us-grid">
-              <figure class="about-item">
-                <img src="assets/img/home-imgs/06.png" alt="" />
-              </figure>
-              <figure class="about-item grid-span-2-rows">
-                <img src="assets/img/home-imgs/05.png" alt="" />
-              </figure>
-              <figure class="about-item">
-                <img src="assets/img/home-imgs/02.png" alt="" />
-              </figure>
-            </div>
-
-            <div id="about-us-grid-2" class="about-us-grid">
-              <figure class="about-item grid-span-2-rows">
-                <img src="assets/img/home-imgs/03.png" alt="" />
-              </figure>
-              <figure class="about-item">
-                <img src="assets/img/home-imgs/04.png" alt="" />
-              </figure>
-              <figure class="about-item">
-                <img src="assets/img/home-imgs/01.png" alt="" />
-              </figure>
-            </div>
-
-            <div class="about-text-box">
-              <p class="subheading">More info</p>
-              <h3 class="heading-tertiary">Three floors of Luxury</h3>
-              <p class="basic-description">
-                The rooms are arranged on the first, second and third floors. At
-                top floor there is a charming terrace and solarium. You can also
-                enjoy in beatuiful view from above.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+    <main id="jqueryspapp" role="main">
+      <section id="homepage" data-load="homepage.html"></section>
     </main>
-
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule=""
-      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"
-    ></script>
-
-    <script
-      defer
-      src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"
-    ></script>
-    <script defer src="assets/js/script.js"></script>
-    <!-- Toastr JS -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
-    <script src="assets/js/login.js"></script>
-
-    <script>
-      toastr.options = {
-        closeButton: false,
-        debug: false,
-        newestOnTop: true,
-        progressBar: true,
-        positionClass: "toast-top-right",
-        preventDuplicates: false,
-        onclick: null,
-        showDuration: "300",
-        hideDuration: "1000",
-        timeOut: "5000",
-        extendedTimeOut: "5000",
-        showEasing: "swing",
-        hideEasing: "linear",
-        showMethod: "fadeIn",
-        hideMethod: "fadeOut",
-      };
-
-      $(document).ready(function () {
-        if (localStorage.getItem("nav") == "1") {
-          $("#about-link")[0].click();
-          $("#close-mob-nav")[0].click();
-
-          localStorage.setItem("nav", 0);
-        }
-
-        $("#login-form-container").find("form")[0].reset();
-        $("#register-form-container").find("form")[0].reset();
-
-        $("#forgot-form-container").find("form")[0].reset();
-
-        $("#birth_date").val("");
-        var today = new Date();
-        var max_date = today.getFullYear() + "-";
-        var month = today.getMonth() + 1;
-        if (month.toString().length == 1) {
-          max_date += "0";
-        }
-        max_date += month + "-";
-        if (today.getDate().toString().length == 1) {
-          max_date += "0";
-        }
-        max_date += today.getDate();
-        $("#birth_date").attr("max", max_date);
-      });
-      // document.getElementById("birth_date").valueAsDate = new Date();
-
-      resizeSVG();
-      function resizeSVG() {
-        $(function () {
-          $(window).on("resize", function (e) {
-            for (var i = 0; i < $(".form-svg").length; i++) {
-              if ($(window).width() > 700) {
-                $(".form_svg_path")[i].setAttribute("stroke-width", 8);
-              }
-              if ($(window).width() < 700) {
-                var stroke = (700 - $(window).width()) / 100 + 10;
-                $(".form_svg_path")[i].setAttribute("stroke-width", stroke);
-              }
-
-              if ($(window).width() < 300) {
-                var stroke = (700 - $(window).width()) / 100 + 15;
-                $(".form_svg_path")[i].setAttribute("stroke-width", stroke);
-              }
-
-              $(".form-svg")[i].setAttribute(
-                "width",
-                document.getElementsByClassName("form-main")[i].offsetWidth
-              );
-            }
-          });
-        });
-      }
-
-      Login.init();
-      $(document).ready(function () {
-        $(window).resize();
-      });
-    </script>
   </body>
+
+  <!--Ion icons -->
+  <script
+    type="module"
+    src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"
+  ></script>
+  <script
+    nomodule=""
+    src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"
+  ></script>
+
+  <!-- Smooth Scroll -->
+  <script
+    defer
+    src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"
+  ></script>
+
+  <script defer src="assets/js/script.js"></script>
+
+  <!-- jQuerry -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <!-- jQuerrySPApp should be included down here -->
+  <script src="assets/js/jQuerrySPApp.js"></script>
+
+  <!-- Toastr JS -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      var app = $.jQuerySPApp({ defaultView: "#homepage" }); // initialize
+      /*
+if (!window.localStorage.getItem("token")) {
+  window.location = "login.html";
+} else {
+  $("body").show();
+  var user_info = parse_jwt(window.localStorage.getItem("token"));
+  if (user_info.rl == "ADMIN") {
+    setCartCount();
+  } else {
+    $(".admin-stuff").remove();
+  }
+}
+*/
+      // run app
+      app.run();
+    });
+  </script>
 </html>
