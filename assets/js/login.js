@@ -1,5 +1,28 @@
 class Login {
   static init() {
+    $(document).ready(function () {
+      $("#login-form-container").find("form")[0].reset();
+      $("#register-form-container").find("form")[0].reset();
+
+      $("#forgot-form-container").find("form")[0].reset();
+
+      $("#birth_date").val("");
+      var today = new Date();
+      var max_date = today.getFullYear() + "-";
+      var month = today.getMonth() + 1;
+      if (month.toString().length == 1) {
+        max_date += "0";
+      }
+      max_date += month + "-";
+      if (today.getDate().toString().length == 1) {
+        max_date += "0";
+      }
+      max_date += today.getDate();
+      $("#birth_date").attr("max", max_date);
+    });
+
+    Login.resizeSVG();
+
     var urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has("token")) {
       $("#change-password-token").val(urlParams.get("token"));
@@ -35,6 +58,32 @@ class Login {
         event.preventDefault();
         Login.doChangePassword();
       },
+    });
+  }
+
+  static resizeSVG() {
+    $(function () {
+      $(window).on("resize", function (e) {
+        for (var i = 0; i < $(".form-svg").length; i++) {
+          if ($(window).width() > 700) {
+            $(".form_svg_path")[i].setAttribute("stroke-width", 8);
+          }
+          if ($(window).width() < 700) {
+            var stroke = (700 - $(window).width()) / 100 + 10;
+            $(".form_svg_path")[i].setAttribute("stroke-width", stroke);
+          }
+
+          if ($(window).width() < 300) {
+            var stroke = (700 - $(window).width()) / 100 + 15;
+            $(".form_svg_path")[i].setAttribute("stroke-width", stroke);
+          }
+
+          $(".form-svg")[i].setAttribute(
+            "width",
+            document.getElementsByClassName("form-main")[i].offsetWidth
+          );
+        }
+      });
     });
   }
 

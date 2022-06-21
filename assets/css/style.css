@@ -710,32 +710,31 @@ div.form-2-fields > * {
 
 .profile-option-active,
 .profile-option-inactive {
+  font-family: Poppins, sans-serif;
   font-size: 1.4rem;
   padding: 1rem;
   width: 100%;
   border-radius: 10px;
   text-align: center;
+  cursor: pointer;
+  border: none;
 }
 
-.profile-option-active:link,
-.profile-option-active:visited {
+.profile-option-active {
   background-color: #1cc3b2;
   color: #fff;
 }
 
-.profile-option-active:hover,
-.profile-option-active:active {
+.profile-option-active:hover {
   background-color: #20a799;
   transition: 0.3s ease-in;
 }
 
-.profile-option-inactive:link,
-.profile-option-inactive:visited {
+.profile-option-inactive {
   color: #212529;
 }
 
-.profile-option-inactive:hover,
-.profile-option-inactive:active {
+.profile-option-inactive:hover {
   background-color: rgba(226, 229, 239, 0.75);
   color: #212529;
   transition: 0.3s ease-in;

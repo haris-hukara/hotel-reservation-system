@@ -1,95 +1,12 @@
-<!DOCTYPE html>
-
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- Toastr CSS -->
-    <link href="assets/css/toastr.min.css" rel="stylesheet" />
-
-    <!-- Fav icon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="manifest" href="/site.webmanifest" />
-
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule=""
-      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"
-    ></script>
-
-    <link rel="stylesheet" href="assets/css/general.css" />
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <link rel="stylesheet" href="assets/css/queries.css" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Ubuntu"
-      rel="stylesheet"
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,500;0,600;0,700;1,200&display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    
-    <!-- Data tables -->
-    <link rel="stylesheet" href="assets/css/dataTables.responsive.css" />
-    <link rel="stylesheet" href="assets/css/jquery.dataTables.min.css" />
-    <script src="assets/js/jquery.dataTables.min.js"></script>
-    <link rel="stylesheet" href="assets/css/table.css" />
-    <title>Hotel Sea | Log in</title>
-  </head>
-
-  <body class="">
-    <header class="header">
-      <a href="index.html" class="logo">Hotel <span>S</span>ea</a>
-
-      <nav class="main-nav">
-        <ul class="main-nav-list">
-          <li><a class="main-nav-link" href="index.html">Home</a></li>
-          <li><a class="main-nav-link" href="rooms.html">Rooms</a></li>
-          <li>
-            <a class="main-nav-link" href="#about">About us</a>
-          </li>
-          <li><a class="main-nav-link nav-cta" href="login.html">Login</a></li>
-        </ul>
-      </nav>
-
-      <button class="btn-mobile-nav">
-        <ion-icon
-          class="icon-mobile-nav md hydrated"
-          name="menu-outline"
-          role="img"
-          aria-label="menu outline"
-        ></ion-icon>
-        <ion-icon
-          class="icon-mobile-nav md hydrated"
-          name="close-outline"
-          role="img"
-          aria-label="close outline"
-        ></ion-icon>
-      </button>
-    </header>
-    
-      <main>
         <div class="heading-background">
           <h1 id="profile-page-heading" class="page-heading">My Profile</h1>
         </div>
         
         <div class="container">
-
           <div class="profile-box">
             <div class="profile-options">
-              <a id="my-profile-btn" class="profile-option-active" href="" onclick="showUserProfile()"> My profile</a>
-              <a id="my-reservations-btn" class="profile-option-inactive" href="" onclick="showUserReservations()"> My Reservations</a>
+              <button id="my-profile-btn" class="profile-option-active" href onclick="showUserProfile()"> My profile</button>
+              <button id="my-reservations-btn" class="profile-option-inactive" href onclick="showUserReservations()"> My Reservations</p>
           </div>
           
           <div id="user-profile-form-container" class="form-main">
@@ -355,22 +272,17 @@
 
 
 
-         
-
-        </div>
-      </main>
-    </div>
-   
-    
-    <script>
       
-      $(document).ready(function () {
-        $("#myTable").DataTable();
+    
+        <script>
+          
+          $(document).ready(function () {
+            $("#myTable").DataTable();
         $("#myTable_filter").remove();
         $("#myTable_wrapper").prepend($("#table-head"));
         $("#table-head").prepend($("#myTable_length"));
       });
-
+      
 
     function showUserReservations() {
     $("#user-reservations-table").removeClass("hidden");
@@ -400,99 +312,3 @@
     </script>
 
 
- <script src="//cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
-
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule=""
-      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"
-    ></script>
-
-      <script
-        defer
-        src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"
-      ></script>
-    <script defer src="assets/js/script.js"></script>
-    <!-- Toastr JS -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
-    <script src="assets/js/login.js"></script>
-
-    <script>
-      toastr.options = {
-        closeButton: false,
-        debug: false,
-        newestOnTop: true,
-        progressBar: true,
-        positionClass: "toast-top-right",
-        preventDuplicates: false,
-        onclick: null,
-        showDuration: "300",
-        hideDuration: "1000",
-        timeOut: "5000",
-        extendedTimeOut: "5000",
-        showEasing: "swing",
-        hideEasing: "linear",
-        showMethod: "fadeIn",
-        hideMethod: "fadeOut",
-      };
-
-      $(document).ready(function () {
-        $("#login-form-container").find("form")[0].reset();
-        $("#register-form-container").find("form")[0].reset();
-
-        $("#forgot-form-container").find("form")[0].reset();
-
-        $("#birth_date").val("");
-        var today = new Date();
-        var max_date = today.getFullYear() + "-";
-        var month = today.getMonth() + 1;
-        if (month.toString().length == 1) {
-          max_date += "0";
-        }
-        max_date += month + "-";
-        if (today.getDate().toString().length == 1) {
-          max_date += "0";
-        }
-        max_date += today.getDate();
-        $("#birth_date").attr("max", max_date);
-      });
-      // document.getElementById("birth_date").valueAsDate = new Date();
-
-      resizeSVG();
-      function resizeSVG() {
-        $(function () {
-          $(window).on("resize", function (e) {
-            for (var i = 0; i < $(".form-svg").length; i++) {
-              if ($(window).width() > 700) {
-                $(".form_svg_path")[i].setAttribute("stroke-width", 8);
-              }
-              if ($(window).width() < 700) {
-                var stroke = (700 - $(window).width()) / 100 + 10;
-                $(".form_svg_path")[i].setAttribute("stroke-width", stroke);
-              }
-
-              if ($(window).width() < 300) {
-                var stroke = (700 - $(window).width()) / 100 + 15;
-                $(".form_svg_path")[i].setAttribute("stroke-width", stroke);
-              }
-
-              $(".form-svg")[i].setAttribute(
-                "width",
-                document.getElementsByClassName("form-main")[i].offsetWidth
-              );
-            }
-          });
-        });
-      }
-
-      Login.init();
-      $(document).ready(function () {
-        $(window).resize();
-      });
-    </script>
-  </body>
-</html>

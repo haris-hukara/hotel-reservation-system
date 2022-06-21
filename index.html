@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="assets/css/general.css" />
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/queries.css" />
+    <link rel="stylesheet" href="assets/css/jQuerrySPApp.css" />
     <link
       href="https://fonts.googleapis.com/css?family=Ubuntu"
       rel="stylesheet"
@@ -41,21 +42,28 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,500;0,600;0,700;1,200&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Data tables -->
+    <link rel="stylesheet" href="assets/css/dataTables.responsive.css" />
+    <link rel="stylesheet" href="assets/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="assets/css/table.css" />
     <title>Hotel Sea | Log in</title>
   </head>
 
   <body class="sticky">
     <header class="header">
-      <a href="#" class="logo">Hotel <span>S</span>ea</a>
+      <a href="#homepage" class="logo">Hotel <span>S</span>ea</a>
 
       <nav class="main-nav">
         <ul class="main-nav-list">
-          <li><a class="main-nav-link" href="#">Home</a></li>
-          <li><a class="main-nav-link" href="rooms.html">Rooms</a></li>
+          <li><a class="main-nav-link" href="#homepage">Home</a></li>
+          <li><a class="main-nav-link" href="#rooms">Rooms</a></li>
           <li>
-            <a id="about-link" class="main-nav-link" href="#about">About us</a>
+            <a id="about-link" class="main-nav-link" href="#profile"
+              >My profile</a
+            >
           </li>
-          <li><a class="main-nav-link nav-cta" href="login.html">Login</a></li>
+          <li><a class="main-nav-link nav-cta" href="#login">Login</a></li>
         </ul>
       </nav>
 
@@ -78,55 +86,58 @@
 
     <main id="jqueryspapp" role="main">
       <section id="homepage" data-load="homepage.html"></section>
+      <section id="profile" data-load="profile.html"></section>
+      <section id="rooms" data-load="rooms.html"></section>
+      <section id="login" data-load="login.html"></section>
     </main>
   </body>
-
-  <!--Ion icons -->
-  <script
-    type="module"
-    src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"
-  ></script>
-  <script
-    nomodule=""
-    src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"
-  ></script>
-
-  <!-- Smooth Scroll -->
-  <script
-    defer
-    src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"
-  ></script>
-
-  <script defer src="assets/js/script.js"></script>
-
-  <!-- jQuerry -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-  <!-- jQuerrySPApp should be included down here -->
-  <script src="assets/js/jQuerrySPApp.js"></script>
-
-  <!-- Toastr JS -->
-  <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
-
-  <script type="text/javascript">
-    $(document).ready(function () {
-      var app = $.jQuerySPApp({ defaultView: "#homepage" }); // initialize
-      /*
-if (!window.localStorage.getItem("token")) {
-  window.location = "login.html";
-} else {
-  $("body").show();
-  var user_info = parse_jwt(window.localStorage.getItem("token"));
-  if (user_info.rl == "ADMIN") {
-    setCartCount();
-  } else {
-    $(".admin-stuff").remove();
-  }
-}
-*/
-      // run app
-      app.run();
-    });
-  </script>
 </html>
+<!-- General JS -->
+<script defer src="assets/js/script.js"></script>
+
+<!-- jQuerry -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- jQuerrySPApp should be included down here -->
+<script src="assets/js/jQuerrySPApp.js"></script>
+
+<!-- Ion icons -->
+<script
+  type="module"
+  src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"
+></script>
+<script
+  nomodule=""
+  src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"
+></script>
+
+<!-- Toastr JS -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+
+<!-- Datatables -->
+<script src="assets\js\jquery.dataTables.min.js"></script>
+
+<!-- Controllers -->
+<script src="assets/js/login.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    var app = $.jQuerySPApp({ defaultView: "#homepage" }); // initialize
+    /*
+
+    if (!window.localStorage.getItem("token")) {
+      window.location = "login.html";
+    } else {
+      $("body").show();
+      var user_info = parse_jwt(window.localStorage.getItem("token"));
+      if (user_info.rl == "ADMIN") {
+        setCartCount();
+      } else {
+        $(".admin-stuff").remove();
+      }
+    }*/
+    // run app
+    app.run();
+  });
+</script>
