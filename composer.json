@@ -1,0 +1,9 @@
+{
+    "require": {
+        "mikecao/flight": "^2.0",
+        "firebase/php-jwt": "^6.2",
+        "zircote/swagger-php": "3.2",
+        "spomky-labs/otphp": "^10.0",
+        "swiftmailer/swiftmailer": "^6.3"
+    }
+}

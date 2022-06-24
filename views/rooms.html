@@ -7,13 +7,13 @@
     <div>
       <div class="filters-wraper">
         <label class="mb-1rem" for="">Check in</label>
-        <input class="filters-input" type="date" name="" id="" />
+        <input class="filters-input" type="date" name="check_in" id="" />
       </div>
     </div>
     <div>
       <div class="filters-wraper">
         <label class="mb-1rem" for="">Check out</label>
-        <input class="filters-input" type="date" name="" id="" />
+        <input class="filters-input" type="date" name="check_out" id="" />
       </div>
     </div>
 
@@ -23,7 +23,7 @@
         <input
           class="filters-input filters-small-input"
           type="number"
-          name=""
+          name="rooms"
           id=""
         />
       </div>
@@ -32,7 +32,7 @@
         <input
           class="filters-input filters-small-input"
           type="number"
-          name=""
+          name="adults"
           id=""
         />
       </div>
@@ -41,7 +41,7 @@
         <input
           class="filters-input filters-small-input"
           type="number"
-          name=""
+          name="children"
           id=""
         />
       </div>
@@ -52,87 +52,11 @@
     </div>
   </div>
   <section class="section-rooms">
-    <div class="rooms-grid-temp grid grid--center-v row-gap-6-rem">
+    <div
+      id="rooms-box"
+      class="rooms-grid-temp grid grid--center-v row-gap-6-rem"
+    >
       <!-- Rooms -->
-      <div class="room-container">
-        <figure class="room-figure">
-          <img alt="" src="assets/img/room-1.png" />
-        </figure>
-        <div class="room-main">
-          <div class="room-main-info">
-            <div class="room-head">
-              <h2>Standard Room</h2>
-              <p>From $99/night</p>
-            </div>
-            <p class="room-description">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id hic
-              repudiandae ut, fugit magni esse minima maiores doloribus possimus
-              nam.
-            </p>
-            <div class="room-services">
-              <div class="room-service">
-                <ion-icon
-                  name="wifi-outline"
-                  role="img"
-                  class="md hydrated"
-                  aria-label="wifi outline"
-                ></ion-icon>
-                <p class="room-service-name">Wifi</p>
-              </div>
-              <div class="room-service">
-                <ion-icon
-                  name="fast-food-outline"
-                  role="img"
-                  class="md hydrated"
-                  aria-label="fast food outline"
-                ></ion-icon>
-                <p class="room-service-name">Breakfast</p>
-              </div>
-              <div class="room-service">
-                <ion-icon
-                  name="car-sport-outline"
-                  role="img"
-                  class="md hydrated"
-                  aria-label="car sport outline"
-                ></ion-icon>
-                <p class="room-service-name">Parking</p>
-              </div>
-              <div class="room-service">
-                <ion-icon
-                  name="desktop-outline"
-                  role="img"
-                  class="md hydrated"
-                  aria-label="desktop outline"
-                ></ion-icon>
-                <p class="room-service-name">TV</p>
-              </div>
-              <div class="room-service">
-                <ion-icon
-                  name="paw-outline"
-                  role="img"
-                  class="md hydrated"
-                  aria-label="paw outline"
-                ></ion-icon>
-                <p class="room-service-name">Pet free</p>
-              </div>
-              <div class="room-service">
-                <ion-icon
-                  name="barbell-outline"
-                  role="img"
-                  class="md hydrated"
-                  aria-label="barbell outline"
-                ></ion-icon>
-                <p class="room-service-name">Gym</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="flex-col-center">
-            <button class="room-button">Make reservation</button>
-            <a class="forgot mt-1" onclick="">See more details </a>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
   <div class="pagination-wrap">
@@ -180,3 +104,7 @@
     </div>
   </div>
 </div>
+
+<script>
+  Rooms.init();
+</script>

@@ -151,6 +151,7 @@
                 <ion-icon class="small-icon" name="add-outline"></ion-icon>
               </div>
             </div>
+           
             <table id="myTable">
               <thead>
                 <tr>
@@ -283,31 +284,6 @@
         $("#table-head").prepend($("#myTable_length"));
       });
       
-
-    function showUserReservations() {
-    $("#user-reservations-table").removeClass("hidden");
-    $("#user-profile-form-container").addClass("hidden");
-
-    $("#my-profile-btn").removeClass("profile-option-active");
-    $("#my-profile-btn").addClass("profile-option-inactive");
-    
-    $("#my-reservations-btn").removeClass("profile-option-inactive");
-    $("#my-reservations-btn").addClass("profile-option-active");
-    $("#profile-page-heading").text("My Reservations");
-  }
-  
-  function showUserProfile() {
-    $("#user-profile-form-container").removeClass("hidden");
-    $("#user-reservations-table").addClass("hidden");
-    
-    $("#my-profile-btn").removeClass("profile-option-inactive");
-    $("#my-profile-btn").addClass("profile-option-active");
-    
-    $("#my-reservations-btn").removeClass("profile-option-active");
-    $("#my-reservations-btn").addClass("profile-option-inactive");
-    $("#profile-page-heading").text("My Profile");
-  }
-
 
     </script>
 

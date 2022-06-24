@@ -477,7 +477,7 @@
 /**************************/
 
 .section-form {
-  background-image: url("/../../assets/img/login-background.jpg");
+  background-image: url("../img/login-background.jpg");
   max-width: 192rem;
   min-height: 85rem;
   background-size: 192rem 120rem;

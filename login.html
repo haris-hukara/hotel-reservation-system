@@ -8,10 +8,25 @@
 
     <!-- Toastr CSS -->
     <link href="assets/css/toastr.min.css" rel="stylesheet" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="manifest" href="/site.webmanifest" />
+
+    <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="favicon/apple-touch-icon.png"
+  />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="favicon/favicon-32x32.png"
+  />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="16x16"
+    href="favicon/favicon-16x16.png"
+  />
+  <link rel="manifest" href="favicon/site.webmanifest" />
 
     <script
       type="module"
@@ -40,18 +55,15 @@
     <title>Hotel Sea | Log in</title>
   </head>
 
-  <body class="">
+  <body style="display: none">
     <header class="header">
       <a href="index.html" class="logo">Hotel <span>S</span>ea</a>
 
       <nav class="main-nav">
         <ul class="main-nav-list">
           <li><a class="main-nav-link" href="index.html">Home</a></li>
-          <li><a class="main-nav-link" href="rooms.html">Rooms</a></li>
-          <li>
-            <a class="main-nav-link" href="#about">About us</a>
-          </li>
-          <li><a class="main-nav-link nav-cta" href="login.html">Login</a></li>
+          <li><a class="main-nav-link" href="index.html#rooms">Rooms</a></li>
+          <li><a class="main-nav-link nav-cta nav-button" href="login.html">Login</a></li>
         </ul>
       </nav>
 
@@ -142,6 +154,7 @@
               </div>
             </form>
           </div>
+
 
           <div id="register-form-container" class="form-main hidden">
             <div class="form-heading">
@@ -291,7 +304,7 @@
                 </div>
               </div>
 
-              <button type="submit" class="submit">Register</button>
+              <button id="register-link" type="submit" class="submit">Register</button>
               <div class="form-links">
                 <a
                   class="forgot"
@@ -302,6 +315,8 @@
               </div>
             </form>
           </div>
+          
+
           <div id="forgot-form-container" class="form-main hidden">
             <div class="form-heading">
               <p class="form-logo">Hotel <span>S</span>ea</p>
@@ -410,7 +425,11 @@
         </div>
       </main>
     </div>
-   
+    <!-- Rest Client -->
+    <script src="assets/js/restClient.js"></script>
+
+    <!-- Utils -->
+    <script src="./assets/js/utils.js"></script>
     <script
       type="module"
       src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"
@@ -425,79 +444,13 @@
         src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"
       ></script>
     <script defer src="assets/js/script.js"></script>
+    
     <!-- Toastr JS -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
-    <script src="assets/js/login.js"></script>
+    <script src="assets/js/controllers/login.js"></script>
 
     <script>
-      toastr.options = {
-        closeButton: false,
-        debug: false,
-        newestOnTop: true,
-        progressBar: true,
-        positionClass: "toast-top-right",
-        preventDuplicates: false,
-        onclick: null,
-        showDuration: "300",
-        hideDuration: "1000",
-        timeOut: "5000",
-        extendedTimeOut: "5000",
-        showEasing: "swing",
-        hideEasing: "linear",
-        showMethod: "fadeIn",
-        hideMethod: "fadeOut",
-      };
-
-      $(document).ready(function () {
-        $("#login-form-container").find("form")[0].reset();
-        $("#register-form-container").find("form")[0].reset();
-
-        $("#forgot-form-container").find("form")[0].reset();
-
-        $("#birth_date").val("");
-        var today = new Date();
-        var max_date = today.getFullYear() + "-";
-        var month = today.getMonth() + 1;
-        if (month.toString().length == 1) {
-          max_date += "0";
-        }
-        max_date += month + "-";
-        if (today.getDate().toString().length == 1) {
-          max_date += "0";
-        }
-        max_date += today.getDate();
-        $("#birth_date").attr("max", max_date);
-      });
-      // document.getElementById("birth_date").valueAsDate = new Date();
-
-      resizeSVG();
-      function resizeSVG() {
-        $(function () {
-          $(window).on("resize", function (e) {
-            for (var i = 0; i < $(".form-svg").length; i++) {
-              if ($(window).width() > 700) {
-                $(".form_svg_path")[i].setAttribute("stroke-width", 8);
-              }
-              if ($(window).width() < 700) {
-                var stroke = (700 - $(window).width()) / 100 + 10;
-                $(".form_svg_path")[i].setAttribute("stroke-width", stroke);
-              }
-
-              if ($(window).width() < 300) {
-                var stroke = (700 - $(window).width()) / 100 + 15;
-                $(".form_svg_path")[i].setAttribute("stroke-width", stroke);
-              }
-
-              $(".form-svg")[i].setAttribute(
-                "width",
-                document.getElementsByClassName("form-main")[i].offsetWidth
-              );
-            }
-          });
-        });
-      }
-
       Login.init();
       $(document).ready(function () {
         $(window).resize();
