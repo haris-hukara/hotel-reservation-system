@@ -17,7 +17,7 @@ Features:
 
 Used:
 
-- HTML, CSS, JS, Bootstrap
+- HTML, CSS, JS, jQuery
  
 - PHP, FlightPHP, Swagger, MySQL
 
