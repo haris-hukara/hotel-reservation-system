@@ -1,9 +1,13 @@
 <?php
+
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+
 Flight::route('/user/*', function(){
     $token = Flight::header('Authentication');
     
     try {
-        $user = (array)\Firebase\JWT\JWT::decode($token, Config::JWT_SECRET,['HS256']);
+        $user = (array)\Firebase\JWT\JWT::decode(strval($token), new Key(Config::JWT_SECRET(), 'HS256'));
         Flight::set("user", $user);
 
         if(Flight::request()->method != 'GET' && $user['rl']=="USER_READ_ONLY"){
@@ -22,7 +26,7 @@ Flight::route('/user/*', function(){
     $token = Flight::header('Authentication');
 
     try {
-        $user = (array)\Firebase\JWT\JWT::decode($token, Config::JWT_SECRET,['HS256']);
+        $user = (array)\Firebase\JWT\JWT::decode( strval($token), new Key(Config::JWT_SECRET(), 'HS256'));
         if($user['rl'] !="ADMIN"){
             throw new Exception ("Admin access required.", 403);
         }

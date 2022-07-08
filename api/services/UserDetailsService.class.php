@@ -18,23 +18,23 @@ class UserDetailsService extends BaseService{
     }
     /* add override */
     public function add($userDetails){
-      if(!isset($userDetails['name'])) throw new Exception("Name is missing");
-      if(!isset($userDetails['surname'])) throw new Exception("Surname is missing");
+      if(!isset($userDetails['first_name'])) throw new Exception("Name is missing");
+      if(!isset($userDetails['last_name'])) throw new Exception("Surname is missing");
       if(!isset($userDetails['email'])) throw new Exception("Email is missing");
       if(!isset($userDetails['phone_number'])) throw new Exception("Phone is missing");
       if(!isset($userDetails['city'])) throw new Exception("City is missing");
-      if(!isset($userDetails['zip_code'])) throw new Exception("Zip Code is missing");
-      if(!isset($userDetails['address'])) throw new Exception("Address is missing");
+      if(!isset($userDetails['country'])) throw new Exception("Country is missing");
+      if(!isset($userDetails['birth_date'])) throw new Exception("Birth date is missing");
        
         $details = $this->dao->add([
-        "name" => $userDetails['name'],
-        "surname" => $userDetails['surname'],
-        "email" => $userDetails['email'],
-        "phone_number" => $userDetails['phone_number'],
-        "city" => $userDetails['city'],
-        "zip_code" => $userDetails['zip_code'],
-        "address" => $userDetails['address'],
-        "created_at" => date(Config::DATE_FORMAT)
+          "first_name" => $userDetails['first_name'],
+          "last_name" => $userDetails['last_name'],
+          "email" => $userDetails['email'],
+          "phone_number" => $userDetails['phone_number'],
+          "city" => $userDetails['city'],
+          "country" => $userDetails['country'],
+          "birth_date" => $userDetails['birth_date'],
+          "created_at" => date(Config::DATE_FORMAT)
       ]);
 
       return $details;

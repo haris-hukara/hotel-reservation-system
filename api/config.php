@@ -20,9 +20,14 @@ class Config {
       return Config::get_env("DB_PORT", "3306");
     }
 
-    const JWT_SECRET = "JWT SECRET";
-    const JWT_TOKEN_TIME = 604800; // exp time for JWT token in seconds
 
+    public static function JWT_SECRET(){
+      return Config::get_env("JWT_SECRET", "ezcb9s8UcF");
+    }
+      // 86400 = 1 day in sec
+    public static function JWT_TOKEN_TIME(){
+      return Config::get_env("JWT_TOKEN_TIME", 86400);
+    }
       public static function SMTP_HOST(){
         return Config::get_env("SMTP_HOST", "smtp.gmail.com");
       }

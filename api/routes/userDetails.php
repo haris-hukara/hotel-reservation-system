@@ -4,13 +4,13 @@
 *  @OA\RequestBody(description ="Body for adding order details", required = true,
 *          @OA\MediaType(mediaType="application/json",
 *                 @OA\Schema(
-*                     @OA\Property(property="name", type="string",example="name",description="123"),           
-*                     @OA\Property(property="surname", type="string",example="surname",description="123"),           
-*                     @OA\Property(property="email", type="string",example="emai213l@email.ba",description="123"),           
-*                     @OA\Property(property="phone_number", type="string",example="000 000 000",description="123"), 
-*                     @OA\Property(property="city", type="string",example="city",description="123"),           
-*                     @OA\Property(property="zip_code", type="string",example="71000",description="5 digit zip"),
-*                     @OA\Property(property="address", type="string",example="address 13",description="123"),           
+*                     @OA\Property(property="first_name", type="string",example="name",description="first name"),           
+*                     @OA\Property(property="last_name", type="string",example="surname",description="last name"),           
+*                     @OA\Property(property="email", type="string",example="haris.hukara@stu.ibu.edu.ba",description="email"),           
+*                     @OA\Property(property="phone_number", type="string",example="000 000 000",description="phone number"), 
+*                     @OA\Property(property="country", type="string",example="Bosnia nad Herzegovina",description="Country name"),
+*                     @OA\Property(property="city", type="string",example="city",description="City name"),           
+*                     @OA\Property(property="birth_date", type="string",example="1999-02-16",description="yyyy-mm-dd")           
 *            ) 
 *        )
 *   ),
@@ -59,13 +59,13 @@ Flight::route('GET /user/details/@id', function($id){
 **@OA\RequestBody(description ="Basic account info that is going to be updated", required = true,
 *          @OA\MediaType(mediaType="application/json",
 *                 @OA\Schema(
-*                     @OA\Property(property="name", type="string",example="name",description="123"),           
-*                     @OA\Property(property="surname", type="string",example="surname",description="123"),           
-*                     @OA\Property(property="email", type="string",example="emai213l@email.ba",description="123"),           
-*                     @OA\Property(property="phone_number", type="string",example="000 000 000",description="123"), 
-*                     @OA\Property(property="city", type="string",example="city",description="123"),           
-*                     @OA\Property(property="zip_code", type="string",example="71000",description="5 digit zip"),
-*                     @OA\Property(property="address", type="string",example="address 13",description="123"), 
+*                     @OA\Property(property="first_name", type="string",example="name",description="first name"),           
+*                     @OA\Property(property="last_name", type="string",example="surname",description="last name"),           
+*                     @OA\Property(property="email", type="string",example="haris.hukara@stu.ibu.edu.ba",description="email"),           
+*                     @OA\Property(property="phone_number", type="string",example="000 000 000",description="phone number"), 
+*                     @OA\Property(property="country", type="string",example="Bosnia nad Herzegovina",description="Country name"),
+*                     @OA\Property(property="city", type="string",example="city",description="City name"),           
+*                     @OA\Property(property="birth_date", type="string",example="1999-02-16",description="yyyy-mm-dd")           
 *            ) 
 *        )
 *   ), 
