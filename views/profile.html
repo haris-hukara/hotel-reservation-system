@@ -5,8 +5,8 @@
         <div class="container">
           <div class="profile-box">
             <div class="profile-options">
-              <button id="my-profile-btn" class="profile-option-active" href onclick="showUserProfile()"> My profile</button>
-              <button id="my-reservations-btn" class="profile-option-inactive" href onclick="showUserReservations()"> My Reservations</p>
+              <button id="my-profile-btn" class="profile-option-active" href onclick="Profile.showUserProfile()"> My profile</button>
+              <button id="my-reservations-btn" class="profile-option-inactive" href onclick="Profile.showUserReservations()"> My Reservations</p>
           </div>
           
           <div id="user-profile-form-container" class="form-main">
@@ -270,21 +270,8 @@
 
         </div>
           
-
-
-
-      
-    
-        <script>
-          
-          $(document).ready(function () {
-            $("#myTable").DataTable();
-        $("#myTable_filter").remove();
-        $("#myTable_wrapper").prepend($("#table-head"));
-        $("#table-head").prepend($("#myTable_length"));
-      });
-      
-
-    </script>
+<script type="text/javascript">
+  Profile.init();
+</script>
 
 
