@@ -9,18 +9,17 @@ require_once dirname(__FILE__).'/../vendor/autoload.php';
 require_once dirname(__FILE__).'/services/OrderDetailsService.class.php';
 require_once dirname(__FILE__).'/services/OrderService.class.php';
 require_once dirname(__FILE__).'/services/PaymentMethodService.class.php';
-require_once dirname(__FILE__).'/services/ProductsService.class.php';
+require_once dirname(__FILE__).'/services/RoomsService.class.php';
 require_once dirname(__FILE__).'/services/UserAccountService.class.php';
 require_once dirname(__FILE__).'/services/UserDetailsService.class.php';
-
 
 // log errors into apache log on bitnami server
 // Flight::set('flight.log:errors',TRUE);
 
-/*   error handling for API */
+/*   error handling for API  
 Flight::map('error', function(Exception $ex){
     Flight::json(['message' => $ex->getMessage()] , $ex->getCode());
-}); 
+});*/
 
 
 Flight::route('GET /', function(){  
@@ -62,10 +61,10 @@ Flight::map('header', function($name){
   /* utility function for generating JWT Token */
   Flight::map('jwt', function($user){
     $jwt = Firebase\JWT\JWT::encode( 
-        [ "exp"=>(time() + Config::JWT_TOKEN_TIME), 
+        [ "exp"=>(time() + Config::JWT_TOKEN_TIME()), 
           "id"=> $user["id"], 
           "rl"=> $user["role"]
-        ],"JWT SECRET",'HS256');
+        ], Config::JWT_SECRET(),'HS256');
 
     return ["token" => $jwt];
   });
@@ -75,7 +74,7 @@ Flight::map('header', function($name){
 Flight::register('orderDetailsService', 'OrderDetailsService');
 Flight::register('orderService', 'OrderService');
 Flight::register('paymentMethodService', 'PaymentMethodService');
-Flight::register('productsService', 'ProductsService');
+Flight::register('roomsService', 'RoomsService');
 Flight::register('userAccountService', 'UserAccountService');
 Flight::register('userDetailsService', 'UserDetailsService');
 
@@ -85,7 +84,7 @@ require_once dirname(__FILE__).'/routes/middleware.php';
 require_once dirname(__FILE__).'/routes/order.php';
 require_once dirname(__FILE__).'/routes/orderDetails.php';
 require_once dirname(__FILE__).'/routes/paymentMethod.php';
-require_once dirname(__FILE__).'/routes/products.php';
+require_once dirname(__FILE__).'/routes/rooms.php';
 require_once dirname(__FILE__).'/routes/userAccount.php';
 require_once dirname(__FILE__).'/routes/userDetails.php';
 
