@@ -16,35 +16,29 @@ Flight::route('GET /admin/rooms', function(){
 
     flight::json(Flight::roomsService()->get_rooms($search, $offset, $limit, $order));
 });
-
 /**
  * @OA\Get(path="/rooms", tags={"rooms"},
- *                    @OA\Parameter( type="integer", in="query",name="offset", default=0, description= "Offset for paggination"),           
+  *                   @OA\Parameter( type="integer", in="query",name="offset", default=0, description= "Offset for paggination"),           
 *                     @OA\Parameter( type="integer", in="query",name="limit", default=10, description= "Limit for paggination"),
-*                     @OA\Parameter( type="integer", in="query",name="search", default="Adidas", description= "Case insensitive search for room name"),
-*                     @OA\Parameter( type="integer", in="query",name="category", default="Hoodie", description= "Case insensitive search for room category"),
+*                     @OA\Parameter( type="integer", in="query",name="search", default="Standard Room", description= "Case insensitive search for room name"),
 *                     @OA\Parameter( type="string", in="query",name="order", default="-id", description= "Sorting elements by column_name <br><br>  -column_name for ascending order <br>+column_name for descending order"),
- *     @OA\Response(response="200", description="List of all rooms from database with paggination")
+*                     @OA\Parameter( type="string", in="query",name="check_in", default="2022-01-01", description= "Check-in date"),
+*                     @OA\Parameter( type="string", in="query",name="check_out", default="2022-01-31", description= "Check-out date"),
+ *     @OA\Response(response="200", description="List of all avaliable rooms between two dates from database with paggination")
  * )
  */
 Flight::route('GET /rooms', function(){  
     $offset = Flight::query('offset', 0);
     $limit = Flight::query('limit', 10);
     $search = Flight::query('search');
-    $category = Flight::query('category');
-    $order = Flight::query('order', "-id");    
+    $check_in = Flight::query('check_in');
+    $check_out = Flight::query('check_out');
+    $order = Flight::query('order');    
 
-    flight::json(Flight::roomsService()->get_avaliable_rooms($search, $offset, $limit, $order, $category));
+    flight::json(Flight::roomsService()->get_avaliable_rooms($search, $offset, $limit, $order, $check_in, $check_out));
 });
 
-/**
- * @OA\Get(path="/rooms", tags={"rooms"},
- *     @OA\Response(response="200", description="List of all rooms")
- * )
- */
-Flight::route('GET /rooms', function(){  
-    flight::json(Flight::roomsService()->get_all_rooms());
-});
+
 
 /**
  * @OA\Get(path="/rooms_count", tags={"rooms"},

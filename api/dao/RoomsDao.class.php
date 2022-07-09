@@ -58,51 +58,40 @@ class RoomsDao extends BaseDao{
         return $this->query_unique($query,$params);
  }
 
-    public function get_avaliable_rooms($search, $offset, $limit, $order = "-id", $category =""){
+    
+ public function get_avaliable_rooms($search, $offset, $limit, $order, $check_in, $check_out){
 
         switch (substr($order, 0, 1)){
-            case '-': $order_direction = 'ASC'; break;
-            case '+': $order_direction = 'DESC'; break;
-            default: throw new Exception("Invalid order format"); break;
-        };
+                case '-': $order_direction = 'ASC'; break;
+                case '+': $order_direction = 'DESC'; break;
+                default: throw new Exception("Invalid order format"); break;
+            };
 
         $params = [];
         $params["search"] = $search;
-        
-        $avaliable_rooms = "SELECT DISTINCT ps.room_id
-                                FROM rooms p 
-                                JOIN room_stock ps ON p.id = ps.room_id
-                                WHERE ps.quantity_avaliable > 0";
+        $params["check_in"] = $check_in;
+        $params["check_out"] = $check_out;
+    
+  
+        $unavaliable_rooms = "SELECT DISTINCT rd.room_id
+                              FROM reservations r
+                              JOIN reservation_details rd ON r.id = rd.reservation_id
+                              WHERE r.check_in BETWEEN :check_in AND :check_out
+                              AND r.status = 'FINALISE'";
 
-        $query = "SELECT p.id,
-                        p.name, 
-                        ps.name AS 'category',
-                        p.gender_category,                     
-                        p.unit_price,
-                        p.image_link
-                FROM rooms p
-                JOIN room_subcategory ps ON p.subcategory_id = ps.id  
-                WHERE p.id IN ( {$avaliable_rooms} )
-                AND LOWER(p.name) LIKE CONCAT('%', :search, '%')";
+        $query = "SELECT * FROM rooms ro
+                  WHERE ro.id NOT IN ( ${unavaliable_rooms} )
+                  AND LOWER(ro.name) LIKE CONCAT('%', :search, '%')";
+                        
+        $order = substr($order, 1);
+        $order = "ro.".$order;
 
-        if ($category != ""){
-            $query .= " AND LOWER(ps.name) LIKE CONCAT('%', :category, '%')";
-            $params["category"] = strtolower($category);
+        $query .= "ORDER BY ${order} ${order_direction}
+                LIMIT ${limit} OFFSET ${offset}";
+
+        return $this->query($query,$params);
+
         }
-            
-            $order = substr($order, 1);
-            
-            if( strtolower($order) == "category"){
-                $order = "ps.name";
-            }else{
-                $order = "p.".$order;
-            }
-
-            $query .= "ORDER BY ${order} ${order_direction}
-                    LIMIT ${limit} OFFSET ${offset}";
-
-            return $this->query($query,$params);
-    }
 
         public function get_avaliable_sizes($room_id){
             $query =  "SELECT ps.room_id, ps.size_id, s.name, ps.quantity_avaliable

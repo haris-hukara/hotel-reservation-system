@@ -24,16 +24,11 @@ class RoomsService extends BaseService{
       return $this->dao->get_avaliable_rooms_count("");
     }
 
-
-      public function get_avaliable_rooms($search, $offset, $limit, $order ,$category){
-      if ($search && $category ){
-        return ($this->dao->get_avaliable_rooms($search, $offset, $limit, $order ,$category));
-      }if($search){
-        return ($this->dao->get_avaliable_rooms($search, $offset, $limit, $order ,$category =""));
-      }if($category){
-        return ($this->dao->get_avaliable_rooms($search ="", $offset, $limit, $order ,$category));
+    public function get_avaliable_rooms($search, $offset, $limit, $order, $check_in, $check_out){
+      if ($search){
+        return ($this->dao->get_avaliable_rooms($search, $offset, $limit, $order , $check_in, $check_out));
       }else{
-        return ($this->dao->get_avaliable_rooms($search ="", $offset, $limit, $order ,$category=""));
+        return ($this->dao->get_avaliable_rooms($search ="", $offset, $limit, $order , $check_in, $check_out));
       }
     }
 
