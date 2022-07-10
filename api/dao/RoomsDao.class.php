@@ -51,7 +51,7 @@ class RoomsDao extends BaseDao{
                           FROM reservations r
                           JOIN reservation_details rd ON r.id = rd.reservation_id
                           WHERE r.check_in BETWEEN :check_in AND :check_out
-                          AND r.status = 'FINALISE'";
+                          AND r.status IN ('ACCEPTED','ACTIVE')";
 
     $query = "SELECT COUNT(ro.id) AS avaliable_rooms_count FROM rooms ro
               WHERE ro.id NOT IN ( ${unavaliable_rooms} )
@@ -79,7 +79,7 @@ class RoomsDao extends BaseDao{
                               FROM reservations r
                               JOIN reservation_details rd ON r.id = rd.reservation_id
                               WHERE r.check_in BETWEEN :check_in AND :check_out
-                              AND r.status = 'FINALISE'";
+                              AND r.status IN ('ACCEPTED','ACTIVE')";
 
         $query = "SELECT * FROM rooms ro
                   WHERE ro.id NOT IN ( ${unavaliable_rooms} )

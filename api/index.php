@@ -7,7 +7,7 @@ require_once dirname(__FILE__).'/../vendor/autoload.php';
 
 /* include service classes */
 require_once dirname(__FILE__).'/services/OrderDetailsService.class.php';
-require_once dirname(__FILE__).'/services/OrderService.class.php';
+require_once dirname(__FILE__).'/services/ReservationsService.class.php';
 require_once dirname(__FILE__).'/services/PaymentMethodService.class.php';
 require_once dirname(__FILE__).'/services/RoomsService.class.php';
 require_once dirname(__FILE__).'/services/UserAccountService.class.php';
@@ -16,10 +16,10 @@ require_once dirname(__FILE__).'/services/UserDetailsService.class.php';
 // log errors into apache log on bitnami server
 // Flight::set('flight.log:errors',TRUE);
 
-/*   error handling for API  */
+/*   error handling for API  
 Flight::map('error', function(Exception $ex){
     Flight::json(['message' => $ex->getMessage()] , $ex->getCode());
-});
+});*/
 
 
 Flight::route('GET /', function(){  
@@ -72,7 +72,7 @@ Flight::map('header', function($name){
 
 /* register Bussiness Logic layer services */
 Flight::register('orderDetailsService', 'OrderDetailsService');
-Flight::register('orderService', 'OrderService');
+Flight::register('reservationsService', 'ReservationsService');
 Flight::register('paymentMethodService', 'PaymentMethodService');
 Flight::register('roomsService', 'RoomsService');
 Flight::register('userAccountService', 'UserAccountService');
@@ -81,7 +81,7 @@ Flight::register('userDetailsService', 'UserDetailsService');
 
 /* include routes */
 require_once dirname(__FILE__).'/routes/middleware.php';
-require_once dirname(__FILE__).'/routes/order.php';
+require_once dirname(__FILE__).'/routes/reservations.php';
 require_once dirname(__FILE__).'/routes/orderDetails.php';
 require_once dirname(__FILE__).'/routes/paymentMethod.php';
 require_once dirname(__FILE__).'/routes/rooms.php';

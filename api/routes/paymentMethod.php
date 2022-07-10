@@ -3,7 +3,7 @@
  * @OA\Get(path="/admin/payment_method", tags={"Payment Method","admin"},security={{"ApiKeyAuth":{}}},
  *                    @OA\Parameter( type="integer", in="query",name="offset", default=0, description= "Offset for paggination"),           
 *                     @OA\Parameter( type="integer", in="query",name="limit", default=10, description= "Limit for paggination"),
-*                     @OA\Parameter( type="integer", in="query",name="search", default="Sarajevo", description= "Case insensitive search for cities"),
+*                     @OA\Parameter( type="integer", in="query",name="search", default="At arrival", description= "Case insensitive search for payment method"),
 *                     @OA\Parameter( type="string", in="query",name="order", default="-id", description= "Sorting elements by column_name <br><br>  -column_name for ascending order <br>+column_name for descending order"),
  *     @OA\Response(response="200", description="List of all cities from database with paggination")
  * )
