@@ -48,7 +48,7 @@ Flight::route('GET /admin/accounts/@id', function($id){
  * )
  */
 Flight::route('GET /user/account/@id', function($id){
-         Flight::json(Flight::userAccountService()->getUserAccountById(Flight::get('user'),$id));  
+    Flight::json(Flight::userAccountService()->getUserAccountById(Flight::get('user'),$id));  
 });
 
 /**
@@ -65,22 +65,23 @@ Flight::route('GET /user/password/account/@id', function($id){
 
 
 /**
-* @OA\Put(path="/account/{id}",tags={"user account"},security={{"ApiKeyAuth":{}}},
+* @OA\Put(path="/user/account/{id}",tags={"user account"},security={{"ApiKeyAuth":{}}},
 * @OA\Parameter(@OA\Schema(type="integer"), in="path", name="id", example = "1", description="Update account by account_id"),
 **@OA\RequestBody(description ="Basic account info that is going to be updated", required = true,
 *          @OA\MediaType(mediaType="application/json",
 *                 @OA\Schema(
-*                     @OA\Property(property="email", type="string",example="example@email.ba",description="123"),           
-*                     @OA\Property(property="password", type="string",example="password",description="123"),           
+*                     @OA\Property(property="email", type="string",example="haris.hukara@stu.ibu.edu.ba",description="email"),           
+*                     @OA\Property(property="current_password", type="string",example="password",description="current password"),           
+*                     @OA\Property(property="new_password", type="string",example="password",description="new password"),           
 *            ) 
 *        )
 *   ), 
 * @OA\Response(response="200", description="Update account message")
 * )     
 */ 
-Flight::route('PUT /account/@id', function($id){
+Flight::route('PUT /user/account/@id', function($id){
     $data = Flight::request()->data->getdata();
-    flight::json(Flight::userAccountService()->update($id, $data));
+    flight::json(Flight::userAccountService()->update_account($id, $data, Flight::get('user')));
 });
 
 

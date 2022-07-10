@@ -31,35 +31,19 @@ class UserAccountService extends BaseService{
     public function getUserAccountById($user, $id){
       $user_account;
       try {
-        $user_account =  $this->dao->get_by_id($id);
+        $user_account = $this->dao->get_by_id($id);
       } catch (\Exception $e) {
         throw $e;
       }
 
-      if($user['id'] == $user_account['id'] ){
+      if($user_account && $user['id'] == $user_account['id'] ){
       return $user_account;
       }else{
         throw new Exception("Not your account", 401);
       }
     }
 
-    public function checkAccountPassword($user, $id, $password){
-      $user_account;
-      try {
-        $user_account =  $this->dao->get_by_id($id);
-      } catch (\Exception $e) {
-        throw $e;
-      }
-
-      if($user['id'] == $user_account['id'] ){
-        if ($user_account['password'] == md5($password)){
-          return true;
-        };
-      }else{
-        throw new Exception("Not your account", 401);
-      }
-        return false;
-    }
+ 
 
     public function forgot($userAccount){
       $db_user = $this->dao->get_user_by_email($userAccount['email']);
@@ -163,7 +147,44 @@ class UserAccountService extends BaseService{
         }
    }
 
-  
+
+   public function update_account($id, $data, $user){
+    if($this->checkAccountPassword($user, $id, $data['current_password'])){
+      $data['password'] = $data['new_password'];
+      unset($data['current_password']);
+      unset($data['new_password']);
+      try{
+      $this->dao->update($id, $data);
+      } catch (\Exception $e) {
+        if(str_contains($e->getMessage(), 'user_account.email_UNIQUE')){
+          throw new Exception("Account with same email already exsists", 400, $e);
+         }else{
+           throw $e;    
+         }  
+        }
+        return ["message"=>"Account info has been updated"];
+      }else{
+        return ["message"=>"Password is not correct"];
+      };
+   }
+
+   public function checkAccountPassword($user, $id, $password){
+    $user_account;
+    try {
+      $user_account =  $this->dao->get_by_id($id);
+    } catch (\Exception $e) {
+      throw $e;
+    }
+
+    if($user_account && $user['id'] == $user_account['id'] ){
+      if ($user_account['password'] == md5($password)){
+        return true;
+      };
+    }else{
+      throw new Exception("Not your account", 401);
+    }
+      return false;
+  }
   
   }
 ?>
