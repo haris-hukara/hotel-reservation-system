@@ -17,14 +17,32 @@ class RoomsService extends BaseService{
       }
     }
 
-    public function get_avaliable_rooms_count($search){
-      if ($search){
-      return $this->dao->get_avaliable_rooms_count($search);
+    public function get_avaliable_rooms_count($search, $check_in, $check_out){
+      $today = date('Y-m-d');
+      if(!$check_in || !$check_out) {
+        $check_in = $today;
+        $check_out = date('Y-m-d', strtotime($today. ' + 7 days'));
       }
-      return $this->dao->get_avaliable_rooms_count("");
+      if(!parent::date_format_check($check_in)) throw new Exception("Check-in date format is not valid");
+      if(!parent::date_format_check($check_out)) throw new Exception("Check-out date format is not valid");
+      if( $check_out < $check_in ) throw new Exception("Check-out date can't be lower than check-in date");
+  
+      if ($search){
+      return $this->dao->get_avaliable_rooms_count($search, $check_in, $check_out);
+      }
+      return $this->dao->get_avaliable_rooms_count("", $check_in, $check_out);
     }
 
     public function get_avaliable_rooms($search, $offset, $limit, $order, $check_in, $check_out){
+      $today = date('Y-m-d');
+      if(!$check_in || !$check_out) {
+        $check_in = $today;
+        $check_out = date('Y-m-d', strtotime($today. ' + 7 days'));
+      }
+      if(!parent::date_format_check($check_in)) throw new Exception("Check-in date format is not valid");
+      if(!parent::date_format_check($check_out)) throw new Exception("Check-out date format is not valid");
+      if( $check_out < $check_in ) throw new Exception("Check-out date can't be lower than check-in date");
+      
       if ($search){
         return ($this->dao->get_avaliable_rooms($search, $offset, $limit, $order , $check_in, $check_out));
       }else{
@@ -32,8 +50,8 @@ class RoomsService extends BaseService{
       }
     }
 
-    public function get_avaliable_room_by_id($id){
-      return $this->dao->get_avaliable_room_by_id($id);
+    public function get_room_by_id($id){
+      return $this->dao->get_room_by_id($id);
     }
 
     public function update_room($id, $data){
@@ -51,15 +69,16 @@ class RoomsService extends BaseService{
     }
 
     public function add_room($details){
-      if(!isset($details['name'])) throw new Exception("room name is missing");
+      if(!isset($details['name'])) throw new Exception("Room name is missing");
+      if(!isset($details['description'])) throw new Exception("Description is missing");
+      if(!isset($details['night_price'])) throw new Exception("Night price is missing");
+      if(!isset($details['image_link'])) throw new Exception("Image link is missing");
       
       $room = parent::add([
         "name" => $details['name'],
-        "unit_price" => $details['unit_price'],
-        "image_link" => $details['image_link'],
-        "gender_category" => $details['gender_category'],
-        "subcategory_id" => $details['subcategory_id'],
-        "created_at" => date(Config::DATE_FORMAT)
+        "description" => $details['description'],
+        "night_price" => $details['night_price'],
+        "image_link" => $details['image_link']
       ]); 
     
       return $room;
@@ -73,7 +92,14 @@ class RoomsService extends BaseService{
         return $this->dao->get_all_rooms();
       }
 
-      
+      public function delete_room_by_id($id){
+        $delete_count = $this->delete_by_id($id);
+        if ($delete_count > 0){
+         return ["message"=>"Successfully deleted ".$delete_count." rooms"];
+        }else{
+          throw new Exception("Room with id ".$id. " doesn't exist", 404);
+        }
+      }
   }
 ?>
 

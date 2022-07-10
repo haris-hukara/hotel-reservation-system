@@ -19,6 +19,15 @@ class BaseService{
         return $this->dao->get_by_id($id);
     }
 
+    public function delete_by_id($id){
+        return $this->dao->delete_by_id($id);
+    }
+
+    public function date_format_check($date){
+        $dt = DateTime::createFromFormat("Y-m-d", $date);
+        return $dt !== false && !array_sum($dt::getLastErrors());
+     }
+
 }
 
 ?>

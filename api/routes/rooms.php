@@ -24,9 +24,9 @@ Flight::route('GET /admin/rooms', function(){
 *                     @OA\Parameter( type="string", in="query",name="order", default="-id", description= "Sorting elements by column_name <br><br>  -column_name for ascending order <br>+column_name for descending order"),
 *                     @OA\Parameter( type="string", in="query",name="check_in", default="2022-01-01", description= "Check-in date"),
 *                     @OA\Parameter( type="string", in="query",name="check_out", default="2022-01-31", description= "Check-out date"),
- *     @OA\Response(response="200", description="List of all avaliable rooms between two dates from database with paggination")
- * )
- */
+*     @OA\Response(response="200", description="List of all avaliable rooms between two dates from database with paggination")
+* )
+*/
 Flight::route('GET /rooms', function(){  
     $offset = Flight::query('offset', 0);
     $limit = Flight::query('limit', 10);
@@ -34,21 +34,25 @@ Flight::route('GET /rooms', function(){
     $check_in = Flight::query('check_in');
     $check_out = Flight::query('check_out');
     $order = Flight::query('order');    
-
+    
     flight::json(Flight::roomsService()->get_avaliable_rooms($search, $offset, $limit, $order, $check_in, $check_out));
 });
 
 
 
 /**
- * @OA\Get(path="/rooms_count", tags={"rooms"},
-*                     @OA\Parameter( type="integer", in="query",name="search", default="Adidas", description= "Case insensitive search for room name"),
+ * @OA\Get(path="/avaliable_rooms_count", tags={"rooms"},
+ *                     @OA\Parameter( type="integer", in="query",name="search", default="Standard Room", description= "Case insensitive search for room name"),
+ *                     @OA\Parameter( type="string", in="query",name="check_in",  description= "date format YYYY-MM-DD"),
+ *                     @OA\Parameter( type="string", in="query",name="check_out",  description= "date format YYYY-MM-DD"),
  *     @OA\Response(response="200", description="Returns count of all avaliable rooms ")
  * )
  */
-Flight::route('GET /rooms_count', function(){  
+Flight::route('GET /avaliable_rooms_count', function(){  
     $search = Flight::query('search');
-    flight::json(Flight::roomsService()->get_avaliable_rooms_count($search));
+    $check_in = Flight::query('check_in');
+    $check_out = Flight::query('check_out');
+    flight::json(Flight::roomsService()->get_avaliable_rooms_count($search, $check_in, $check_out));
 });
 
 /**
@@ -58,7 +62,7 @@ Flight::route('GET /rooms_count', function(){
  * )
  */
 Flight::route('GET /room/@id', function($id){  
-        flight::json(Flight::roomsService()->get_avaliable_room_by_id($id));
+    Flight::json(Flight::roomsService()->get_by_id($id));
 });
 
 
@@ -67,12 +71,23 @@ Flight::route('GET /room/@id', function($id){
 * @OA\Parameter(@OA\Schema(type="integer"), in="path", name="id", example = "1", description="Update city by city id"),
 **@OA\RequestBody(description ="Basic account info that is going to be updated", required = true,
 *          @OA\MediaType(mediaType="application/json",
-*                 @OA\Schema(
-*                     @OA\Property(property="name", type="string",example="Adidas Hoodie",description="123"),           
-*                     @OA\Property(property="unit_price", type="integer",example=10, description="123"),           
-*                     @OA\Property(property="image_link", type="string",example="link.com" , description="123"),           
-*                     @OA\Property(property="gender_category", type="string",example="M",description="123"),           
-*                     @OA\Property(property="subcategory_id", type="integer",example=1, description="123"),           
+*                @OA\Schema(
+*                     @OA\Property(property="name", 
+*                                      type="string",
+*                                      example="Standard Room",
+*                                      description="room name"),           
+*                     @OA\Property(property="description", 
+*                                      type="string",
+*                                      example="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id hic repudiandae ut, fugit magni esse minima maiores doloribus possimus nam.",
+*                                      description="Room description"),           
+*                     @OA\Property(property="night_price", 
+*                                      type="integer",
+*                                      example=100,
+*                                      description="Night price"),           
+*                     @OA\Property(property="image_link", 
+*                                      type="string",
+*                                      example="assets/img/room-1.png",
+*                                      description="Image link")       
 *            ) 
 *        )
 *   ), 
@@ -84,25 +99,6 @@ Flight::route('PUT /admin/rooms/@id', function($id){
     flight::json(Flight::roomsService()->update($id, $data));
 });
 
-/**
- * @OA\Get(path="/admin/rooms/{id}", tags={"rooms","admin"}, security={{"ApiKeyAuth": {}}},
- *     @OA\Parameter(type="integer", in="path", name="id", default=1, description="Id of room"),
- *     @OA\Response(response="200", description="Fetch individual room by id")
- * )
- */
-Flight::route('GET /admin/rooms/@id', function($id){
-    Flight::json(Flight::roomsService()->get_by_id($id));  
-});
-
-/**
- * @OA\Get(path="/room/avaliable_sizes/{id}", tags={"rooms"},
- *     @OA\Parameter(type="integer", in="path", name="id", default=1, description="Id of room"),
- *     @OA\Response(response="200", description="Fetch avaliable room sizes and quantity their quantity in stock")
- * )
- */
-Flight::route('GET /room/avaliable_sizes/@id', function($id){
-    Flight::json(Flight::roomsService()->get_avaliable_sizes($id));  
-});
 
 /**
 *  @OA\Post(path="/admin/rooms",tags={"rooms","admin"}, security={{"ApiKeyAuth": {}}},
@@ -111,24 +107,20 @@ Flight::route('GET /room/avaliable_sizes/@id', function($id){
 *                 @OA\Schema(
 *                     @OA\Property(property="name", 
 *                                      type="string",
-*                                      example="Adidas Hoodie",
+*                                      example="Standard Room",
 *                                      description="room name"),           
-*                     @OA\Property(property="unit_price", 
+*                     @OA\Property(property="description", 
+*                                      type="string",
+*                                      example="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id hic repudiandae ut, fugit magni esse minima maiores doloribus possimus nam.",
+*                                      description="Room description"),           
+*                     @OA\Property(property="night_price", 
 *                                      type="integer",
-*                                      example=10,
-*                                      description="Unit price"),           
+*                                      example=100,
+*                                      description="Night price"),           
 *                     @OA\Property(property="image_link", 
 *                                      type="string",
-*                                      example="link.com",
-*                                      description="Image link"),                     
-*                     @OA\Property(property="gender_category", 
-*                                      type="string",
-*                                      example="M",
-*                                      description="Gender category"),           
-*                     @OA\Property(property="subcategory_id", 
-*                                      type="integer",
-*                                      example= 1,
-*                                      description="Sub category of room"),           
+*                                      example="assets/img/room-1.png",
+*                                      description="Image link")       
 *            ) 
 *        )
 *   ),
@@ -141,4 +133,14 @@ Flight::route('POST /admin/rooms', function(){
 });
 
 
+/**
+* @OA\Delete(path="/admin/rooms/{id}",tags={"rooms","admin"},security={{"ApiKeyAuth":{}}},
+* @OA\Parameter(@OA\Schema(type="integer"), in="path", name="id", example = "1", description="Delete room by id"),
+* @OA\Response(response="200", description="Room deleted message")
+* )     
+*/ 
+Flight::route('DELETE /admin/rooms/@id', function($id){  
+    $data = Flight::request()->data->getdata();
+    flight::json(Flight::roomsService()->delete_room_by_id($id));
+});
 ?>

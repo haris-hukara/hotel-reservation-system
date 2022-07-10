@@ -72,7 +72,7 @@ class BaseDao{
             return $entity;
           }       
         
-          
+       
       
           protected function execute_update($table, $id, $entity, $id_column = "id"){
               if(isset($entity['password'])){
@@ -117,21 +117,29 @@ class BaseDao{
           $this->execute_update($this->table, $id, $entity);
         }
         
-        
-       
         public function get_by_id($id){
           return $this->query_unique("SELECT * FROM ".$this->table." WHERE id = :id", ["id" => $id]);
         }
 
-    
         public function get_all($offset = 0, $limit = 25, $order="-id"){
           list($order_column, $order_direction) = self::parse_order($order);
-      
+          
           return $this->query("SELECT *
                                FROM ".$this->table."
                                ORDER BY ${order_column} ${order_direction}
                                LIMIT ${limit} OFFSET ${offset}", []);
         }
-    
-    }
+        
+         
+        
+        public function delete_by_id($id) {
+          $sql = "DELETE FROM ".$this->table." WHERE id = :id";
+          $stmt = $this->connection->prepare($sql);
+          $stmt->bindValue(':id', $id);
+          $stmt->execute();
+          return $stmt->rowCount();
+      }
+
+
+      }
     ?>
