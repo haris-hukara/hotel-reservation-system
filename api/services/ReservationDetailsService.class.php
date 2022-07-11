@@ -1,34 +1,69 @@
 <?php 
 require_once dirname(__FILE__)."/BaseService.class.php";
-require_once dirname(__FILE__)."/../dao/OrderDetailsDao.class.php";
+require_once dirname(__FILE__)."/../dao/ReservationDetailsDao.class.php";
 require_once dirname(__FILE__)."/../dao/RoomsDao.class.php";
 
-class OrderDetailsService extends BaseService{
+class ReservationDetailsService extends BaseService{
 
   private $productStockDao;
   private $userAccountDao;
 
  public function __construct(){
-   $this->dao = new OrderDetailsDao();   
-   $this->productStockDao = new ProductStockDao();
+   $this->dao = new ReservationDetailsDao();   
    $this->userAccountDao = new UserAccountDao();
   }
-
-  public function get_order_details_by_id($user, $order_id){
-    if( $user['rl'] != "ADMIN"){
-        return $this->dao->get_order_details_by_account_id_and_order_id($user['id'], $order_id);
+ 
+  public function get_reservation_details_by_id($user, $user_id, $reservation_id){
+    $user_account;
+    try {
+      $user_account = $this->userAccountDao->get_by_id($user_id);
+    } catch (\Exception $e) {
+      throw $e;
     }
-    return $this->dao->get_order_details_by_order_id($order_id);
-  } 
 
-  public function get_order_price_by_id($user, $id){
-    if( $user['rl'] == "ADMIN"){
-      return ($this->dao->get_order_price_by_id($id));
+    if(!$user_account){
+      throw new Exception("This account doesn't exist", 404);
+    }
+    
+    if( $user['id'] == $user_account['id'] || $user['rl'] == "ADMIN" ){
+      $reservation_details =
+      $this->dao->get_reservation_details_by_account_id_and_reservation_id($user_id,$reservation_id);
+  
+        if(!empty($reservation_details)){
+          return $reservation_details;
+        }else{
+          return ["message"=>"No reservations avaliable"];
+        }
     }else{
-      return ($this->dao->get_order_price_by_account_id($user['id'], $id));
+        throw new Exception("Not your account", 401);
+      }
+    } 
+    
+    public function get_reservation_price_by_account_id_and_reservation_id($user, $user_id, $reservation_id){
+    $user_account;
+    try {
+      $user_account = $this->userAccountDao->get_by_id($user_id);
+    } catch (\Exception $e) {
+      throw $e;
+    }
+
+    if(!$user_account){
+      throw new Exception("This account doesn't exist", 404);
+    }
+    if( $user['id'] == $user_account['id'] || $user['rl'] == "ADMIN" ){
+      $reservation_price = $this->dao->get_reservation_price_by_account_id_and_reservation_id($user_id, $reservation_id);
+      if(!$reservation_price['reservation_id']){
+        throw new Exception("This reservation doesn't exist", 404);
+      }
+      return $reservation_price;
+    }elseif ($user['id'] !== $user_account['id']){
+      throw new Exception("Not your account", 401);
+    }else{
+      return ["message"=>"Oops something went wrong"];
     }
   }
 
+ 
   public function add_order_details($details){
     if(!isset($details['order_id'])) throw new Exception("Order ID is missing");
     if(!isset($details['product_id'])) throw new Exception("Product ID is missing");

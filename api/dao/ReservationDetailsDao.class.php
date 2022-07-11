@@ -1,36 +1,23 @@
 <?php 
  require_once dirname(__FILE__)."/BaseDao.class.php";
 
-class OrderDetailsDao extends BaseDao{
+class ReservationDetailsDao extends BaseDao{
 
     public function __construct(){
-        parent::__construct("order_details");
+        parent::__construct("reservation_details");
     }
     
-    public function get_order_details_by_account_id_and_order_id($account_id, $order_id){
-      $details =  $this->query("SELECT od.order_id, 
-                                        p.name AS 'product_name', 
-                                        ps.name AS 'category',
-                                        p.gender_category AS 'gender',
-                                        s.name AS 'size',
-                                        od.quantity,
-                                        p.unit_price, 
-                                        (quantity*unit_price) AS total,
-                                        p.image_link
-                                  FROM order_details od 
-                                  JOIN products p ON p.id = od.product_id
-                                  JOIN orders o ON o.id = od.order_id
-                                  JOIN user_details ud ON ud.id = o.user_details_id
-                                  JOIN user_account ua ON ua.user_details_id = o.user_details_id
-                                  JOIN sizes s ON s.id = od.size_id
-                                  JOIN product_subcategory ps ON ps.id = p.subcategory_id
-                                  WHERE ua.id = :account_id AND o.id = :order_id", 
-                                ["order_id" => $order_id,
-                                 "account_id" => $account_id]);
-        return $details;
+    public function get_reservation_details_by_account_id_and_reservation_id($account_id, $reservation_id){
+      $details =  $this->query("SELECT ua.id AS account_id,ua.user_details_id, rd.*
+                                FROM user_account ua
+                                JOIN reservations r ON r.user_details_id = ua.user_details_id 
+                                JOIN reservation_details rd ON rd.reservation_id = r.id
+                                WHERE ua.id = :account_id AND r.id = :reservation_id", 
+                                ["account_id" => $account_id, "reservation_id" => $reservation_id]);
+      return $details;
     }   
     
-    public function get_order_details_by_order_id($order_id){
+    public function get_reservation_details_by_reservation_id($order_id){
     return $this->query("SELECT 	od.order_id, 
                                   p.name AS 'product_name', 
                                   ps.name AS 'category',
@@ -49,14 +36,15 @@ class OrderDetailsDao extends BaseDao{
                           ["order_id" => $order_id]);
     }
      
-    public function get_order_price_by_id($id){
-      $details =  $this->query("SELECT 	od.order_id, 
-                                            SUM(od.quantity * p.unit_price) AS 'total_price'
-                                       FROM order_details od 
-                                       JOIN products p ON p.id = od.product_id
-                                       WHERE od.order_id = :order_id", 
-                                       ["order_id" => $id]);
-        return $details;
+    public function get_reservation_price_by_account_id_and_reservation_id($account_id, $reservation_id){
+      $details =  $this->query_unique("SELECT r.id as reservation_id, SUM(rm.night_price) AS total_price
+                                FROM user_account ua
+                                JOIN reservations r ON r.user_details_id = ua.user_details_id 
+                                JOIN reservation_details rd ON rd.reservation_id = r.id
+                                JOIN rooms rm ON rm.id = rd.room_id
+                                WHERE ua.id = :account_id AND r.id = :reservation_id", 
+                                ["account_id" => $account_id, "reservation_id" => $reservation_id]);
+      return $details;
     }   
     public function get_order_price_by_account_id($account_id, $id){
       $details =  $this->query("SELECT 	od.order_id, ua.id AS 'user_id', 

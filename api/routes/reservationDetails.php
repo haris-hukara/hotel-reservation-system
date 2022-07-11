@@ -1,22 +1,24 @@
 <?php
 /**
- * @OA\Get(path="/user/order/details/{id}", tags={"Order Details"},security={{"ApiKeyAuth": {}}},
- *     @OA\Parameter(type="integer", in="path", name="id", default=1, description="Order ID"),
+ * @OA\Get(path="/user/{user_id}/reservation/{reservation_id}/details", tags={"Reservation Details"},security={{"ApiKeyAuth": {}}},
+ *     @OA\Parameter(type="integer", in="path", name="user_id", default=1, description="User ID"),
+ *     @OA\Parameter(type="integer", in="path", name="reservation_id", default=1, description="Reservation ID"),
  *     @OA\Response(response="200", description="Detailed info about order")
  * )
  */
-Flight::route('GET /user/order/details/@id', function($id){
-    Flight::json(Flight::orderDetailsService()->get_order_details_by_id(Flight::get('user'), $id));  
+Flight::route('GET /user/@user_id/reservation/@reservation_id/details', function($user_id, $reservation_id){
+    Flight::json(Flight::reservationDetailsService()->get_reservation_details_by_id(Flight::get('user'),$user_id, $reservation_id));  
 });
 
 /**
- * @OA\Get(path="/user/order/details/price/{id}", tags={"Order Details"},security={{"ApiKeyAuth": {}}},
- *     @OA\Parameter(type="integer", in="path", name="id", default=1, description="Order ID"),
+ * @OA\Get(path="/user/{user_id}/reservation/{reservation_id}/price", tags={"Reservation Details"},security={{"ApiKeyAuth": {}}},
+ *     @OA\Parameter(type="integer", in="path", name="user_id", default=1, description="User ID"),
+ *     @OA\Parameter(type="integer", in="path", name="reservation_id", default=1, description="Reservation ID"),
  *     @OA\Response(response="200", description="Detailed info about order")
  * )
  */
-Flight::route('GET /user/order/details/price/@id', function($id){
-    Flight::json(Flight::orderDetailsService()->get_order_price_by_id(Flight::get('user'),$id));  
+Flight::route('GET /user/@user_id/reservation/@reservation_id/price', function($user_id, $reservation_id){
+    Flight::json(Flight::reservationDetailsService()->get_reservation_price_by_account_id_and_reservation_id(Flight::get('user'),$user_id, $reservation_id));  
 });
 
 /**
@@ -49,7 +51,7 @@ Flight::route('GET /user/order/details/price/@id', function($id){
 */ 
 Flight::route('POST /order/details', function(){
     $data = Flight::request()->data->getdata();
-    Flight::json(Flight::orderDetailsService()->add_order_details($data));
+    Flight::json(Flight::reservationDetailsService()->add_order_details($data));
 });
 
 
@@ -81,6 +83,6 @@ Flight::route('POST /order/details', function(){
 */ 
 Flight::route('PUT /order/details/quantity', function(){  
     $data = Flight::request()->data->getdata();
-    flight::json(Flight::orderDetailsService()->update_order_details_quantity($data));
+    flight::json(Flight::reservationDetailsService()->update_order_details_quantity($data));
 });
 ?>

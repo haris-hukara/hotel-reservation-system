@@ -55,7 +55,7 @@ class ReservationsService extends BaseService{
       if(!empty($reservations)){
         return $reservations;
       }elseif(!$user_account){
-        return ["message"=>"This account doesn't exist"];
+        throw new Exception("This account doesn't exist", 404);
       }else{
         return ["message"=>"No reservations avaliable"];
       }
