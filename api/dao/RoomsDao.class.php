@@ -62,12 +62,12 @@ class RoomsDao extends BaseDao{
 
     
  public function get_avaliable_rooms($search, $offset, $limit, $order, $check_in, $check_out){
-
         switch (substr($order, 0, 1)){
                 case '-': $order_direction = 'ASC'; break;
                 case '+': $order_direction = 'DESC'; break;
                 default: throw new Exception("Invalid order format"); break;
             };
+
 
         $params = [];
         $params["search"] = $search;
@@ -88,8 +88,8 @@ class RoomsDao extends BaseDao{
         $order = substr($order, 1);
         $order = "ro.".$order;
 
-        $query .= "ORDER BY ${order} ${order_direction}
-                LIMIT ${limit} OFFSET ${offset}";
+        $query .= "ORDER BY ${order} ${order_direction} ";
+        if($limit){$query .= "LIMIT ${limit} OFFSET ${offset}";};
 
         return $this->query($query,$params);
 

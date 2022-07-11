@@ -22,26 +22,26 @@ Flight::route('GET /user/@user_id/reservation/@reservation_id/price', function($
 });
 
 /**
-*  @OA\Post(path="/order/details",tags={"Order Details"},
+*  @OA\Post(path="/reservation/details",tags={"Order Details"},
 *  @OA\RequestBody(description ="Body for adding order details", required = true,
 *          @OA\MediaType(mediaType="application/json",
 *                 @OA\Schema(
-*                     @OA\Property(property="order_id", 
+*                     @OA\Property(property="reservation_id", 
 *                                      type="integer",
 *                                      example=1,
-*                                      description="ID of order"),           
-*                     @OA\Property(property="product_id", 
+*                                      description="ID of reservation"),           
+*                     @OA\Property(property="room_id", 
 *                                      type="integer",
 *                                      example=1,
-*                                      description="Product ID"),           
-*                     @OA\Property(property="size_id", 
+*                                      description="Room ID"),           
+*                     @OA\Property(property="children", 
 *                                      type="integer",
 *                                      example=1,
-*                                      description="Size ID"),                     
-*                     @OA\Property(property="quantity", 
+*                                      description="Number of childrens"),                     
+*                     @OA\Property(property="adults", 
 *                                      type="integer",
 *                                      example=1,
-*                                      description="Quantity"),           
+*                                      description="Number of adults"),           
 *
 *            ) 
 *        )
@@ -49,9 +49,9 @@ Flight::route('GET /user/@user_id/reservation/@reservation_id/price', function($
 *  @OA\Response(response="200", description="Added order details")
 * )     
 */ 
-Flight::route('POST /order/details', function(){
+Flight::route('POST /reservation/details', function(){
     $data = Flight::request()->data->getdata();
-    Flight::json(Flight::reservationDetailsService()->add_order_details($data));
+    Flight::json(Flight::reservationDetailsService()->add_reservation_details($data));
 });
 
 

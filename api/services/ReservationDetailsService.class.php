@@ -64,11 +64,11 @@ class ReservationDetailsService extends BaseService{
   }
 
  
-  public function add_order_details($details){
-    if(!isset($details['order_id'])) throw new Exception("Order ID is missing");
-    if(!isset($details['product_id'])) throw new Exception("Product ID is missing");
-    if(!isset($details['size_id'])) throw new Exception("Size ID is missing");
-    if(!isset($details['quantity'])) throw new Exception("Quantity is missing");
+  public function add_reservation_details($details){
+    if(!isset($details['reservation_id'])) throw new Exception("Reservation ID is missing");
+    if(!isset($details['room_id'])) throw new Exception("Room ID is missing");
+    if(!isset($details['children'])) throw new Exception("Number of children is missing");
+    if(!isset($details['adults'])) throw new Exception("Number of adults is missing");
     
     $product = $this->productStockDao->get_product_stock_by_size_id($details['product_id'],
                                                                     $details['size_id']);

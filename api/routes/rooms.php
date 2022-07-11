@@ -28,12 +28,12 @@ Flight::route('GET /admin/rooms', function(){
 * )
 */
 Flight::route('GET /rooms', function(){  
-    $offset = Flight::query('offset', 0);
-    $limit = Flight::query('limit', 10);
-    $search = Flight::query('search');
-    $check_in = Flight::query('check_in');
-    $check_out = Flight::query('check_out');
-    $order = Flight::query('order');    
+    $offset = Flight::query('offset');
+    $limit = Flight::query('limit');
+    $search = Flight::query('search',"");
+    $check_in = Flight::query('check_in',date('Y-m-d'));
+    $check_out = Flight::query('check_out', date('Y-m-d', strtotime(date('Y-m-d'). ' + 7 days')));
+    $order = Flight::query('order','-id');    
     
     flight::json(Flight::roomsService()->get_avaliable_rooms($search, $offset, $limit, $order, $check_in, $check_out));
 });
