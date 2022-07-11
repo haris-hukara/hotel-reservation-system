@@ -94,5 +94,9 @@ class ReservationDetailsDao extends BaseDao{
        }
 
 
+       public function delete_all_details_by_reservation_id($id){
+        return ["message" => "Deleted details count ". $this->delete_by_id_column_and_id("reservation_id",$id)];
+       }
+
 }
 ?>

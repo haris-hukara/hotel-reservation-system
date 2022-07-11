@@ -47,10 +47,11 @@ class RoomsDao extends BaseDao{
     $params["check_in"] = $check_in;
     $params["check_out"] = $check_out;
 
-    $unavaliable_rooms = "SELECT DISTINCT rd.room_id
-                          FROM reservations r
-                          JOIN reservation_details rd ON r.id = rd.reservation_id
-                          WHERE r.check_in BETWEEN :check_in AND :check_out
+    $unavaliable_rooms = "SELECT rd.room_id
+                          FROM reservation_details rd
+                          JOIN reservations r ON r.id = rd.reservation_id
+                          WHERE rd.check_in BETWEEN :check_in AND :check_out
+                          AND   rd.check_out BETWEEN :check_in AND :check_out
                           AND r.status IN ('ACCEPTED','ACTIVE')";
 
     $query = "SELECT COUNT(ro.id) AS avaliable_rooms_count FROM rooms ro
@@ -75,10 +76,11 @@ class RoomsDao extends BaseDao{
         $params["check_out"] = $check_out;
     
   
-        $unavaliable_rooms = "SELECT DISTINCT rd.room_id
-                              FROM reservations r
-                              JOIN reservation_details rd ON r.id = rd.reservation_id
-                              WHERE r.check_in BETWEEN :check_in AND :check_out
+        $unavaliable_rooms = "SELECT rd.room_id
+                              FROM reservation_details rd
+                              JOIN reservations r ON r.id = rd.reservation_id
+                              WHERE rd.check_in BETWEEN :check_in AND :check_out
+                              AND   rd.check_out BETWEEN :check_in AND :check_out
                               AND r.status IN ('ACCEPTED','ACTIVE')";
 
         $query = "SELECT * FROM rooms ro
@@ -95,7 +97,26 @@ class RoomsDao extends BaseDao{
 
         }
 
+        public function check_room_availability($room_id, $check_in, $check_out){
+        $params = [];
+        $params["check_in"] = $check_in;
+        $params["check_out"] = $check_out;
+        $params["room_id"] = $room_id;
+    
+  
+        $unavaliable_rooms = "SELECT rd.room_id
+                          FROM reservation_details rd
+                          JOIN reservations r ON r.id = rd.reservation_id
+                          WHERE rd.check_in BETWEEN :check_in AND :check_out
+                          AND   rd.check_out BETWEEN :check_in AND :check_out
+                          AND r.status IN ('ACCEPTED','ACTIVE')";
 
+        $query = "SELECT * FROM rooms ro
+                  WHERE ro.id = :room_id AND ro.id NOT IN ( ${unavaliable_rooms} )";
+                       
+        return $this->query($query,$params);
+
+        }
 
 
 }

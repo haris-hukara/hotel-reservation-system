@@ -139,6 +139,14 @@ class BaseDao{
           $stmt->execute();
           return $stmt->rowCount();
       }
+    
+      public function delete_by_id_column_and_id($id_column, $id) {
+          $sql = "DELETE FROM ".$this->table." WHERE ".$this->table.".${id_column} = :id";
+          $stmt = $this->connection->prepare($sql);
+          $stmt->bindValue(':id', $id);
+          $stmt->execute();
+          return $stmt->rowCount();
+      }
 
 
       }

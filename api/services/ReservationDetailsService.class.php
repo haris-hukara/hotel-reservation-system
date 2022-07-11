@@ -11,6 +11,7 @@ class ReservationDetailsService extends BaseService{
  public function __construct(){
    $this->dao = new ReservationDetailsDao();   
    $this->userAccountDao = new UserAccountDao();
+   $this->roomsDao = new RoomsDao();
   }
  
   public function get_reservation_details_by_id($user, $user_id, $reservation_id){
@@ -63,41 +64,42 @@ class ReservationDetailsService extends BaseService{
     }
   }
 
- 
+  public function delete_all_details_by_reservation_id($id){
+    return $this->dao->delete_all_details_by_reservation_id($id);
+  }
+
   public function add_reservation_details($details){
     if(!isset($details['reservation_id'])) throw new Exception("Reservation ID is missing");
+    if(!isset($details['check_in'])) throw new Exception("Check in date is missing");
+    if(!isset($details['check_out'])) throw new Exception("Check out date is missing");
     if(!isset($details['room_id'])) throw new Exception("Room ID is missing");
     if(!isset($details['children'])) throw new Exception("Number of children is missing");
     if(!isset($details['adults'])) throw new Exception("Number of adults is missing");
     
-    $product = $this->productStockDao->get_product_stock_by_size_id($details['product_id'],
-                                                                    $details['size_id']);
-    
-    $product_stock = $product['quantity_avaliable']; 
-    $user_quantity = $details['quantity'];
 
-    if ( $details['quantity'] <= 0 || $details['quantity'] > $product_stock){
-        throw new Exception("Enter a valid quantity. Quantity in stock: ". $product_stock );
-        
-    }else{ 
+    if(!parent::date_format_check($details['check_in'])) throw new Exception("Check-in date format is not valid");
+    if(!parent::date_format_check($details['check_out'])) throw new Exception("Check-out date format is not valid");
+    if( $details['check_out'] < $details['check_in'] ) throw new Exception("Check-out date can't be lower than check-in date");
+  
+
+    $room = $this->roomsDao->check_room_availability($details['room_id'], $details['check_in'], $details['check_out']);
+    if(empty($room)){
+      $this->delete_all_details_by_reservation_id($details['reservation_id']);
+      throw new Exception("Room id: " .$details['room_id']. " is not avaliable between ". $details['check_in']." and ". $details['check_out']);
+    }
+   
       try {
-        // add details
-        $order_details = $this->dao->add($details);
-        // update stock
-        $this->productStockDao->change_product_stock($details['product_id'],
-                                                     $details['size_id'],
-                                                     $details['quantity']);
-      
-      return $order_details;
+      // add details
+      $reservation_details = $this->dao->add($details);    
+      return $reservation_details;
       
         } catch (\Exception $e) {
-          if(str_contains($e->getMessage(), 'order_details.PRIMARY')){
-              throw new Exception("This order already exist", 400, $e);
+          if(str_contains($e->getMessage(), 'reservation_details.PRIMARY')){
+              throw new Exception("This reservation details already exist", 400, $e);
           } else { 
             throw $e;
             }
       }
-    }
      
   }
 

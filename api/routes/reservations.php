@@ -56,15 +56,7 @@ Flight::route('GET /admin/reservations/@id', function($id){
 *                     @OA\Property(property="payment_method_id", 
 *                                      type="int",
 *                                      example="1",
-*                                      description="Payment method"),  
-*                     @OA\Property(property="check_in", 
-*                                      type="string",
-*                                   example="2022-01-01", 
-*                               description="Check-in date"),
-*                     @OA\Property(property="check_out", 
-*                                      type="string",
-*                                   example="2022-01-31", 
-*                               description="Check-out date")         
+*                                      description="Payment method"),          
 *            ) 
 *        )
 *   ),
@@ -79,8 +71,8 @@ Flight::route('POST /reservation', function(){
 
  /**
 * @OA\Put(path="/admin/reservation/{id}",tags={"reservations","admin"},security={{"ApiKeyAuth":{}}},
-* @OA\Parameter(@OA\Schema(type="integer"), in="path", name="id", example = "1", description="Update country by id"),
-**@OA\RequestBody(description ="Basic account info that is going to be updated", required = true,
+* @OA\Parameter(@OA\Schema(type="integer"), in="path", name="id", example = "1", description="Update reservation by its id"),
+**@OA\RequestBody(description ="Basic resrvation info that is going to be updated", required = true,
 *          @OA\MediaType(mediaType="application/json",
 *                 @OA\Schema(
 *               @OA\Property(property="payment_method_id", 
@@ -91,14 +83,6 @@ Flight::route('POST /reservation', function(){
 *                                      type="int",
 *                                      example="1",
 *                                      description="Payment method"),  
-*                     @OA\Property(property="check_in", 
-*                                      type="string",
-*                                   example="2022-01-01", 
-*                               description="Check-in date"),
-*                     @OA\Property(property="check_out", 
-*                                      type="string",
-*                                   example="2022-01-31", 
-*                               description="Check-out date"),
 *                     @OA\Property(property="status", 
 *                                      type="string",
 *                                   example="ACCEPTED",

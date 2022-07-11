@@ -22,7 +22,7 @@ Flight::route('GET /user/@user_id/reservation/@reservation_id/price', function($
 });
 
 /**
-*  @OA\Post(path="/reservation/details",tags={"Order Details"},
+*  @OA\Post(path="/reservation/details",tags={"Reservation Details"},
 *  @OA\RequestBody(description ="Body for adding order details", required = true,
 *          @OA\MediaType(mediaType="application/json",
 *                 @OA\Schema(
@@ -42,6 +42,14 @@ Flight::route('GET /user/@user_id/reservation/@reservation_id/price', function($
 *                                      type="integer",
 *                                      example=1,
 *                                      description="Number of adults"),           
+*                     @OA\Property(property="check_in", 
+*                                      type="string",
+*                                      example="2022-01-01",
+*                                      description="Check in date of reservation"),           
+*                     @OA\Property(property="check_out", 
+*                                      type="string",
+*                                      example="2022-01-31",
+*                                      description="Check out date of reservation"),           
 *
 *            ) 
 *        )
@@ -55,34 +63,4 @@ Flight::route('POST /reservation/details', function(){
 });
 
 
-/**
-* @OA\Put(path="/order/details/quantity",tags={"Order Details"},
-**@OA\RequestBody(description ="Body for updating order details quantity", required = true,
-*          @OA\MediaType(mediaType="application/json",
-*                 @OA\Schema(
-*                     @OA\Property(property="order_id", 
-*                                      type="integer",
-*                                      example=1,
-*                                      description="ID of order"),           
-*                     @OA\Property(property="product_id", 
-*                                      type="integer",
-*                                      example=1,
-*                                      description="Product ID"),           
-*                     @OA\Property(property="size_id", 
-*                                      type="integer",
-*                                      example=1,
-*                                      description="Size ID"),                     
-*                     @OA\Property(property="quantity", 
-*                                      type="integer",
-*                                      example=1,
-*                                      description="Quantity"),  ) 
-*        )
-*   ), 
-* @OA\Response(response="200", description="Update account message")
-* )     
-*/ 
-Flight::route('PUT /order/details/quantity', function(){  
-    $data = Flight::request()->data->getdata();
-    flight::json(Flight::reservationDetailsService()->update_order_details_quantity($data));
-});
 ?>

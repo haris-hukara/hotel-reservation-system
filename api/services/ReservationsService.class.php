@@ -18,8 +18,6 @@ class ReservationsService extends BaseService{
    $reservation = parent::add([ 
       "user_details_id" => $data['user_details_id'],
       "payment_method_id" => $data['payment_method_id'],
-      "check_in" => $data['check_in'],
-      "check_out" => $data['check_out'],
       "created_at" => date(Config::DATE_FORMAT)
     ]);
     return $reservation;
