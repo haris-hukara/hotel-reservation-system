@@ -7,13 +7,23 @@
     <div>
       <div class="filters-wraper">
         <label class="mb-1rem" for="">Check in</label>
-        <input class="filters-input" type="date" name="check_in" id="" />
+        <input
+          id="resrvations-check-in"
+          class="filters-input"
+          type="date"
+          name="check_in"
+        />
       </div>
     </div>
     <div>
       <div class="filters-wraper">
         <label class="mb-1rem" for="">Check out</label>
-        <input class="filters-input" type="date" name="check_out" id="" />
+        <input
+          id="resrvations-check-out"
+          class="filters-input"
+          type="date"
+          name="check_out"
+        />
       </div>
     </div>
 
@@ -24,7 +34,7 @@
           class="filters-input filters-small-input"
           type="number"
           name="rooms"
-          id=""
+          id="resrvations-rooms"
         />
       </div>
       <div class="filters-wraper">
@@ -33,7 +43,7 @@
           class="filters-input filters-small-input"
           type="number"
           name="adults"
-          id=""
+          id="resrvations-adults"
         />
       </div>
       <div class="filters-wraper">
@@ -42,13 +52,19 @@
           class="filters-input filters-small-input"
           type="number"
           name="children"
-          id=""
+          id="resrvations-children"
         />
       </div>
     </div>
 
     <div class="filters-button-wrap">
-      <button class="filters-button">Check avaliability</button>
+      <button
+        id="resrvations-button"
+        onclick="Rooms.get_avaliable_rooms()"
+        class="filters-button"
+      >
+        Check avaliability
+      </button>
     </div>
   </div>
   <section class="section-rooms">
@@ -117,7 +133,126 @@
     ><!-- close modal -->
 
     <div class="modal-content">
-      <h3 class="modal-h3">Some content here</h3>
+      <h1 class="modal-heading">Reservation</h1>
+      <p class="modal-text">Please fill in your info</p>
+      <div id="reservation-form-container" class="">
+        <form id="reservation-form" class="" role="form">
+          <div class="label-title">
+            <label for="email">Email</label>
+          </div>
+          <div class="input-container">
+            <input
+              required=""
+              name="email"
+              class="form-field"
+              type="email"
+              placeholder="John.Doe@mail.com"
+            />
+          </div>
+          <div class="form-2-fields">
+            <div>
+              <div class="label-title">
+                <label for="first_name">First name</label>
+              </div>
+              <div class="input-container">
+                <input
+                  required=""
+                  name="first_name"
+                  class="form-field"
+                  type="text"
+                  placeholder="John"
+                  minlength="2"
+                />
+              </div>
+            </div>
+            <div>
+              <div class="label-title">
+                <label for="last_name">Last name</label>
+              </div>
+              <div class="input-container">
+                <input
+                  required=""
+                  name="last_name"
+                  class="form-field"
+                  type="text"
+                  placeholder="Doe"
+                  minlength="2"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="form-2-fields">
+            <div>
+              <div class="label-title">
+                <label for="phone_number">Phone number</label>
+              </div>
+              <div class="input-container">
+                <input
+                  required=""
+                  name="phone_number"
+                  class="form-field"
+                  type="text"
+                  placeholder="+387 60 000 000"
+                  minlength="9"
+                  maxlength="16"
+                />
+              </div>
+            </div>
+            <div>
+              <div class="label-title">
+                <label for="birth_date">Birth date</label>
+              </div>
+              <div class="input-container">
+                <input
+                  id="birth_date"
+                  required=""
+                  name="birth_date"
+                  class="form-field form-date"
+                  type="date"
+                  min="1920-01-01"
+                  max="2022-12-31"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="form-2-fields">
+            <div>
+              <div class="label-title">
+                <label for="country">Country</label>
+              </div>
+              <div class="input-container">
+                <input
+                  required=""
+                  name="country"
+                  class="form-field"
+                  type="text"
+                  placeholder="Croatia"
+                  minlength="2"
+                />
+              </div>
+            </div>
+            <div>
+              <div class="label-title">
+                <label for="city">City</label>
+              </div>
+              <div class="input-container">
+                <input
+                  required=""
+                  name="city"
+                  class="form-field"
+                  type="text"
+                  placeholder="Zagreb"
+                  minlength="2"
+                />
+              </div>
+            </div>
+          </div>
+
+          <button id="reservation-link" type="submit" class="submit">
+            Make reservation
+          </button>
+        </form>
+      </div>
     </div>
     <!-- content -->
   </div>

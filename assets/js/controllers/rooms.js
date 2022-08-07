@@ -5,7 +5,8 @@ class Rooms {
     });
   }
 
-  static openModal() {
+  static openModal($id) {
+    console.log($id);
     var elements = $(".modal-overlay, .modal");
     elements.addClass("active");
   }
@@ -15,8 +16,60 @@ class Rooms {
     elements.removeClass("active");
   }
 
+  static get_avaliable_rooms() {
+    localStorage.setItem("check-in", $("#resrvations-check-in").val());
+    localStorage.setItem("check-out", $("#resrvations-check-out").val());
+    localStorage.setItem("adults", $("#resrvations-adults").val());
+    localStorage.setItem("children", $("#resrvations-children").val());
+    localStorage.setItem("rooms", $("#resrvations-rooms").val());
+    $(".room-container").remove();
+
+    $("#home-check-in").val($("#resrvations-check-in").val());
+    $("#home-check-out").val($("#resrvations-check-out").val());
+    $("#home-adults").val($("#resrvations-adults").val());
+    $("#home-children").val($("#resrvations-children").val());
+    $("#home-rooms").val($("#resrvations-rooms").val());
+
+    Rooms.get_rooms();
+  }
+
   static get_rooms() {
-    RestClient.get("api/rooms", function (data) {
+    var check_in = localStorage.getItem("check-in");
+    var check_out = localStorage.getItem("check-out");
+    var url = "api/rooms";
+
+    if (
+      check_in != null &&
+      check_out != null &&
+      check_in != undefined &&
+      check_out != undefined
+    ) {
+      $("#resrvations-check-in").val(localStorage.getItem("check-in"));
+      $("#resrvations-check-out").val(localStorage.getItem("check-out"));
+      url += "?order=-id&check_in=" + check_in + "&check_out=" + check_out;
+    } else {
+      var current_date = new Date();
+      var today = current_date.toLocaleDateString("fr-CA", {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+      });
+
+      var future_date = new Date();
+      future_date.setDate(future_date.getDate() + 7);
+      var seven_days = future_date.toLocaleDateString("fr-CA", {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+      });
+      $("#resrvations-check-in").val(today);
+      $("#resrvations-check-out").val(seven_days);
+    }
+    $("#resrvations-rooms").val(1);
+    $("#resrvations-adults").val(1);
+    $("#resrvations-children").val(0);
+
+    RestClient.get(url, function (data) {
       console.log(data);
       for (var i = 0; i < data.length; i++) {
         $("#rooms-box").append(
@@ -40,7 +93,7 @@ class Rooms {
       <div class="room-main">
         <div class="room-main-info">
           <div class="room-head">
-            <h2>${name} <span class="room-id hidden">${id}</span></h2>
+            <h2>${name} <span id="room-id-${id}" class="room-id hidden">${id}</span></h2>
             <p>From <span class="room-price"> $${night_price}</span>/night</p>
           </div>
           <p class="room-description">
@@ -104,7 +157,7 @@ class Rooms {
           </div>
         </div>
         <div class="flex-col-center">
-          <button class="room-button modal-button" onclick="Rooms.openModal()">Make reservation</button>
+          <button class="room-button modal-button" onclick="Rooms.openModal(${id})">Make reservation</button>
           <a class="forgot mt-1" onclick="">See more details </a>
         </div>
       </div>

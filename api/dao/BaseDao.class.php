@@ -95,6 +95,7 @@ class BaseDao{
 
        
            protected function query($query, $params){
+            
                $stmt = $this->connection->prepare($query);
                $stmt->execute($params);
                return $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -10,13 +10,13 @@
     <div>
       <div class="filters-wraper">
         <label class="mb-1rem" for="">Check in</label>
-        <input class="filters-input" type="date" name="" id="" />
+        <input class="filters-input" type="date" name="" id="home-check-in" />
       </div>
     </div>
     <div>
       <div class="filters-wraper">
         <label class="mb-1rem" for="">Check out</label>
-        <input class="filters-input" type="date" name="" id="" />
+        <input class="filters-input" type="date" name="" id="home-check-out" />
       </div>
     </div>
 
@@ -26,8 +26,8 @@
         <input
           class="filters-input filters-small-input"
           type="number"
-          name=""
-          id=""
+          name="rooms"
+          id="home-rooms"
         />
       </div>
       <div class="filters-wraper">
@@ -35,8 +35,8 @@
         <input
           class="filters-input filters-small-input"
           type="number"
-          name=""
-          id=""
+          name="adults"
+          id="home-adults"
         />
       </div>
       <div class="filters-wraper">
@@ -44,14 +44,16 @@
         <input
           class="filters-input filters-small-input"
           type="number"
-          name=""
-          id=""
+          name="children"
+          id="home-children"
         />
       </div>
     </div>
 
     <div class="filters-button-wrap">
-      <a href="#rooms" class="filters-button"> Check avaliability </a>
+      <a class="filters-button" onclick="Home.checkAvaliability()">
+        Check avaliability
+      </a>
     </div>
   </div>
 </div>
@@ -107,7 +109,7 @@
     </div>
   </section>
 </div>
-<script src="assets/js/controllers/home.js"></script>
+
 <script>
   Home.init();
 </script>

@@ -36,7 +36,6 @@ class RoomsDao extends BaseDao{
         $order = "r.".$order;
         $query .= "ORDER BY ${order} ${order_direction}
                    LIMIT ${limit} OFFSET ${offset}";
-
         return $this->query($query,$params);
  }
 
@@ -92,7 +91,7 @@ class RoomsDao extends BaseDao{
 
         $query .= "ORDER BY ${order} ${order_direction} ";
         if($limit){$query .= "LIMIT ${limit} OFFSET ${offset}";};
-
+      
         return $this->query($query,$params);
 
         }

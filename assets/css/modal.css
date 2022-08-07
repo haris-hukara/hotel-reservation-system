@@ -2,6 +2,26 @@
  * Overlay
  * -- only show for tablet and up
  */
+
+.modal-heading,
+.modal-text {
+  text-align: center;
+}
+.modal-heading {
+  font-size: 2.4rem;
+  margin-bottom: 0.8rem;
+  font-weight: 500;
+}
+
+.modal-text {
+  font-size: 1.4rem;
+  margin-bottom: 3rem;
+}
+
+.modal-content {
+  width: 100%;
+}
+
 @media only screen and (min-width: 40em) {
   .modal-overlay {
     display: -webkit-box;
@@ -32,12 +52,14 @@
   .modal-overlay.active {
     opacity: 1;
     visibility: visible;
+    z-index: 1000;
   }
 }
 /**
  * Modal
  */
 .modal {
+  z-index: 1000;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -104,6 +126,7 @@
   opacity: 1;
   -webkit-transform: scale(1);
   transform: scale(1);
+  padding: 4rem;
 }
 .modal.active .modal-content {
   opacity: 1;
@@ -121,6 +144,9 @@
   h1 {
     font-size: 1.5rem;
   }
+  .modal-content {
+    width: 85%;
+  }
 
   .modal {
     position: fixed;
@@ -137,5 +163,21 @@
 
   .close-modal {
     right: 20px !important;
+  }
+}
+
+@media only screen and (max-height: 33.75em) {
+  .modal.active {
+    transform: scale(0.8);
+  }
+}
+@media only screen and (max-height: 26.25em) {
+  .modal.active {
+    transform: scale(0.65);
+  }
+}
+@media only screen and (max-height: 21.25em) {
+  .modal.active {
+    transform: scale(0.6);
   }
 }
