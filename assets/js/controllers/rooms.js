@@ -5,6 +5,16 @@ class Rooms {
     });
   }
 
+  static openModal() {
+    var elements = $(".modal-overlay, .modal");
+    elements.addClass("active");
+  }
+
+  static closeModal() {
+    var elements = $(".modal-overlay, .modal");
+    elements.removeClass("active");
+  }
+
   static get_rooms() {
     RestClient.get("api/rooms", function (data) {
       console.log(data);
@@ -94,7 +104,7 @@ class Rooms {
           </div>
         </div>
         <div class="flex-col-center">
-          <button class="room-button">Make reservation</button>
+          <button class="room-button modal-button" onclick="Rooms.openModal()">Make reservation</button>
           <a class="forgot mt-1" onclick="">See more details </a>
         </div>
       </div>
