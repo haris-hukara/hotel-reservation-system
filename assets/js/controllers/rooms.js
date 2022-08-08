@@ -2,6 +2,9 @@ class Rooms {
   static init() {
     $(document).ready(function () {
       Rooms.get_rooms();
+      if (!localStorage.getItem("token")) {
+        $("#checkbox-label").remove();
+      }
     });
   }
 
