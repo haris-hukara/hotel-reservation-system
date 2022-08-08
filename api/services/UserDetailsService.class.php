@@ -55,6 +55,8 @@ class UserDetailsService extends BaseService{
       return $this->dao->get_user_details_by_account_id_and_details_id($user['id'], $details_id);
     }
 
+    
+
     public function update_user_details($user, $details_id, $details){
       $user_account = $this->userAccountDao->get_by_id($user['id']);
       if($user_account['user_details_id'] != $details_id ){
@@ -63,6 +65,13 @@ class UserDetailsService extends BaseService{
          return $this->update($details_id, $details);
   }
   
+
+  public function get_user_details_by_account_id($user, $account_id){
+    if($user['rl'] == "ADMIN" OR $user['id'] == $account_id ){
+      return $this->dao->get_user_details_by_account_id($account_id);
+    }
+    throw new Exception("Invalid details", 403);
+    }
 
 }
 

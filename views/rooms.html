@@ -142,6 +142,7 @@
           </div>
           <div class="input-container">
             <input
+              id="modal-email"
               required=""
               name="email"
               class="form-field"
@@ -156,6 +157,7 @@
               </div>
               <div class="input-container">
                 <input
+                  id="modal-first-name"
                   required=""
                   name="first_name"
                   class="form-field"
@@ -171,6 +173,7 @@
               </div>
               <div class="input-container">
                 <input
+                  id="modal-last-name"
                   required=""
                   name="last_name"
                   class="form-field"
@@ -188,6 +191,7 @@
               </div>
               <div class="input-container">
                 <input
+                  id="modal-phone-number"
                   required=""
                   name="phone_number"
                   class="form-field"
@@ -204,7 +208,7 @@
               </div>
               <div class="input-container">
                 <input
-                  id="birth_date"
+                  id="modal-birth-date"
                   required=""
                   name="birth_date"
                   class="form-field form-date"
@@ -222,6 +226,7 @@
               </div>
               <div class="input-container">
                 <input
+                  id="modal-container"
                   required=""
                   name="country"
                   class="form-field"
@@ -237,6 +242,7 @@
               </div>
               <div class="input-container">
                 <input
+                  id="modal-city"
                   required=""
                   name="city"
                   class="form-field"
@@ -246,6 +252,18 @@
                 />
               </div>
             </div>
+          </div>
+
+          <div id="checkbox-label" class="modal-label-div">
+            <label for="profile-info">Use my info</label>
+            <input
+              class="modal-checkbox"
+              type="checkbox"
+              name="profile-info"
+              id="profile-info-box"
+              value="no"
+              onclick="Rooms.getUserInfo()"
+            />
           </div>
 
           <button id="reservation-link" type="submit" class="submit">

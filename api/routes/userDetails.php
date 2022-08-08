@@ -52,6 +52,17 @@ Flight::route('GET /user/details/@id', function($id){
    Flight::json(Flight::userDetailsService()->get_user_details_by_account_id_and_details_id(Flight::get('user'), $id));
 });
 
+/**
+ * @OA\Get(path="/user/{account_id}/details", tags={"User Details","admin"}, security={{"ApiKeyAuth": {}}},
+ *     @OA\Parameter(type="integer", in="path", name="account_id", default=1, description="Id of user account"),
+ *     @OA\Response(response="200", description="Fetch individual user details")
+ * )
+ */
+
+Flight::route('GET /user/@account_id/details/', function($account_id){
+   Flight::json(Flight::userDetailsService()->get_user_details_by_account_id(Flight::get('user'), $account_id));
+});
+
 
 /**
 * @OA\Put(path="/user/details/{id}",tags={"User Details"},security={{"ApiKeyAuth": {}}},

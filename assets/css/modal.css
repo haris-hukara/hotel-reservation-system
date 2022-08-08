@@ -3,6 +3,18 @@
  * -- only show for tablet and up
  */
 
+#checkbox-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.modal-checkbox {
+  align-self: initial;
+  justify-self: left;
+}
+
 .modal-heading,
 .modal-text {
   text-align: center;

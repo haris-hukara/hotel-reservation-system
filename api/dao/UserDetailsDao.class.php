@@ -31,7 +31,15 @@ class UserDetailsDao extends BaseDao{
 
     public function remove_user_details_by_id($id){
         $this->query_unique("DELETE FROM user_details WHERE id = :id", ["id" => $id]);
+    }
 
+    public function get_user_details_by_account_id($id){
+        
+       return $this->query_unique("SELECT ud.* 
+                                    FROM user_details ud 
+                                    JOIN user_account ua ON ud.id =  ua.user_details_id
+                                    WHERE ua.id = :id", 
+                                    ["id" => $id]);
     }
    
 }

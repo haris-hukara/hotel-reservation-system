@@ -16,6 +16,26 @@ class Rooms {
     elements.removeClass("active");
   }
 
+  static getUserInfo() {
+    if ($("#profile-info-box").val() == "yes") {
+      $("[id^=modal]").removeAttr("disabled");
+      $("#profile-info-box").attr("value", "no");
+    } else {
+      const account_id = parse_jwt(window.localStorage.getItem("token")).id;
+      RestClient.get("api/user/" + account_id + "/details", function (data) {
+        $("#modal-email").val(data.email);
+        $("#modal-first-name").val(data.first_name);
+        $("#modal-last-name").val(data.last_name);
+        $("#modal-phone-number").val(data.phone_number);
+        $("#modal-birth-date").val(data.birth_date);
+        $("#modal-country").val(data.country);
+        $("#modal-city").val(data.city);
+        $("[id^=modal]").prop("disabled", true);
+        $("#profile-info-box").attr("value", "yes");
+      });
+    }
+  }
+
   static get_avaliable_rooms() {
     localStorage.setItem("check-in", $("#resrvations-check-in").val());
     localStorage.setItem("check-out", $("#resrvations-check-out").val());
