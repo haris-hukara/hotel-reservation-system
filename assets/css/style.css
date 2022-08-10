@@ -115,6 +115,20 @@
 /* ROOM CARD */
 /**************************/
 
+.room-price {
+  color: #2a303b;
+  font-size: 2.4rem;
+  font-weight: 700;
+  border-bottom: 0.6rem solid #1cc3b2;
+  border-radius: 0.2em;
+  background: linear-gradient(
+    -180deg,
+    rgba(0, 0, 0, 0.09) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  padding: 0.2rem 0.4rem;
+}
+
 .room-figure {
   overflow: hidden;
   height: 100%;
@@ -238,7 +252,7 @@
 }
 
 .room-main p {
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: 400;
   line-height: 1.5;
 }
@@ -451,7 +465,6 @@
 .section-about {
   max-width: 192rem;
   min-height: 85rem;
-  background-color: #fff;
 }
 
 .about-item {
@@ -488,6 +501,10 @@
   padding: 9.6rem 0;
 }
 
+.sticky {
+  background-color: rgb(251, 252, 255);
+}
+
 .sticky .header {
   position: fixed;
   top: 0;
@@ -496,7 +513,6 @@
   height: 8rem;
   padding-top: 0;
   padding-bottom: 0;
-  background-color: rgba(255, 255, 255, 0.97);
   z-index: 999;
   box-shadow: 0 1.2rem 3.2rem rgba(0, 0, 0, 0.03);
 }

@@ -36,12 +36,12 @@ class Home {
 
     window.location.href = "#rooms";
 
-    $("#resrvations-check-in").val($("#home-check-in").val());
-    $("#resrvations-check-out").val($("#home-check-out").val());
-    $("#resrvations-adults").val($("#home-adults").val());
-    $("#resrvations-children").val($("#home-children").val());
-    $("#resrvations-rooms").val($("#home-rooms").val());
+    $("#reservations-check-in").val($("#home-check-in").val());
+    $("#reservations-check-out").val($("#home-check-out").val());
+    $("#reservations-adults").val($("#home-adults").val());
+    $("#reservations-children").val($("#home-children").val());
+    $("#reservations-rooms").val($("#home-rooms").val());
 
-    $("#resrvations-button").click();
+    $("#reservations-button").click();
   }
 }

@@ -5,11 +5,96 @@ class Rooms {
       if (!localStorage.getItem("token")) {
         $("#checkbox-label").remove();
       }
+
+      $("#reservation-form").validate({
+        submitHandler: function (form, event) {
+          event.preventDefault();
+          Rooms.makeReservation();
+        },
+      });
     });
   }
 
-  static openModal($id) {
-    console.log($id);
+  static makeReservationForRoomUsingDetailsId(details_id, room_info) {
+    RestClient.post(
+      "api/reservation",
+      {
+        user_details_id: details_id.toString(),
+        payment_method_id: "1",
+      },
+      function (data) {
+        Object.assign(room_info, { reservation_id: data.id });
+        console.log(room_info);
+        RestClient.post(
+          "api/reservation/details",
+          room_info,
+          function (data) {
+            toastr.success("Successfully created reservation");
+            Rooms.closeModal();
+          },
+          function (jqXHR, textStatus, errorThrown) {
+            toastr.error(jqXHR.responseJSON.message);
+          }
+        );
+      },
+      function (jqXHR, textStatus, errorThrown) {
+        toastr.error(jqXHR.responseJSON.message);
+      }
+    );
+  }
+
+  static makeReservation() {
+    var user_info = jsonize_form("#reservation-form");
+    let room_info = jsonize_form("#room-form");
+
+    if (user_info["profile-info"] == "yes") {
+      const account_id = parse_jwt(window.localStorage.getItem("token")).id;
+      RestClient.get("api/user/" + account_id + "/details", function (data) {
+        var details_id = data.id;
+        Rooms.makeReservationForRoomUsingDetailsId(details_id, room_info);
+      });
+    } else {
+      RestClient.post(
+        "api/details/add",
+        user_info,
+        function (data) {
+          var details_id = data.id;
+          Rooms.makeReservationForRoomUsingDetailsId(details_id, room_info);
+        },
+        function (jqXHR, textStatus, errorThrown) {
+          toastr.error(jqXHR.responseJSON.message);
+        }
+      );
+    }
+  }
+
+  static openUserInfoForm() {
+    $("#room-form").attr("hidden", true);
+    $("#reservation-form").removeAttr("hidden");
+  }
+
+  static openReservationRoomInfo() {
+    $("#reservation-form").attr("hidden", true);
+    $("#room-form").removeAttr("hidden");
+  }
+
+  static openModal(id) {
+    Rooms.openReservationRoomInfo();
+    $("#modal-room-id").val(id);
+    $("#modal-room-name").val($("#room-" + id + "-name").html());
+    $("#modal-room-price").val($("#room-" + id + "-price").html());
+
+    var date1 = new Date(localStorage.getItem("check-in"));
+    var date2 = new Date(localStorage.getItem("check-out"));
+    var diffDays = date2.getDate() - date1.getDate();
+    var total_price = diffDays * $("#modal-room-price").val();
+    $("#room-total-price").html("$" + total_price + ".00");
+
+    $("#modal-room-adults").val(localStorage.getItem("adults"));
+    $("#modal-room-children").val(localStorage.getItem("children"));
+    $("#modal-room-check-in").val(localStorage.getItem("check-in"));
+    $("#modal-room-check-out").val(localStorage.getItem("check-out"));
+
     var elements = $(".modal-overlay, .modal");
     elements.addClass("active");
   }
@@ -23,6 +108,10 @@ class Rooms {
     if ($("#profile-info-box").val() == "yes") {
       $("[id^=modal]").removeAttr("disabled");
       $("#profile-info-box").attr("value", "no");
+
+      $("[id^=modal-room]").removeAttr("disabled");
+      $("[id^=modal-room-name]").prop("disabled", true);
+      $("[id^=modal-room-price]").prop("disabled", true);
     } else {
       const account_id = parse_jwt(window.localStorage.getItem("token")).id;
       RestClient.get("api/user/" + account_id + "/details", function (data) {
@@ -34,24 +123,33 @@ class Rooms {
         $("#modal-country").val(data.country);
         $("#modal-city").val(data.city);
         $("[id^=modal]").prop("disabled", true);
+
+        $("[id^=modal-room]").removeAttr("disabled");
+        $("[id^=modal-room-name]").prop("disabled", true);
+        $("[id^=modal-room-price]").prop("disabled", true);
+
         $("#profile-info-box").attr("value", "yes");
       });
     }
   }
 
+  static storeParams() {
+    localStorage.setItem("check-in", $("#reservations-check-in").val());
+    localStorage.setItem("check-out", $("#reservations-check-out").val());
+    localStorage.setItem("adults", $("#reservations-adults").val());
+    localStorage.setItem("children", $("#reservations-children").val());
+    localStorage.setItem("rooms", $("#reservations-rooms").val());
+  }
+
   static get_avaliable_rooms() {
-    localStorage.setItem("check-in", $("#resrvations-check-in").val());
-    localStorage.setItem("check-out", $("#resrvations-check-out").val());
-    localStorage.setItem("adults", $("#resrvations-adults").val());
-    localStorage.setItem("children", $("#resrvations-children").val());
-    localStorage.setItem("rooms", $("#resrvations-rooms").val());
+    Rooms.storeParams();
     $(".room-container").remove();
 
-    $("#home-check-in").val($("#resrvations-check-in").val());
-    $("#home-check-out").val($("#resrvations-check-out").val());
-    $("#home-adults").val($("#resrvations-adults").val());
-    $("#home-children").val($("#resrvations-children").val());
-    $("#home-rooms").val($("#resrvations-rooms").val());
+    $("#home-check-in").val($("#reservations-check-in").val());
+    $("#home-check-out").val($("#reservations-check-out").val());
+    $("#home-adults").val($("#reservations-adults").val());
+    $("#home-children").val($("#reservations-children").val());
+    $("#home-rooms").val($("#reservations-rooms").val());
 
     Rooms.get_rooms();
   }
@@ -59,6 +157,7 @@ class Rooms {
   static get_rooms() {
     var check_in = localStorage.getItem("check-in");
     var check_out = localStorage.getItem("check-out");
+
     var url = "api/rooms";
 
     if (
@@ -67,8 +166,8 @@ class Rooms {
       check_in != undefined &&
       check_out != undefined
     ) {
-      $("#resrvations-check-in").val(localStorage.getItem("check-in"));
-      $("#resrvations-check-out").val(localStorage.getItem("check-out"));
+      $("#reservations-check-in").val(localStorage.getItem("check-in"));
+      $("#reservations-check-out").val(localStorage.getItem("check-out"));
       url += "?order=-id&check_in=" + check_in + "&check_out=" + check_out;
     } else {
       var current_date = new Date();
@@ -85,15 +184,15 @@ class Rooms {
         month: "numeric",
         day: "numeric",
       });
-      $("#resrvations-check-in").val(today);
-      $("#resrvations-check-out").val(seven_days);
+      $("#reservations-check-in").val(today);
+      $("#reservations-check-out").val(seven_days);
     }
-    $("#resrvations-rooms").val(1);
-    $("#resrvations-adults").val(1);
-    $("#resrvations-children").val(0);
+    $("#reservations-rooms").val(1);
+    $("#reservations-adults").val(1);
+    $("#reservations-children").val(0);
+    Rooms.storeParams();
 
     RestClient.get(url, function (data) {
-      console.log(data);
       for (var i = 0; i < data.length; i++) {
         $("#rooms-box").append(
           Rooms.createRoom(
@@ -116,8 +215,8 @@ class Rooms {
       <div class="room-main">
         <div class="room-main-info">
           <div class="room-head">
-            <h2>${name} <span id="room-id-${id}" class="room-id hidden">${id}</span></h2>
-            <p>From <span class="room-price"> $${night_price}</span>/night</p>
+            <h2> <span id="room-${id}-name">${name}</span> <span id="room-id-${id}" class="room-id hidden">${id}</span></h2>
+            <p>From <span class="room-price"> <span>$</span><span id="room-${id}-price">${night_price}</span> </span>/night</p>
           </div>
           <p class="room-description">
           ${description}

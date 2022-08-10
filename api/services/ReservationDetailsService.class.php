@@ -69,35 +69,34 @@ class ReservationDetailsService extends BaseService{
   }
 
   public function add_reservation_details($details){
-    if(!isset($details['reservation_id'])) throw new Exception("Reservation ID is missing");
-    if(!isset($details['check_in'])) throw new Exception("Check in date is missing");
-    if(!isset($details['check_out'])) throw new Exception("Check out date is missing");
-    if(!isset($details['room_id'])) throw new Exception("Room ID is missing");
-    if(!isset($details['children'])) throw new Exception("Number of children is missing");
-    if(!isset($details['adults'])) throw new Exception("Number of adults is missing");
+    if(!isset($details['reservation_id'])) throw new Exception("Reservation ID is missing",400);
+    if(!isset($details['check_in'])) throw new Exception("Check in date is missing",400);
+    if(!isset($details['check_out'])) throw new Exception("Check out date is missing",400);
+    if(!isset($details['room_id'])) throw new Exception("Room ID is missing",400);
+    if(!isset($details['children'])) throw new Exception("Number of children is missing",400);
+    if(!isset($details['adults'])) throw new Exception("Number of adults is missing",400);
     
 
-    if(!parent::date_format_check($details['check_in'])) throw new Exception("Check-in date format is not valid");
-    if(!parent::date_format_check($details['check_out'])) throw new Exception("Check-out date format is not valid");
-    if( $details['check_out'] < $details['check_in'] ) throw new Exception("Check-out date can't be lower than check-in date");
-  
-
+    if(!parent::date_format_check($details['check_in'])) throw new Exception("Check-in date format is not valid",400);
+    if(!parent::date_format_check($details['check_out'])) throw new Exception("Check-out date format is not valid",400);
+    if( $details['check_out'] < $details['check_in'] ) throw new Exception("Check-out date can't be lower than check-in date",400);
+    
     $room = $this->roomsDao->check_room_availability($details['room_id'], $details['check_in'], $details['check_out']);
-    if(empty($room)){
+    if(!empty($room)){
       $this->delete_all_details_by_reservation_id($details['reservation_id']);
-      throw new Exception("Room id: " .$details['room_id']. " is not avaliable between ". $details['check_in']." and ". $details['check_out']);
+      throw new Exception("Room id: " .$details['room_id']. " is not avaliable between ". $details['check_in']." and ". $details['check_out'], 400);
     }
-   
-      try {
+    
+    try {
       // add details
       $reservation_details = $this->dao->add($details);    
       return $reservation_details;
       
-        } catch (\Exception $e) {
-          if(str_contains($e->getMessage(), 'reservation_details.PRIMARY')){
+    } catch (\Exception $e) {
+      if(str_contains($e->getMessage(), 'reservation_details.PRIMARY')){
               throw new Exception("This reservation details already exist", 400, $e);
           } else { 
-            throw $e;
+            throw new Exception($e, 400);
             }
       }
      

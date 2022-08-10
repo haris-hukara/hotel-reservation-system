@@ -46,7 +46,7 @@ class RoomsService extends BaseService{
       if ($search){
         return ($this->dao->get_avaliable_rooms($search, $offset, $limit, $order , $check_in, $check_out));
       }else{
-        return ($this->dao->get_avaliable_rooms($search , $offset, $limit, $order , $check_in, $check_out));
+        return ($this->dao->get_avaliable_rooms("" , $offset, $limit, $order , $check_in, $check_out));
       }
     }
 

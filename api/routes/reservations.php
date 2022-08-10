@@ -17,7 +17,7 @@ Flight::route('GET /user/@user_id/reservations', function($user_id){
 
 
 /**
- * @OA\Get(path="/admin/resrvations", tags={"reservations","admin"},security={{"ApiKeyAuth":{}}},
+ * @OA\Get(path="/admin/reservations", tags={"reservations","admin"},security={{"ApiKeyAuth":{}}},
   *    @OA\Parameter(type="integer", in="query", name="offset", default=0, description="Offset for pagination"),
  *     @OA\Parameter(type="integer", in="query", name="limit", default=25, description="Limit for pagination"),
  *     @OA\Parameter(type="string", in="query", name="search", description="reservation status"),
@@ -25,7 +25,7 @@ Flight::route('GET /user/@user_id/reservations', function($user_id){
  *     @OA\Response(response="200", description="List accounts from database")
  * )
  */
-Flight::route('GET /admin/resrvations', function(){  
+Flight::route('GET /admin/reservations', function(){  
     $offset = Flight::query('offset', 0);
     $limit = Flight::query('limit', 10);
     $search = Flight::query('search');

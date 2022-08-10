@@ -111,7 +111,7 @@ class RoomsDao extends BaseDao{
                           AND r.status IN ('ACCEPTED','ACTIVE')";
 
         $query = "SELECT * FROM rooms ro
-                  WHERE ro.id = :room_id AND ro.id NOT IN ( ${unavaliable_rooms} )";
+                  WHERE ro.id = :room_id AND ro.id IN ( ${unavaliable_rooms} )";
                        
         return $this->query($query,$params);
 
