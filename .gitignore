@@ -1,3 +1,4 @@
 /vendor/
 /.vscode
 config copy.php
+api/config.php
