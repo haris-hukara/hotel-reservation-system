@@ -52,6 +52,17 @@ Flight::route('GET /user/account/@id', function($id){
 });
 
 /**
+ * @OA\Get(path="/user/account/{id}/email", tags={"user account"}, security={{"ApiKeyAuth": {}}},
+ *     @OA\Parameter(type="integer", in="path", name="id", default=1, description="Id of account"),
+ *     @OA\Response(response="200", description="Get user email")
+ * )
+ */
+Flight::route('GET /user/account/@id/email', function($id){
+    $data = (Flight::userAccountService()->getUserAccountById(Flight::get('user'),$id));  
+    Flight::json(["email" => $data['email']]);  
+});
+
+/**
  * @OA\Get(path="/user/password/account/{id}", tags={"user account"}, security={{"ApiKeyAuth": {}}},
  *     @OA\Parameter(type="integer", in="path", name="id", default=1, description="Id of account"),
  *     @OA\Parameter(type="string", in="query", name="password", default=1234, description="Password to be checked"),

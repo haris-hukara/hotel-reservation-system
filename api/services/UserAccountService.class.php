@@ -150,7 +150,9 @@ class UserAccountService extends BaseService{
 
    public function update_account($id, $data, $user){
     if($this->checkAccountPassword($user, $id, $data['current_password'])){
-      $data['password'] = $data['new_password'];
+      if(isset($data['new_password'])){
+        $data['password'] = $data['new_password'];
+      }
       unset($data['current_password']);
       unset($data['new_password']);
       try{
@@ -164,7 +166,7 @@ class UserAccountService extends BaseService{
         }
         return ["message"=>"Account info has been updated"];
       }else{
-        return ["message"=>"Password is not correct"];
+        throw new Exception("Password is not correct", 400);
       };
    }
 

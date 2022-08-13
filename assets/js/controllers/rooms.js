@@ -115,13 +115,8 @@ class Rooms {
     } else {
       const account_id = parse_jwt(window.localStorage.getItem("token")).id;
       RestClient.get("api/user/" + account_id + "/details", function (data) {
-        $("#modal-email").val(data.email);
-        $("#modal-first-name").val(data.first_name);
-        $("#modal-last-name").val(data.last_name);
-        $("#modal-phone-number").val(data.phone_number);
-        $("#modal-birth-date").val(data.birth_date);
-        $("#modal-country").val(data.country);
-        $("#modal-city").val(data.city);
+        json2form("#reservation-form", data);
+
         $("[id^=modal]").prop("disabled", true);
 
         $("[id^=modal-room]").removeAttr("disabled");
