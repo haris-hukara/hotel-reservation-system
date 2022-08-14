@@ -96,3 +96,18 @@ table.dataTable tr.child span.dtr-title {
   min-width: 75px;
   font-weight: bold;
 }
+
+.status-bg-accepted {
+  background: lightgreen;
+}
+.status-bg-refused {
+  background: lightcoral;
+}
+.status-bg-pending {
+  background: lightsteelblue;
+}
+
+.status-bg-active,
+.status-bg-finalised {
+  background: lightgray;
+}

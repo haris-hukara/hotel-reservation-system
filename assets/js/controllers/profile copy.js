@@ -3,7 +3,10 @@ class Profile {
     $(document).ready(function () {
       Profile.getUserInfo();
       Profile.getUserAccountInfo();
-      Profile.getUserResrvations();
+      $("#myTable").DataTable();
+      $("#myTable_filter").remove();
+      $("#myTable_wrapper").prepend($("#table-head"));
+      $("#table-head").prepend($("#myTable_length"));
     });
 
     $("#profile-form").validate({
@@ -128,58 +131,5 @@ class Profile {
     $("#edit-profile-submit").removeClass("submit-disabled");
     $("input[id^=profile]").removeAttr("readonly");
     $("#edit-profile-submit").removeAttr("disabled");
-  }
-
-  static getUserResrvations() {
-    const account_id = parse_jwt(window.localStorage.getItem("token")).id;
-    RestClient.get("api/user/" + account_id + "/reservations", function (data) {
-      let rows = Profile.generateReservationRow(data);
-      let table = Profile.generateReservationTable(rows);
-      $("#user-reservations-table").append(table);
-      $("#UserReservationsTable").DataTable();
-      $("#UserReservationsTable_filter").remove();
-      $("#UserReservationsTable_wrapper").prepend($("#table-head"));
-      $("#table-head").append($("#UserReservationsTable_length"));
-    });
-  }
-
-  static generateReservationRow(data) {
-    let rows = "";
-
-    for (var i = 0; i < data.length; i++) {
-      let status = data[i].status.toLowerCase();
-      let row = `<tr>
-    <td>${data[i].id}</td>
-    <td class="forgot font-size-inherit">
-      <span hidden>${data[i].user_details_id}</span> Click to se more
-    </td>
-    <td>At Arrival</td>
-    <td>${data[i].created_at}</td>
-    <td class="status-bg-${status}">${
-        status[0].toUpperCase() + status.slice(1)
-      }</td>
-    </tr>`;
-      rows += row;
-    }
-    return rows;
-  }
-
-  static generateReservationTable(rows) {
-    let html = `<table id="UserReservationsTable">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>User details</th>
-        <th>Payment method</th>
-        <th>Reservation created at</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      ${rows}
-    </tbody>
-  </table>`;
-    return html;
   }
 }

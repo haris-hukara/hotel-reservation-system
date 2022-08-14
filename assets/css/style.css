@@ -502,6 +502,7 @@
 }
 
 .sticky {
+  background: url(https://www.toptal.com/designers/subtlepatterns/uploads/white_wall_hash.png);
   background-color: rgb(251, 252, 255);
 }
 
@@ -684,6 +685,10 @@ div.form-2-fields > * {
   text-align: center;
   display: block;
   margin-top: 1rem;
+}
+
+.forgot.font-size-inherit {
+  font-size: inherit;
 }
 
 .forgot {
