@@ -214,13 +214,13 @@ class Profile {
   }
 
   static openUserInfoInModal() {
-    $("#reservation-form").attr("hidden", true);
+    $("#user-reservation-form").attr("hidden", true);
     $("#user-details-form").removeAttr("hidden");
   }
 
   static openReservationInfoInModal() {
     $("#user-details-form").attr("hidden", true);
-    $("#reservation-form").removeAttr("hidden");
+    $("#user-reservation-form").removeAttr("hidden");
   }
 
   static openReservationDetails(id) {
@@ -229,7 +229,7 @@ class Profile {
     RestClient.get(
       "api/user/" + account_id + "/reservation/" + id + "/details",
       function (data) {
-        json2form("#reservation-form", data[0]);
+        json2form("#user-reservation-form", data[0]);
         Profile.getReservationTotalPrice(id);
         Profile.openReservationInfoInModal();
         Profile.openInfoModal();
@@ -255,7 +255,7 @@ class Profile {
         night_price: data.night_price,
         room_name: data.name,
       };
-      json2form("#reservation-form", room_info);
+      json2form("#user-reservation-form", room_info);
     });
   }
 
