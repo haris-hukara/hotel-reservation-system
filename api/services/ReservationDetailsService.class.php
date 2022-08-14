@@ -40,8 +40,8 @@ class ReservationDetailsService extends BaseService{
       }
     } 
     
-    public function get_reservation_price_by_account_id_and_reservation_id($user, $user_id, $reservation_id){
-    $user_account;
+    public function get_reservation_details($user, $user_id, $reservation_id){
+      $user_account;
     try {
       $user_account = $this->userAccountDao->get_by_id($user_id);
     } catch (\Exception $e) {
@@ -51,16 +51,45 @@ class ReservationDetailsService extends BaseService{
     if(!$user_account){
       throw new Exception("This account doesn't exist", 404);
     }
-    if( $user['id'] == $user_account['id'] || $user['rl'] == "ADMIN" ){
-      $reservation_price = $this->dao->get_reservation_price_by_account_id_and_reservation_id($user_id, $reservation_id);
-      if(!$reservation_price['reservation_id']){
+    if( $user_id == $user_account['id'] || $user['rl'] == "ADMIN" ){
+      $reservations = $this->dao->get_reservation_details($user_id, $reservation_id);
+      if(empty($reservations)){
         throw new Exception("This reservation doesn't exist", 404);
       }
-      return $reservation_price;
+      return $reservations;
     }elseif ($user['id'] !== $user_account['id']){
       throw new Exception("Not your account", 401);
     }else{
-      return ["message"=>"Oops something went wrong"];
+      throw new Exception("Oops something went wrong",400);
+    }
+    }
+
+    public function get_reservation_price($user, $user_id, $reservation_id){
+    $user_account;
+    try {
+      $user_account = $this->userAccountDao->get_by_id($user_id);
+    } catch (\Exception $e) {
+      throw $e;
+    }
+    
+    if(!$user_account){
+      throw new Exception("This account doesn't exist", 404);
+    }
+    if( $user_id == $user_account['id'] || $user['rl'] == "ADMIN" ){
+      $reservations = $this->dao->get_reservation_details($user_id, $reservation_id);
+      if(empty($reservations)){
+        throw new Exception("This reservation doesn't exist", 404);
+      }
+
+      $total_price = 0;
+      foreach($reservations as $arr => $val) {
+        $total_price += ($reservations[$arr]["price"]);
+      }
+      return ["total_price"=>$total_price];
+    }elseif ($user['id'] !== $user_account['id']){
+      throw new Exception("Not your account", 401);
+    }else{
+      throw new Exception("Oops something went wrong",400);
     }
   }
 

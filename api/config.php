@@ -5,16 +5,16 @@ class Config {
     const DATE_FORMAT = "Y-m-d H:i:s";
 
     public static function DB_HOST(){
-      return Config::get_env("DB_HOST", "localhost");
+      return Config::get_env("DB_HOST", "sql11.freesqldatabase.com");
     }
     public static function DB_USERNAME(){
-      return Config::get_env("DB_USERNAME", "root");
+      return Config::get_env("DB_USERNAME", "sql11512689");
     }
     public static function DB_PASSWORD(){
-      return Config::get_env("DB_PASSWORD", "root");
+      return Config::get_env("DB_PASSWORD", "18vqt2GEyy");
     }
     public static function DB_SCHEME(){
-      return Config::get_env("DB_SCHEME", "hotelsea");
+      return Config::get_env("DB_SCHEME", "sql11512689");
     }
     public static function DB_PORT(){
       return Config::get_env("DB_PORT", "3306");

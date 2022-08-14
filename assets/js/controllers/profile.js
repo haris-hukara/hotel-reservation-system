@@ -3,7 +3,7 @@ class Profile {
     $(document).ready(function () {
       Profile.getUserInfo();
       Profile.getUserAccountInfo();
-      Profile.getUserResrvations();
+      Profile.getUserReservations();
     });
 
     $("#profile-form").validate({
@@ -130,17 +130,31 @@ class Profile {
     $("#edit-profile-submit").removeAttr("disabled");
   }
 
-  static getUserResrvations() {
+  static tableHead() {
+    let html = `<div id="table-head">
+            <h2 id="my-table-name">Reservations table</h2>
+            </div>`;
+    return html;
+  }
+
+  static getUserReservations() {
+    $("#user-reservations-table").empty();
+    $("#user-reservations-table").append(Profile.tableHead);
     const account_id = parse_jwt(window.localStorage.getItem("token")).id;
-    RestClient.get("api/user/" + account_id + "/reservations", function (data) {
-      let rows = Profile.generateReservationRow(data);
-      let table = Profile.generateReservationTable(rows);
-      $("#user-reservations-table").append(table);
-      $("#UserReservationsTable").DataTable();
-      $("#UserReservationsTable_filter").remove();
-      $("#UserReservationsTable_wrapper").prepend($("#table-head"));
-      $("#table-head").append($("#UserReservationsTable_length"));
-    });
+    RestClient.get(
+      "api/user/" + account_id + "/reservations?order",
+      function (data) {
+        let rows = Profile.generateReservationRow(data);
+        let table = Profile.generateReservationTable(rows);
+        $("#user-reservations-table").append(table);
+        $("#UserReservationsTable").DataTable({
+          order: [[3, "desc"]],
+        });
+        $("#UserReservationsTable_filter").remove();
+        $("#UserReservationsTable_wrapper").prepend($("#table-head"));
+        $("#table-head").append($("#UserReservationsTable_length"));
+      }
+    );
   }
 
   static generateReservationRow(data) {
@@ -149,9 +163,15 @@ class Profile {
     for (var i = 0; i < data.length; i++) {
       let status = data[i].status.toLowerCase();
       let row = `<tr>
-    <td>${data[i].id}</td>
-    <td class="forgot font-size-inherit">
-      <span hidden>${data[i].user_details_id}</span> Click to se more
+    <td>
+       <span style="display: block">${data[i].id}</span>
+      <span  onclick="Profile.openReservationDetails(${
+        data[i].id
+      })" class="forgot font-size-inherit">Click to see details</span></td>
+    <td class="forgot font-size-inherit" onclick="Profile.openReservationUserDetailsInfo(${
+      data[i].user_details_id
+    })">
+      <span hidden>${data[i].user_details_id}</span> Click to see
     </td>
     <td>At Arrival</td>
     <td>${data[i].created_at}</td>
@@ -181,5 +201,69 @@ class Profile {
     </tbody>
   </table>`;
     return html;
+  }
+
+  static closeInfoModal() {
+    var elements = $("[id^=profile-reservation-modal]");
+    elements.removeClass("active");
+  }
+
+  static openInfoModal() {
+    var elements = $("[id^=profile-reservation-modal]");
+    elements.addClass("active");
+  }
+
+  static openUserInfoInModal() {
+    $("#reservation-form").attr("hidden", true);
+    $("#user-details-form").removeAttr("hidden");
+  }
+
+  static openReservationInfoInModal() {
+    $("#user-details-form").attr("hidden", true);
+    $("#reservation-form").removeAttr("hidden");
+  }
+
+  static openReservationDetails(id) {
+    const account_id = parse_jwt(window.localStorage.getItem("token")).id;
+    $("#reservation-info-id").html(id);
+    RestClient.get(
+      "api/user/" + account_id + "/reservation/" + id + "/details",
+      function (data) {
+        json2form("#reservation-form", data[0]);
+        Profile.getReservationTotalPrice(id);
+        Profile.openReservationInfoInModal();
+        Profile.openInfoModal();
+      }
+    );
+  }
+
+  static getReservationTotalPrice(reservation_id) {
+    const account_id = parse_jwt(window.localStorage.getItem("token")).id;
+    RestClient.get(
+      "api/user/" + account_id + "/reservation/" + reservation_id + "/price",
+      function (data) {
+        $("#profile-modal-room-total-price").html(
+          "$" + data.total_price + ".00"
+        );
+      }
+    );
+  }
+
+  static setRoomInfo(room_id) {
+    RestClient.get("api/room/" + room_id, function (data) {
+      var room_info = {
+        night_price: data.night_price,
+        room_name: data.name,
+      };
+      json2form("#reservation-form", room_info);
+    });
+  }
+
+  static openReservationUserDetailsInfo(details_id) {
+    RestClient.get("api/user/details/" + details_id, function (data) {
+      json2form("#user-details-form", data);
+      Profile.openUserInfoInModal();
+      Profile.openInfoModal();
+    });
   }
 }

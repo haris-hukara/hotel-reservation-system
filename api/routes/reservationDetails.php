@@ -7,7 +7,7 @@
  * )
  */
 Flight::route('GET /user/@user_id/reservation/@reservation_id/details', function($user_id, $reservation_id){
-    Flight::json(Flight::reservationDetailsService()->get_reservation_details_by_id(Flight::get('user'),$user_id, $reservation_id));  
+    Flight::json(Flight::reservationDetailsService()->get_reservation_details(Flight::get('user'),$user_id, $reservation_id));  
 });
 
 /**
@@ -18,7 +18,7 @@ Flight::route('GET /user/@user_id/reservation/@reservation_id/details', function
  * )
  */
 Flight::route('GET /user/@user_id/reservation/@reservation_id/price', function($user_id, $reservation_id){
-    Flight::json(Flight::reservationDetailsService()->get_reservation_price_by_account_id_and_reservation_id(Flight::get('user'),$user_id, $reservation_id));  
+    Flight::json(Flight::reservationDetailsService()->get_reservation_price(Flight::get('user'),$user_id, $reservation_id));  
 });
 
 /**

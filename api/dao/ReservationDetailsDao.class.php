@@ -36,14 +36,16 @@ class ReservationDetailsDao extends BaseDao{
                           ["order_id" => $order_id]);
     }
      
-    public function get_reservation_price_by_account_id_and_reservation_id($account_id, $reservation_id){
-      $details =  $this->query_unique("SELECT r.id as reservation_id, SUM(rm.night_price) AS total_price
-                                FROM user_account ua
-                                JOIN reservations r ON r.user_details_id = ua.user_details_id 
-                                JOIN reservation_details rd ON rd.reservation_id = r.id
-                                JOIN rooms rm ON rm.id = rd.room_id
-                                WHERE ua.id = :account_id AND r.id = :reservation_id", 
-                                ["account_id" => $account_id, "reservation_id" => $reservation_id]);
+    public function get_reservation_details($account_id, $reservation_id){
+      $query = "SELECT rd.*, rm.name AS room_name, rd.check_in, rd.check_out,DATEDIFF(rd.check_out,rd.check_in) AS total_nights,rm.night_price,  (rm.night_price)*(DATEDIFF(rd.check_out,rd.check_in) ) AS price
+      FROM user_account ua
+      JOIN reservations r ON r.user_details_id = ua.user_details_id 
+      JOIN reservation_details rd ON rd.reservation_id = r.id
+      JOIN rooms rm ON rm.id = rd.room_id
+      WHERE ua.id = :account_id AND r.id = :reservation_id";
+     
+     
+      $details =  $this->query($query,["account_id" => $account_id, "reservation_id" => $reservation_id]);
       return $details;
     }   
     public function get_order_price_by_account_id($account_id, $id){
