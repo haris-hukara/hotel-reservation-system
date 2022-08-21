@@ -6,6 +6,8 @@ class ReservationDetailsDao extends BaseDao{
     public function __construct(){
         parent::__construct("reservation_details");
     }
+
+    
     
     public function get_reservation_details_by_account_id_and_reservation_id($account_id, $reservation_id){
       $details =  $this->query("SELECT ua.id AS account_id,ua.user_details_id, rd.*
@@ -17,24 +19,7 @@ class ReservationDetailsDao extends BaseDao{
       return $details;
     }   
     
-    public function get_reservation_details_by_reservation_id($order_id){
-    return $this->query("SELECT 	od.order_id, 
-                                  p.name AS 'product_name', 
-                                  ps.name AS 'category',
-                                  p.gender_category AS 'gender',
-                                  s.name AS 'size',
-                                  od.quantity,
-                                  p.unit_price, 
-                                  (quantity*unit_price) AS total,
-                                  p.image_link
-
-                          FROM order_details od 
-                          JOIN products p ON p.id = od.product_id
-                          JOIN sizes s ON s.id = od.size_id
-                          JOIN product_subcategory ps ON ps.id = p.subcategory_id
-                          WHERE od.order_id = :order_id", 
-                          ["order_id" => $order_id]);
-    }
+    
      
     public function get_reservation_details($account_id, $reservation_id){
       $query = "SELECT rd.*, rm.name AS room_name, rd.check_in, rd.check_out,DATEDIFF(rd.check_out,rd.check_in) AS total_nights,rm.night_price,  (rm.night_price)*(DATEDIFF(rd.check_out,rd.check_in) ) AS price
@@ -100,5 +85,12 @@ class ReservationDetailsDao extends BaseDao{
         return ["message" => "Deleted details count ". $this->delete_by_id_column_and_id("reservation_id",$id)];
        }
 
+
+       public function get_reservation_details_by_reservation_id($reservation_id){
+        return $this->query("SELECT * 
+                              FROM reservation_details
+                              WHERE reservation_id = :reservation_id", 
+                              ["reservation_id" => $reservation_id]);
+        }
 }
 ?>

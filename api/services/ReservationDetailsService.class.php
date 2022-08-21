@@ -14,7 +14,7 @@ class ReservationDetailsService extends BaseService{
    $this->roomsDao = new RoomsDao();
   }
  
-  public function get_reservation_details_by_id($user, $user_id, $reservation_id){
+  public function get_reservation_details_by_user_id_and_reservation_id($user, $user_id, $reservation_id){
     $user_account;
     try {
       $user_account = $this->userAccountDao->get_by_id($user_id);
@@ -170,7 +170,20 @@ class ReservationDetailsService extends BaseService{
         throw new Exception("Quantity input is same, nothing to change");
       }
     }
-  }   
+  }  
+  
+  public function get_reservation_details_by_id($user, $reservation_id){
+
+  if( $user['rl'] == "ADMIN" ){
+      $reservations = $this->dao->get_reservation_details_by_reservation_id( $reservation_id);
+      if(empty($reservations)){
+        throw new Exception("Reservation details don't exist", 404);
+      }
+      return $reservations;
+  }else{
+      throw new Exception("You are not allowed",403);
+    }
+  }
                  
 }
 ?>

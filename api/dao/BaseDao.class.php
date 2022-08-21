@@ -87,7 +87,7 @@ class BaseDao{
                
                $query = substr($query, 0, -2);
                $query .= " WHERE ${id_column} = :id";
-       
+              
                $stmt = $this->connection->prepare($query);
                $entity['id'] = $id;
                $stmt->execute($entity);
@@ -96,7 +96,6 @@ class BaseDao{
        
            protected function query($query, $params){
                $stmt = $this->connection->prepare($query);
-              
                $stmt->execute($params);
                return $stmt->fetchAll(PDO::FETCH_ASSOC);
            }

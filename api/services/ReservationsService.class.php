@@ -1,14 +1,17 @@
 <?php 
 require_once dirname(__FILE__)."/BaseService.class.php";
+require_once dirname(__FILE__)."/../dao/ReservationDetailsDao.class.php";
 require_once dirname(__FILE__)."/../dao/ReservationsDao.class.php";
 require_once dirname(__FILE__)."/../dao/UserAccountDao.class.php";
 
 class ReservationsService extends BaseService{
   protected $userAccountDao;
+  protected $ReservationDetailsDao;
 
  public function __construct(){
    $this->dao = new ReservationsDao();   
    $this->userAccountDao = new UserAccountDao();   
+   $this->reservationDetailsDao = new ReservationDetailsDao();   
   }
 
 
@@ -61,6 +64,42 @@ class ReservationsService extends BaseService{
       throw new Exception("Not your account", 401);
     }
   }
+
+
+    public function accept_reservation($user, $reservation_id){
+      $reservation_details = $this->get_reservation_details_by_id($user, $reservation_id);
+      $check_in = $reservation_details[0]["check_in"];
+      $check_out = $reservation_details[0]["check_out"];
+
+      $rooms = [];
+      foreach($reservation_details as $value){
+        array_push($rooms, $value["room_id"]);
+      }
+      $rooms_ids = implode(", ", $rooms); 
+      $to_reject = $this->dao->get_reservations_for_rejecting($reservation_id, $check_in, $check_out, $rooms_ids);
+      if($to_reject){
+        $this->dao->update_reservation_status( strval($to_reject["reservations"]) , "REJECTED");
+      }
+      return $this->dao->update_reservation_status($reservation_id, "ACCEPTED");
+
+      return 0;
+    }
+
+    public function get_reservation_details_by_id($user, $reservation_id){
+      if( $user['rl'] == "ADMIN" ){
+        $reservations = $this->reservationDetailsDao->get_reservation_details_by_reservation_id($reservation_id);
+          if(empty($reservations)){
+            throw new Exception("Reservation details don't exist", 404);
+          }
+          return $reservations;
+      }else{
+          throw new Exception("You are not allowed",403);
+        }
+    }
+
+   
+    
+
 
 
 }

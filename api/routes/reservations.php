@@ -98,4 +98,16 @@ Flight::route('PUT /admin/reservation/@id', function($id){
     flight::json(Flight::reservationsService()->update_reservation($id, $data));
 });
 
+
+/**
+ * @OA\Get(path="/admin/reservations/{reservation_id}/accept", tags={"reservations","admin"},security={{"ApiKeyAuth":{}}},
+ *     @OA\Parameter(type="integer", required=true, in="path", name="reservation_id", default=1, description="Reservation ID"),
+ *     @OA\Response(response="200", description="Reservation details")
+ * )
+ */
+Flight::route('GET /admin/reservations/@reservation_id/accept', function($reservation_id){
+    Flight::json(Flight::reservationsService()->accept_reservation(Flight::get('user'),$reservation_id));  
+});
+
+
 ?>

@@ -51,6 +51,53 @@ class ReservationsDao extends BaseDao{
         return $this->query($query,["account_id" => $account_id]);
     }
 
+    public function get_pending_reservations(){
+      return $this->query( "SELECT *
+                            FROM reservations r
+                            JOIN reservation_details rd ON rd.reservation_id = r.id
+                            WHERE r.status LIKE 'PENDING'
+                            ORDER BY r.created_at ASC", 
+                            []);
+    }
+
+
+    public function get_reservations_for_rejecting($reservation_id, $check_in, $check_out, $rooms_ids){
+       
+        return $this->query_unique(
+          "SELECT GROUP_CONCAT(r.id) AS reservations
+                FROM reservations r
+                JOIN reservation_details rd ON rd.reservation_id = r.id
+                WHERE r.status LIKE 'PENDING' 
+                AND r.id != :reservation_id
+                AND rd.room_id IN ( :rooms_ids )
+          AND 
+          ( ( check_in BETWEEN :check_in AND :check_out ) 
+      OR 
+            ( check_out BETWEEN :check_in AND :check_out ) 
+           )
+    GROUP BY r.status",        
+          [
+            "reservation_id" => $reservation_id,
+            "rooms_ids" => $rooms_ids,
+            "check_in" => $check_in,
+            "check_out" => $check_out
+        ]);
+    
+    }
+
+
+    public function update_reservation_status($reservations, $status){
+        $re = "(". $reservations . ")";
+        $params = [ "status" => $status];
+        $this->query(
+                    ("UPDATE reservations r
+                    SET r.status = :status
+                    WHERE r.id IN ". $re),
+                    $params);
+
+       return $params;
+       }
+
 
 }
 ?>

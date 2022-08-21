@@ -22,6 +22,16 @@ Flight::route('GET /user/@user_id/reservation/@reservation_id/price', function($
 });
 
 /**
+ * @OA\Get(path="/admin/reservation/{reservation_id}/details", tags={"Reservation Details", "admin"},security={{"ApiKeyAuth": {}}},
+ *     @OA\Parameter(type="integer", in="path", name="reservation_id", default=1, description="Reservation ID"),
+ *     @OA\Response(response="200", description="Reservation details")
+ * )
+ */
+Flight::route('GET /admin/reservation/@reservation_id/details', function($reservation_id){
+    Flight::json(Flight::reservationDetailsService()->get_reservation_details_by_id(Flight::get('user'), $reservation_id));  
+});
+
+/**
 *  @OA\Post(path="/reservation/details",tags={"Reservation Details"},
 *  @OA\RequestBody(description ="Body for adding order details", required = true,
 *          @OA\MediaType(mediaType="application/json",
