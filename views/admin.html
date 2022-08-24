@@ -1,5 +1,5 @@
 <div class="heading-background">
-  <h1 id="profile-page-heading" class="page-heading">Profile</h1>
+  <h1 id="profile-page-heading" class="page-heading">Admin Rooms</h1>
 </div>
 
 <div class="container">
@@ -9,15 +9,15 @@
         id="my-profile-btn"
         class="profile-option-active"
         href=""
-        onclick="Profile.showUserProfile()"
+        onclick="Admin.showUserProfile()"
       >
-        Profile
+        Rooms
       </button>
       <button
         id="my-reservations-btn"
         class="profile-option-inactive"
         href=""
-        onclick="Profile.showUserReservations()"
+        onclick="Admin.showUserReservations()"
       >
         Reservations
         <p></p>
@@ -164,93 +164,6 @@
         </button>
       </form>
     </div>
-    <div class="form-main user-profile-form-container">
-      <form id="email-form" class="form1" role="form">
-        <h2 class="profile-info-heading">Change account email</h2>
-
-        <div class="label-title">
-          <label for="current_password">Your current account email</label>
-        </div>
-        <div class="input-container">
-          <input
-            id="account-email"
-            disabled=""
-            name="account_email"
-            class="form-field"
-            type="email"
-            placeholder="John.Doe@mail.com"
-          />
-        </div>
-        <div class="label-title">
-          <label for="current_password">New email</label>
-        </div>
-        <div class="input-container">
-          <input
-            required=""
-            name="email"
-            class="form-field"
-            type="email"
-            placeholder="John.Doe@mail.com"
-          />
-        </div>
-        <div class="label-title">
-          <label for="current_password">Current password</label>
-        </div>
-
-        <div class="input-container">
-          <input
-            required=""
-            minlength="8"
-            maxlength="255"
-            name="current_password"
-            class="form-field"
-            type="password"
-            placeholder="Password"
-          />
-        </div>
-        <button id="email-profile-submit" type="submit" class="submit">
-          Submit
-        </button>
-      </form>
-    </div>
-    <div class="form-main user-profile-form-container">
-      <form id="password-form" class="form1" role="form">
-        <h2 class="profile-info-heading">Change password</h2>
-
-        <div class="label-title">
-          <label for="current_password">Current Password</label>
-        </div>
-        <div class="input-container">
-          <input
-            required=""
-            minlength="8"
-            maxlength="255"
-            name="current_password"
-            class="form-field"
-            type="password"
-            placeholder="Password"
-          />
-        </div>
-        <div class="label-title">
-          <label for="new_password">New Password</label>
-        </div>
-
-        <div class="input-container">
-          <input
-            required=""
-            minlength="8"
-            maxlength="255"
-            name="new_password"
-            class="form-field"
-            type="password"
-            placeholder="Password"
-          />
-        </div>
-        <button id="password-profile-submit" type="submit" class="submit">
-          Submit
-        </button>
-      </form>
-    </div>
   </div>
 
   <div id="user-reservations-table" class="section-table hidden">
@@ -278,6 +191,18 @@
       </h1>
       <div id="reservation-form-container" class="">
         <form id="user-reservation-form" class="" role="form">
+          <a
+            id="admin-edit-reservation-details"
+            class="forgot"
+            onclick="Admin.enableReservationDetailsEditing()"
+            >Edit info
+            <ion-icon
+              class="small-icon md hydrated"
+              name="pencil-outline"
+              role="img"
+              aria-label="pencil outline"
+            ></ion-icon
+          ></a>
           <div class="label-title">
             <label for="room_name">Room name</label>
           </div>
@@ -292,6 +217,15 @@
               placeholder="Room 1"
             />
           </div>
+          <input
+            readonly
+            hidden
+            id="profile-modal-reservation-id"
+            required=""
+            name="reservation-id"
+            class="form-field"
+            type="number"
+          />
           <div class="form-2-fields">
             <div>
               <div class="label-title">
@@ -315,7 +249,7 @@
               </div>
               <div class="input-container">
                 <input
-                  readonly="true"
+                  disabled
                   id="profile-modal-room-price"
                   required=""
                   name="night_price"
@@ -399,6 +333,13 @@
               >$50.00</span
             >
           </p>
+          <button
+            id="admin-update-reservation-details"
+            class="submit-disabled"
+            type="submit"
+          >
+            Proceed
+          </button>
         </form>
 
         <form id="user-details-form" class="" role="form" hidden="">

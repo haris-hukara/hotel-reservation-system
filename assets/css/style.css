@@ -738,6 +738,15 @@ div.form-2-fields > * {
   gap: 0.8rem;
 }
 
+#admin-edit-reservation-details {
+  display: flex;
+  position: absolute;
+  top: 3rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+}
+
 .profile-info-heading {
   font-size: 1.8rem;
   font-weight: 600;

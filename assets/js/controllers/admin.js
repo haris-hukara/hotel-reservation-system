@@ -1,41 +1,15 @@
 class Admin {
   static init() {
     $(document).ready(function () {
-      Admin.getUserInfo();
-      Admin.getUserAccountInfo();
       Admin.getUserReservations();
     });
 
-    $("#profile-form").validate({
+    $("#user-reservation-form").validate({
       submitHandler: function (form, event) {
         event.preventDefault();
-        Admin.updateUserDetailsInfo();
+        Admin.updateReservationDetails();
       },
     });
-
-    $("#password-form").validate({
-      submitHandler: function (form, event) {
-        event.preventDefault();
-        Admin.updateUserPassword();
-      },
-    });
-
-    $("#email-form").validate({
-      submitHandler: function (form, event) {
-        event.preventDefault();
-        Admin.updateUserEmail();
-      },
-    });
-  }
-
-  static getUserAccountInfo() {
-    const account_id = parse_jwt(window.localStorage.getItem("token")).id;
-    RestClient.get(
-      "api/user/account/" + account_id + "/email",
-      function (data) {
-        $("#account-email").val(data.email);
-      }
-    );
   }
 
   static updateUserEmail() {
@@ -44,51 +18,6 @@ class Admin {
 
   static updateUserPassword() {
     Admin.updateAccount("password");
-  }
-
-  static updateAccount(param) {
-    const details = jsonize_form("#" + param + "-form");
-    const account_id = parse_jwt(window.localStorage.getItem("token")).id;
-    console.log(details);
-    $("#" + param + "-profile-submit").prop("disabled", true);
-
-    RestClient.put(
-      "api/user/account/" + account_id,
-      details,
-      function (data) {
-        toastr.success("Your profile " + param + " is updated");
-        $("#" + param + "-profile-submit").removeAttr("disabled");
-        if (param == "email") {
-          Admin.getUserAccountInfo();
-        }
-        $("#" + param + "-form")[0].reset();
-      },
-      function (jqXHR, textStatus, errorThrown) {
-        $("#" + param + "-profile-submit").removeAttr("disabled");
-        toastr.error(jqXHR.responseJSON.message);
-      }
-    );
-  }
-
-  static updateUserDetailsInfo() {
-    const details = jsonize_form("#profile-form");
-    const account_id = parse_jwt(window.localStorage.getItem("token")).id;
-    $("#edit-profile-submit").prop("disabled", true);
-
-    RestClient.put(
-      "api/user/details/" + account_id,
-      details,
-      function (data) {
-        toastr.success("Your profile details have been updated");
-        Admin.getUserInfo();
-        $("#edit-profile-submit").removeClass("disabled");
-        $("#edit-profile-submit").addClass("submit-disabled");
-      },
-      function (jqXHR, textStatus, errorThrown) {
-        $("#edit-profile-submit").removeAttr("disabled");
-        toastr.error(jqXHR.responseJSON.message);
-      }
-    );
   }
 
   static showUserReservations() {
@@ -100,7 +29,7 @@ class Admin {
 
     $("#my-reservations-btn").removeClass("profile-option-inactive");
     $("#my-reservations-btn").addClass("profile-option-active");
-    $("#profile-page-heading").text("Reservations");
+    $("#profile-page-heading").text("Admin reservations");
   }
 
   static showUserProfile() {
@@ -112,15 +41,7 @@ class Admin {
 
     $("#my-reservations-btn").removeClass("profile-option-active");
     $("#my-reservations-btn").addClass("profile-option-inactive");
-    $("#profile-page-heading").text("Profile");
-  }
-
-  static getUserInfo() {
-    const account_id = parse_jwt(window.localStorage.getItem("token")).id;
-    RestClient.get("api/user/" + account_id + "/details", function (data) {
-      json2form("#profile-form", data);
-      $("input[id^=profile]").prop("readonly", true);
-    });
+    $("#profile-page-heading").text("Admin rooms");
   }
 
   static enableEditing() {
@@ -244,6 +165,7 @@ class Admin {
 
   static openReservationDetails(id) {
     $("#reservation-info-id").html(id);
+    $("#profile-modal-reservation-id").val(id);
     RestClient.get("api/admin/reservation/" + id + "/details", function (data) {
       json2form("#user-reservation-form", data[0]);
       Admin.getReservationTotalPrice(id);
@@ -306,5 +228,22 @@ class Admin {
         toastr.error(jqXHR.responseJSON.message);
       }
     );
+  }
+
+  static enableReservationDetailsEditing() {
+    $("#admin-update-reservation-details")
+      .removeClass("submit-disabled")
+      .addClass("submit");
+
+    $("#profile-modal-room-id").removeAttr("readonly");
+    $("#profile-modal-room-check-in").removeAttr("readonly");
+    $("#profile-modal-room-check-out").removeAttr("readonly");
+    $("#profile-modal-room-adults").removeAttr("readonly");
+    $("#profile-modal-room-children").removeAttr("readonly");
+  }
+
+  static updateReservationDetails() {
+    let data = jsonize_form("#user-reservation-form");
+    console.log(data);
   }
 }
