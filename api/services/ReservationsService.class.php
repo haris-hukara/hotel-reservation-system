@@ -32,7 +32,7 @@ class ReservationsService extends BaseService{
     if ($search){
       return ($this->dao->get_reservations($search, $offset, $limit, $order));
     }else{
-      return ($this->dao->get_all($offset,$limit, $order));
+      return ($this->dao->get_reservations("",$offset,$limit, $order));
     }
   }
 
@@ -78,7 +78,7 @@ class ReservationsService extends BaseService{
         return ["message" => "Nothing to change"];
       };
 
-      if(in_array($reservation_status, ["FINALISED", "ACTIVE"]) && in_array($status, ["PENDING", "ACTIVE", "REJECTED"])){
+      if(in_array($reservation_status, ["FINALISED", "ACTIVE"]) && in_array($status, ["PENDING", "ACCEPTED", "REJECTED"])){
         throw new Exception("Forbidden change", 404);
       }
 

@@ -97,6 +97,16 @@ table.dataTable tr.child span.dtr-title {
   font-weight: bold;
 }
 
+.status-bg-accepted,
+.status-bg-rejected,
+.status-bg-pending,
+.status-bg-active,
+.status-bg-finalised {
+  padding: 1rem;
+  border-radius: 1rem;
+  font-weight: 500;
+}
+
 .status-bg-accepted {
   background: lightgreen;
 }
@@ -104,12 +114,15 @@ table.dataTable tr.child span.dtr-title {
   background: lightcoral;
 }
 .status-bg-pending {
+  background: navajowhite;
+}
+
+.status-bg-active {
   background: lightsteelblue;
 }
 
-.status-bg-active,
 .status-bg-finalised {
-  background: lightgray;
+  background: darkgrey;
 }
 
 .table-accept-reject {

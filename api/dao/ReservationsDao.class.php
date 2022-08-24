@@ -21,12 +21,25 @@ class ReservationsDao extends BaseDao{
             default: throw new Exception("Invalid order format"); break;
         };
         
-        return $this->query( "SELECT * 
-                              FROM reservations
-                              WHERE LOWER(status) LIKE CONCAT('%', :status, '%')
-                              ORDER BY ${order} ${order_direction}
-                              LIMIT ${limit} OFFSET ${offset}", 
-                             ["status" => strtolower($search)]);
+        $order = substr($order, 1);
+        
+        $query ="SELECT r.id, ua.user_details_id, r.status, rd.check_in, rd.check_out, r.created_at, GROUP_CONCAT(rd.room_id) AS rooms
+        FROM user_account ua
+        JOIN reservations r ON r.user_details_id = ua.user_details_id 
+        JOIN reservation_details rd ON rd.reservation_id = r.id
+        JOIN rooms rm ON rm.id = rd.room_id
+        WHERE LOWER(r.status) LIKE CONCAT('%', :status, '%')
+        GROUP BY r.id
+        ORDER BY ${order} ${order_direction}
+        LIMIT ${limit} OFFSET ${offset}";
+
+        $old_query = "SELECT * 
+        FROM reservations
+        WHERE LOWER(status) LIKE CONCAT('%', :status, '%')
+        ORDER BY ${order} ${order_direction}
+        LIMIT ${limit} OFFSET ${offset}";
+
+        return $this->query( $query, ["status" => strtolower($search)]);
     }
 
     
@@ -99,6 +112,8 @@ class ReservationsDao extends BaseDao{
        }
 
 
+   
+     
 }
 ?>
 

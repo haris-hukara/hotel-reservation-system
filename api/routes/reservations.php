@@ -27,9 +27,9 @@ Flight::route('GET /user/@user_id/reservations', function($user_id){
  */
 Flight::route('GET /admin/reservations', function(){  
     $offset = Flight::query('offset', 0);
-    $limit = Flight::query('limit', 10);
+    $limit = Flight::query('limit', 100000);
     $search = Flight::query('search');
-    $order = Flight::query('order', "-id");    
+    $order = Flight::query('order', "-created_at");    
     flight::json(Flight::reservationsService()->get_reservations($search, $offset, $limit, $order));
 });
 

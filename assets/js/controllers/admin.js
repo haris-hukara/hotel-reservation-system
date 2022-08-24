@@ -146,7 +146,7 @@ class Admin {
       let table = Admin.generateReservationTable(rows);
       $("#user-reservations-table").append(table);
       $("#UserReservationsTable").DataTable({
-        order: [[3, "asc"]],
+        order: [[5, "asc"]],
       });
       $("#UserReservationsTable_filter").remove();
       $("#UserReservationsTable_wrapper").prepend($("#table-head"));
@@ -164,17 +164,27 @@ class Admin {
        <span style="display: block">${data[i].id}</span>
       <span  onclick="Admin.openReservationDetails(${
         data[i].id
-      })" class="forgot font-size-inherit">Click to see details</span></td>
+      })" class="forgot font-size-inherit">Click to see more</span>
+    </td>
+
     <td class="forgot font-size-inherit" onclick="Admin.openReservationUserDetailsInfo(${
       data[i].user_details_id
     })">
       <span hidden>${data[i].user_details_id}</span> Click to see
     </td>
-    <td>At Arrival</td>
+
+    <td>${data[i].rooms}</td>
+
+    <td>${data[i].check_in}</td>
+    <td>${data[i].check_out}</td>
     <td>${data[i].created_at}</td>
-    <td class="status-bg-${status}">${
-        status[0].toUpperCase() + status.slice(1)
-      }</td>
+
+    <td>
+    <span class="status-bg-${status}"> 
+    ${status[0].toUpperCase() + status.slice(1)}
+    </span> 
+    </td>
+
       <td class="table-accept-reject">
       <ion-icon class="table-accept" name="checkmark-circle" onclick="Admin.acceptReservation(${
         data[i].id
@@ -194,10 +204,12 @@ class Admin {
     let html = `<table id="UserReservationsTable">
     <thead>
       <tr>
-        <th>ID</th>
+        <th>Reservation id</th>
         <th>User details</th>
-        <th>Payment method</th>
-        <th>Reservation created at</th>
+        <th>Rooms</th>
+        <th>Check-in</th>
+        <th>Check-out</th>
+        <th>Created at</th>
         <th>Status</th>
         <th>Accept / Reject</th>
       </tr>
@@ -269,7 +281,30 @@ class Admin {
     });
   }
 
-  static acceptReservation(id) {}
+  static acceptReservation(id) {
+    Admin.changeReservationStatus(id, "ACCEPTED");
+  }
 
-  static rejectReservation(id) {}
+  static rejectReservation(id) {
+    Admin.changeReservationStatus(id, "REJECTED");
+  }
+
+  static changeReservationStatus(reservation_id, reservation_status) {
+    RestClient.put(
+      "api/admin/reservations/" + reservation_id + "/change_status",
+      { status: reservation_status },
+      function (data) {
+        toastr.success(
+          "Reservation " +
+            reservation_id +
+            " status changed to " +
+            reservation_status
+        );
+        Admin.getUserReservations();
+      },
+      function (jqXHR, textStatus, errorThrown) {
+        toastr.error(jqXHR.responseJSON.message);
+      }
+    );
+  }
 }
