@@ -175,9 +175,11 @@ class Profile {
     </td>
     <td>At Arrival</td>
     <td>${data[i].created_at}</td>
-    <td class="status-bg-${status}">${
-        status[0].toUpperCase() + status.slice(1)
-      }</td>
+    <td>
+    <span class="status-bg-${status}">
+    ${status[0].toUpperCase() + status.slice(1)}
+    </span>
+    </td>
     </tr>`;
       rows += row;
     }
