@@ -100,7 +100,7 @@ table.dataTable tr.child span.dtr-title {
 .status-bg-accepted {
   background: lightgreen;
 }
-.status-bg-refused {
+.status-bg-rejected {
   background: lightcoral;
 }
 .status-bg-pending {
@@ -110,4 +110,25 @@ table.dataTable tr.child span.dtr-title {
 .status-bg-active,
 .status-bg-finalised {
   background: lightgray;
+}
+
+.table-accept-reject {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.table-reject,
+.table-accept {
+  padding: 0.2rem;
+  border-radius: 2rem;
+  background-color: rgba(226, 229, 239, 0.95);
+  cursor: pointer;
+  font-size: 2.4rem;
+}
+
+.table-accept {
+  color: #31b131;
+}
+.table-reject {
+  color: #d33333;
 }

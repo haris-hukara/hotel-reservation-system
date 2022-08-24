@@ -61,27 +61,27 @@ class ReservationsDao extends BaseDao{
     }
 
 
-    public function get_reservations_for_rejecting($reservation_id, $check_in, $check_out, $rooms_ids){
-       
-        return $this->query_unique(
-          "SELECT GROUP_CONCAT(r.id) AS reservations
-                FROM reservations r
-                JOIN reservation_details rd ON rd.reservation_id = r.id
-                WHERE r.status LIKE 'PENDING' 
-                AND r.id != :reservation_id
-                AND rd.room_id IN ( :rooms_ids )
-          AND 
-          ( ( check_in BETWEEN :check_in AND :check_out ) 
-      OR 
-            ( check_out BETWEEN :check_in AND :check_out ) 
-           )
-    GROUP BY r.status",        
+    public function get_reservations_for_change($reservation_id, $check_in, $check_out, $rooms_ids, $status){
+        
+        $rooms_ids = "( ".strval($rooms_ids)." )";
+        $query= "SELECT GROUP_CONCAT( DISTINCT(r.id)) AS reservations
+        FROM reservations r
+        JOIN reservation_details rd ON rd.reservation_id = r.id
+        WHERE r.id != :reservation_id
+        AND rd.room_id IN $rooms_ids
+        AND r.status = :status
+        AND 
+        ((rd.check_in BETWEEN :check_in AND :check_out) OR
+         (rd.check_out BETWEEN :check_in AND :check_out))
+        GROUP BY r.status";
+        return $this->query_unique($query,        
           [
             "reservation_id" => $reservation_id,
-            "rooms_ids" => $rooms_ids,
+            "status" => $status,
             "check_in" => $check_in,
-            "check_out" => $check_out
+            "check_out" => $check_out,
         ]);
+
     
     }
 

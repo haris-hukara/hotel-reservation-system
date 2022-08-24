@@ -1,0 +1,539 @@
+<div class="heading-background">
+  <h1 id="profile-page-heading" class="page-heading">Profile</h1>
+</div>
+
+<div class="container">
+  <div class="profile-box">
+    <div class="profile-options">
+      <button
+        id="my-profile-btn"
+        class="profile-option-active"
+        href=""
+        onclick="Profile.showUserProfile()"
+      >
+        Profile
+      </button>
+      <button
+        id="my-reservations-btn"
+        class="profile-option-inactive"
+        href=""
+        onclick="Profile.showUserReservations()"
+      >
+        Reservations
+        <p></p>
+      </button>
+    </div>
+
+    <div class="form-main user-profile-form-container">
+      <form id="profile-form" class="form1" role="form">
+        <a id="edit-profile" class="forgot" onclick="Profile.enableEditing()"
+          >Edit info
+          <ion-icon
+            class="small-icon md hydrated"
+            name="pencil-outline"
+            role="img"
+            aria-label="pencil outline"
+          ></ion-icon
+        ></a>
+        <h2 class="profile-info-heading">User detais info</h2>
+        <div class="label-title">
+          <label for="email">Email</label>
+        </div>
+        <div class="input-container">
+          <input
+            id="profile-email"
+            required=""
+            name="email"
+            class="form-field"
+            type="email"
+            placeholder="John.Doe@mail.com"
+          />
+        </div>
+
+        <div class="form-2-fields">
+          <div>
+            <div class="label-title">
+              <label for="first_name">First name</label>
+            </div>
+            <div class="input-container">
+              <input
+                id="profile-first-name"
+                required=""
+                name="first_name"
+                class="form-field"
+                type="text"
+                placeholder="John"
+                minlength="2"
+              />
+            </div>
+          </div>
+          <div>
+            <div class="label-title">
+              <label for="last_name">Last name</label>
+            </div>
+            <div class="input-container">
+              <input
+                id="profile-last-name"
+                required=""
+                name="last_name"
+                class="form-field"
+                type="text"
+                placeholder="Doe"
+                minlength="2"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="form-2-fields">
+          <div>
+            <div class="label-title">
+              <label for="phone_number">Phone number</label>
+            </div>
+            <div class="input-container">
+              <input
+                id="profile-phone-number"
+                required=""
+                name="phone_number"
+                class="form-field"
+                type="text"
+                placeholder="+387 60 000 000"
+                minlength="9"
+                maxlength="16"
+              />
+            </div>
+          </div>
+          <div>
+            <div class="label-title">
+              <label for="birth_date">Birth date</label>
+            </div>
+            <div class="input-container">
+              <input
+                id="profile-birth-date"
+                required=""
+                name="birth_date"
+                class="form-field form-date"
+                type="date"
+                min="1920-01-01"
+                max="2022-12-31"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="form-2-fields">
+          <div>
+            <div class="label-title">
+              <label for="country">Country</label>
+            </div>
+            <div class="input-container">
+              <input
+                id="profile-country"
+                required=""
+                name="country"
+                class="form-field"
+                type="text"
+                placeholder="Croatia"
+                minlength="2"
+              />
+            </div>
+          </div>
+          <div>
+            <div class="label-title">
+              <label for="city">City</label>
+            </div>
+            <div class="input-container">
+              <input
+                id="profile-city"
+                required=""
+                name="city"
+                class="form-field"
+                type="text"
+                placeholder="Zagreb"
+                minlength="2"
+              />
+            </div>
+          </div>
+        </div>
+
+        <button
+          id="edit-profile-submit"
+          type="submit"
+          class="submit-disabled"
+          disabled=""
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+    <div class="form-main user-profile-form-container">
+      <form id="email-form" class="form1" role="form">
+        <h2 class="profile-info-heading">Change account email</h2>
+
+        <div class="label-title">
+          <label for="current_password">Your current account email</label>
+        </div>
+        <div class="input-container">
+          <input
+            id="account-email"
+            disabled=""
+            name="account_email"
+            class="form-field"
+            type="email"
+            placeholder="John.Doe@mail.com"
+          />
+        </div>
+        <div class="label-title">
+          <label for="current_password">New email</label>
+        </div>
+        <div class="input-container">
+          <input
+            required=""
+            name="email"
+            class="form-field"
+            type="email"
+            placeholder="John.Doe@mail.com"
+          />
+        </div>
+        <div class="label-title">
+          <label for="current_password">Current password</label>
+        </div>
+
+        <div class="input-container">
+          <input
+            required=""
+            minlength="8"
+            maxlength="255"
+            name="current_password"
+            class="form-field"
+            type="password"
+            placeholder="Password"
+          />
+        </div>
+        <button id="email-profile-submit" type="submit" class="submit">
+          Submit
+        </button>
+      </form>
+    </div>
+    <div class="form-main user-profile-form-container">
+      <form id="password-form" class="form1" role="form">
+        <h2 class="profile-info-heading">Change password</h2>
+
+        <div class="label-title">
+          <label for="current_password">Current Password</label>
+        </div>
+        <div class="input-container">
+          <input
+            required=""
+            minlength="8"
+            maxlength="255"
+            name="current_password"
+            class="form-field"
+            type="password"
+            placeholder="Password"
+          />
+        </div>
+        <div class="label-title">
+          <label for="new_password">New Password</label>
+        </div>
+
+        <div class="input-container">
+          <input
+            required=""
+            minlength="8"
+            maxlength="255"
+            name="new_password"
+            class="form-field"
+            type="password"
+            placeholder="Password"
+          />
+        </div>
+        <button id="password-profile-submit" type="submit" class="submit">
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div id="user-reservations-table" class="section-table hidden">
+    <div id="table-head">
+      <h2 id="my-table-name">Reservations table</h2>
+    </div>
+  </div>
+</div>
+
+<!-- modal -->
+<div id="profile-reservation-modal-overlay" class="modal-overlay">
+  <div id="profile-reservation-modal" class="modal">
+    <a class="close-modal" onclick="Profile.closeInfoModal()">
+      <svg viewBox="0 0 20 20">
+        <path
+          fill="#000000"
+          d="M15.898,4.045c-0.271-0.272-0.713-0.272-0.986,0l-4.71,4.711L5.493,4.045c-0.272-0.272-0.714-0.272-0.986,0s-0.272,0.714,0,0.986l4.709,4.711l-4.71,4.711c-0.272,0.271-0.272,0.713,0,0.986c0.136,0.136,0.314,0.203,0.492,0.203c0.179,0,0.357-0.067,0.493-0.203l4.711-4.711l4.71,4.711c0.137,0.136,0.314,0.203,0.494,0.203c0.178,0,0.355-0.067,0.492-0.203c0.273-0.273,0.273-0.715,0-0.986l-4.711-4.711l4.711-4.711C16.172,4.759,16.172,4.317,15.898,4.045z"
+        ></path>
+      </svg> </a
+    ><!-- close modal -->
+
+    <div class="modal-content">
+      <h1 class="modal-heading">
+        Reservation id: <span id="reservation-info-id"></span>
+      </h1>
+      <div id="reservation-form-container" class="">
+        <form id="user-reservation-form" class="" role="form">
+          <div class="label-title">
+            <label for="room_name">Room name</label>
+          </div>
+          <div class="input-container">
+            <input
+              disabled=""
+              id="profile-modal-room-name"
+              required=""
+              name="room_name"
+              class="form-field"
+              type="text"
+              placeholder="Room 1"
+            />
+          </div>
+          <div class="form-2-fields">
+            <div>
+              <div class="label-title">
+                <label for="room_id">Room id</label>
+              </div>
+              <div class="input-container">
+                <input
+                  readonly="true"
+                  id="profile-modal-room-id"
+                  required=""
+                  name="room_id"
+                  class="form-field"
+                  type="text"
+                  placeholder="1"
+                />
+              </div>
+            </div>
+            <div>
+              <div class="label-title">
+                <label for="night_price">Room price</label>
+              </div>
+              <div class="input-container">
+                <input
+                  readonly="true"
+                  id="profile-modal-room-price"
+                  required=""
+                  name="night_price"
+                  class="form-field"
+                  type="text"
+                  placeholder="50"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="form-2-fields">
+            <div>
+              <div class="label-title">
+                <label for="check_in">Check-in</label>
+              </div>
+              <div class="input-container">
+                <input
+                  readonly="true"
+                  id="profile-modal-room-check-in"
+                  required=""
+                  name="check_in"
+                  class="form-field form-date"
+                  type="date"
+                />
+              </div>
+            </div>
+            <div>
+              <div class="label-title">
+                <label for="check_out">Check-out</label>
+              </div>
+              <div class="input-container">
+                <input
+                  readonly="true"
+                  id="profile-modal-room-check-out"
+                  required=""
+                  name="check_out"
+                  class="form-field form-date"
+                  type="date"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="form-2-fields">
+            <div>
+              <div class="label-title">
+                <label for="adults">Adults</label>
+              </div>
+              <div class="input-container">
+                <input
+                  readonly="true"
+                  id="profile-modal-room-adults"
+                  required=""
+                  name="adults"
+                  class="form-field"
+                  type="text"
+                  placeholder="1"
+                />
+              </div>
+            </div>
+            <div>
+              <div class="label-title">
+                <label for="children">Children</label>
+              </div>
+              <div class="input-container">
+                <input
+                  readonly="true"
+                  id="profile-modal-room-children"
+                  required=""
+                  name="children"
+                  class="form-field"
+                  type="text"
+                  placeholder="1"
+                />
+              </div>
+            </div>
+          </div>
+
+          <p style="font-size: 1.6rem; text-align: center; margin: 1rem">
+            Total price:
+            <span id="profile-modal-room-total-price" class="room-price"
+              >$50.00</span
+            >
+          </p>
+        </form>
+
+        <form id="user-details-form" class="" role="form" hidden="">
+          <div class="label-title">
+            <label for="email">Email</label>
+          </div>
+          <div class="input-container">
+            <input
+              id="profile-modal-email"
+              required=""
+              name="email"
+              class="form-field"
+              type="email"
+              placeholder="John.Doe@mail.com"
+              readonly=""
+            />
+          </div>
+          <div class="form-2-fields">
+            <div>
+              <div class="label-title">
+                <label for="first_name">First name</label>
+              </div>
+              <div class="input-container">
+                <input
+                  id="profile-modal-first-name"
+                  required=""
+                  name="first_name"
+                  class="form-field"
+                  type="text"
+                  placeholder="John"
+                  minlength="2"
+                  readonly=""
+                />
+              </div>
+            </div>
+            <div>
+              <div class="label-title">
+                <label for="last_name">Last name</label>
+              </div>
+              <div class="input-container">
+                <input
+                  id="profile-modal-last-name"
+                  required=""
+                  name="last_name"
+                  class="form-field"
+                  type="text"
+                  placeholder="Doe"
+                  minlength="2"
+                  readonly=""
+                />
+              </div>
+            </div>
+          </div>
+          <div class="form-2-fields">
+            <div>
+              <div class="label-title">
+                <label for="phone_number">Phone number</label>
+              </div>
+              <div class="input-container">
+                <input
+                  id="profile-modal-phone-number"
+                  required=""
+                  name="phone_number"
+                  class="form-field"
+                  type="text"
+                  placeholder="+387 60 000 000"
+                  minlength="9"
+                  maxlength="16"
+                  readonly=""
+                />
+              </div>
+            </div>
+            <div>
+              <div class="label-title">
+                <label for="birth_date">Birth date</label>
+              </div>
+              <div class="input-container">
+                <input
+                  id="profile-modal-birth-date"
+                  required=""
+                  name="birth_date"
+                  class="form-field form-date"
+                  type="date"
+                  min="1920-01-01"
+                  max="2022-12-31"
+                  readonly=""
+                />
+              </div>
+            </div>
+          </div>
+          <div class="form-2-fields">
+            <div>
+              <div class="label-title">
+                <label for="country">Country</label>
+              </div>
+              <div class="input-container">
+                <input
+                  id="profile-modal-country"
+                  required=""
+                  name="country"
+                  class="form-field"
+                  type="text"
+                  placeholder="Croatia"
+                  minlength="2"
+                  readonly=""
+                />
+              </div>
+            </div>
+            <div>
+              <div class="label-title">
+                <label for="city">City</label>
+              </div>
+              <div class="input-container">
+                <input
+                  id="profile-modal-city"
+                  required=""
+                  name="city"
+                  class="form-field"
+                  type="text"
+                  placeholder="Zagreb"
+                  minlength="2"
+                  readonly=""
+                />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- content -->
+  </div>
+  <!-- modal -->
+</div>
+<!-- overlay -->
+
+<script type="text/javascript">
+  Admin.init();
+</script>

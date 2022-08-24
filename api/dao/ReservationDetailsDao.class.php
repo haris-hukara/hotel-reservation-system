@@ -87,10 +87,13 @@ class ReservationDetailsDao extends BaseDao{
 
 
        public function get_reservation_details_by_reservation_id($reservation_id){
-        return $this->query("SELECT * 
-                              FROM reservation_details
-                              WHERE reservation_id = :reservation_id", 
-                              ["reservation_id" => $reservation_id]);
+        return $this->query("SELECT rd.*, r.status, rm.name AS room_name, rd.check_in, rd.check_out,DATEDIFF(rd.check_out,rd.check_in) AS total_nights,rm.night_price,  (rm.night_price)*(DATEDIFF(rd.check_out,rd.check_in) ) AS price
+        FROM user_account ua
+        JOIN reservations r ON r.user_details_id = ua.user_details_id 
+        JOIN reservation_details rd ON rd.reservation_id = r.id
+        JOIN rooms rm ON rm.id = rd.room_id
+        WHERE r.id = :reservation_id", 
+        ["reservation_id" => $reservation_id]);
         }
 }
 ?>

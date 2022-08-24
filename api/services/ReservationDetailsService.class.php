@@ -62,7 +62,26 @@ class ReservationDetailsService extends BaseService{
     }else{
       throw new Exception("Oops something went wrong",400);
     }
+  }
+  
+  
+  public function get_reservation_total_price($user, $reservation_id){
+    if( $user['rl'] == "ADMIN" ){
+      $reservations = $this->dao->get_reservation_details_by_reservation_id( $reservation_id);
+      if(empty($reservations)){
+        throw new Exception("Reservation details don't exist", 404);
+      }
+      $total_price = 0;
+      foreach($reservations as $arr => $val) {
+        $total_price += ($reservations[$arr]["price"]);
+      }
+      return ["total_price"=>$total_price];
+  }else{
+      throw new Exception("You are not allowed",403);
     }
+  
+    }
+
 
     public function get_reservation_price($user, $user_id, $reservation_id){
     $user_account;
@@ -78,7 +97,7 @@ class ReservationDetailsService extends BaseService{
     if( $user_id == $user_account['id'] || $user['rl'] == "ADMIN" ){
       $reservations = $this->dao->get_reservation_details($user_id, $reservation_id);
       if(empty($reservations)){
-        throw new Exception("This reservation doesn't exist", 404);
+        throw new Exception("This reservation doesn't exisrrt", 404);
       }
 
       $total_price = 0;

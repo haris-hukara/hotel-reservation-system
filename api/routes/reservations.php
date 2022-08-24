@@ -100,13 +100,24 @@ Flight::route('PUT /admin/reservation/@id', function($id){
 
 
 /**
- * @OA\Get(path="/admin/reservations/{reservation_id}/accept", tags={"reservations","admin"},security={{"ApiKeyAuth":{}}},
+ * @OA\Put(path="/admin/reservations/{reservation_id}/change_status", tags={"reservations","admin"},security={{"ApiKeyAuth":{}}},
  *     @OA\Parameter(type="integer", required=true, in="path", name="reservation_id", default=1, description="Reservation ID"),
+ **@OA\RequestBody(description ="Basic reservation status info that is going to be updated", required = true,
+*          @OA\MediaType(mediaType="application/json",
+*                 @OA\Schema(
+*               @OA\Property(property="status", 
+*                                type="text",
+*                              example="ACCEPTED",
+*                          description="Status to set")      
+*           ) 
+*        )
+*   ), 
  *     @OA\Response(response="200", description="Reservation details")
  * )
  */
-Flight::route('GET /admin/reservations/@reservation_id/accept', function($reservation_id){
-    Flight::json(Flight::reservationsService()->accept_reservation(Flight::get('user'),$reservation_id));  
+Flight::route('PUT /admin/reservations/@reservation_id/change_status', function($reservation_id){
+    $data = Flight::request()->data->getdata();
+    Flight::json(Flight::reservationsService()->change_reservation_status(Flight::get('user'),$reservation_id,  $data["status"]));  
 });
 
 

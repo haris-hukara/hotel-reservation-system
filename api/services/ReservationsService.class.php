@@ -66,23 +66,63 @@ class ReservationsService extends BaseService{
   }
 
 
-    public function accept_reservation($user, $reservation_id){
+    public function change_reservation_status($user, $reservation_id, $status){
+
       $reservation_details = $this->get_reservation_details_by_id($user, $reservation_id);
       $check_in = $reservation_details[0]["check_in"];
       $check_out = $reservation_details[0]["check_out"];
+
+      $reservation_status = $this->get_by_id($reservation_id)["status"];
+
+      if($status == $reservation_status){
+        return ["message" => "Nothing to change"];
+      };
+
+      if(in_array($reservation_status, ["FINALISED", "ACTIVE"]) && in_array($status, ["PENDING", "ACTIVE", "REJECTED"])){
+        throw new Exception("Forbidden change", 404);
+      }
+
 
       $rooms = [];
       foreach($reservation_details as $value){
         array_push($rooms, $value["room_id"]);
       }
       $rooms_ids = implode(", ", $rooms); 
-      $to_reject = $this->dao->get_reservations_for_rejecting($reservation_id, $check_in, $check_out, $rooms_ids);
-      if($to_reject){
-        $this->dao->update_reservation_status( strval($to_reject["reservations"]) , "REJECTED");
-      }
-      return $this->dao->update_reservation_status($reservation_id, "ACCEPTED");
 
-      return 0;
+       $active = $this->dao->get_reservations_for_change($reservation_id, $check_in, $check_out, $rooms_ids, "ACTIVE");
+       $accepted = $this->dao->get_reservations_for_change($reservation_id, $check_in, $check_out, $rooms_ids, "ACCEPTED");
+       $pending = $this->dao->get_reservations_for_change($reservation_id, $check_in, $check_out, $rooms_ids, "PENDING");
+       $rejected = $this->dao->get_reservations_for_change($reservation_id, $check_in, $check_out, $rooms_ids, "REJECTED");
+
+      if ($reservation_status == "PENDING" && $status == "ACCEPTED"){
+      
+      if($accepted OR $active){
+              throw new Exception("It is not possible to accept this reservation, rooms are occupied", 404);
+            }
+        if($pending){
+          $this->dao->update_reservation_status( strval($pending["reservations"]) , "REJECTED");
+        }
+      }
+
+      if ($reservation_status == "ACCEPTED" && $status == "REJECTED"){
+       if($rejected){
+         $this->dao->update_reservation_status( strval($rejected["reservations"]) , "PENDING");
+        }
+      } 
+      
+
+      if ($reservation_status == "REJECTED" && $status == "ACCEPTED"){
+       if($accepted OR $active){
+         throw new Exception("It is not possible to accept this reservation, rooms are occupied", 404);
+        }
+        if($pending){
+          $this->dao->update_reservation_status(strval($pending["reservations"]) , "REJECTED");
+        }
+      } 
+      
+         
+      return $this->dao->update_reservation_status($reservation_id, $status);
+
     }
 
     public function get_reservation_details_by_id($user, $reservation_id){
