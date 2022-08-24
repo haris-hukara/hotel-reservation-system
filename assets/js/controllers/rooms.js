@@ -182,9 +182,9 @@ class Rooms {
       $("#reservations-check-in").val(today);
       $("#reservations-check-out").val(seven_days);
     }
-    $("#reservations-rooms").val(1);
-    $("#reservations-adults").val(1);
-    $("#reservations-children").val(0);
+    $("#reservations-rooms").val(localStorage.getItem("rooms"));
+    $("#reservations-adults").val(localStorage.getItem("adults"));
+    $("#reservations-children").val(localStorage.getItem("children"));
     Rooms.storeParams();
 
     RestClient.get(url, function (data) {
