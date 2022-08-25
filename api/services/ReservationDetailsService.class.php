@@ -5,7 +5,6 @@ require_once dirname(__FILE__)."/../dao/RoomsDao.class.php";
 
 class ReservationDetailsService extends BaseService{
 
-  private $productStockDao;
   private $userAccountDao;
 
  public function __construct(){
@@ -154,46 +153,7 @@ class ReservationDetailsService extends BaseService{
      
   }
 
-  public function update_order_details_quantity($details){
-    
-    if(!isset($details['order_id'])) throw new Exception("Order ID is missing");
-    if(!isset($details['product_id'])) throw new Exception("Product ID is missing");
-    if(!isset($details['size_id'])) throw new Exception("Size ID is missing");
-    if(!isset($details['quantity'])) throw new Exception("Quantity is missing");
 
-    $new_quantity = $details['quantity']; 
-
-    $stored_details = $this->dao->get_order_details($details['order_id'],
-                                                    $details['product_id'],
-                                                    $details['size_id']);
-    $old_order_quantity  = $stored_details['quantity'];
-
-    $product = $this->productStockDao->get_product_stock_by_size_id($details['product_id'],
-                                                                    $details['size_id']);
-    $current_product_stock = $product['quantity_avaliable']; 
-
-    $stock_quantity = $old_order_quantity + $current_product_stock;
-
-    if ( $new_quantity <= 0 || $new_quantity > $stock_quantity){
-         throw new Exception("Enter a valid quantity. Quantity in stock: ". $stock_quantity );
-    }else{
-    
-      if($new_quantity != $old_order_quantity) { 
-        // update stock and update order details
-        $new_stock = $current_product_stock - ( $new_quantity - $old_order_quantity );
-        $this->productStockDao->set_product_stock($details['product_id'],
-                                                  $details['size_id'], 
-                                                  $new_stock);
-
-       return $this->dao->update_order_details_quantity($details['order_id'],
-                                                        $details['product_id'],
-                                                        $details['size_id'], 
-                                                        $details['quantity']);
-      }else{
-        throw new Exception("Quantity input is same, nothing to change");
-      }
-    }
-  }  
   
   public function get_reservation_details_by_id($user, $reservation_id){
 
@@ -220,6 +180,21 @@ class ReservationDetailsService extends BaseService{
       throw new Exception("You are not allowed",403);
     }
   }
-                 
+          
+  
+  public function check_if_details_changable($reservation_id , $room_id, $check_in, $check_out){
+    if( $check_out < $check_in ) throw new Exception("Check-out date can't be lower than check-in date",400);
+      
+    $is_changable = $this->dao->check_if_details_changable($reservation_id , $room_id, $check_in, $check_out);
+
+    if($is_changable){
+      return true;
+    }else{
+      return false;
+    }
+
+  }
+
+
 }
 ?>

@@ -106,7 +106,33 @@ class ReservationDetailsDao extends BaseDao{
                             ]);
         }
 
+        public function check_if_details_changable($reservation_id , $room_id, $check_in, $check_out) {
+          $params = [];
+          $params["check_in"] = $check_in;
+          $params["check_out"] = $check_out;
+          $params["room_id"] = $room_id;
+          $params["reservation_id"] = $reservation_id;
+          
+          
+          $query ="SELECT ro.id AS rooms
+          FROM rooms ro 
+          WHERE ro.id NOT IN
+          
+          -- unavaliable
+          (
+                 SELECT rd.room_id
+                  FROM reservation_details rd
+                  JOIN reservations r ON r.id = rd.reservation_id
+                  WHERE r.id != :reservation_id
+                  AND   ((rd.check_in BETWEEN :check_in AND :check_out) OR
+                         (rd.check_out BETWEEN :check_in AND :check_out))
+                  AND r.status IN ('ACCEPTED','ACTIVE')
+          )
+          AND ro.id = :room_id";
 
+          return $this->query_unique($query,$params);
+
+        }
 
 }
 ?>
