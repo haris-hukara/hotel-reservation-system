@@ -49,8 +49,8 @@ class RoomsDao extends BaseDao{
     $unavaliable_rooms = "SELECT rd.room_id
                           FROM reservation_details rd
                           JOIN reservations r ON r.id = rd.reservation_id
-                          WHERE rd.check_in BETWEEN :check_in AND :check_out
-                          AND   rd.check_out BETWEEN :check_in AND :check_out
+                          WHERE ((rd.check_in BETWEEN :check_in AND :check_out) OR
+                                 (rd.check_out BETWEEN :check_in AND :check_out))
                           AND r.status IN ('ACCEPTED','ACTIVE')";
 
     $query = "SELECT COUNT(ro.id) AS avaliable_rooms_count FROM rooms ro
@@ -78,8 +78,8 @@ class RoomsDao extends BaseDao{
         $unavaliable_rooms = "SELECT rd.room_id
                               FROM reservation_details rd
                               JOIN reservations r ON r.id = rd.reservation_id
-                              WHERE rd.check_in BETWEEN :check_in AND :check_out
-                              AND   rd.check_out BETWEEN :check_in AND :check_out
+                              WHERE ((rd.check_in BETWEEN :check_in AND :check_out) OR
+                                     (rd.check_out BETWEEN :check_in AND :check_out))
                               AND r.status IN ('ACCEPTED','ACTIVE')";
 
         $query = "SELECT * FROM rooms ro
@@ -106,16 +106,18 @@ class RoomsDao extends BaseDao{
         $unavaliable_rooms = "SELECT rd.room_id
                           FROM reservation_details rd
                           JOIN reservations r ON r.id = rd.reservation_id
-                          WHERE rd.check_in BETWEEN :check_in AND :check_out
-                          AND   rd.check_out BETWEEN :check_in AND :check_out
+                          WHERE ((rd.check_in BETWEEN :check_in AND :check_out) OR
+                                 (rd.check_out BETWEEN :check_in AND :check_out))
                           AND r.status IN ('ACCEPTED','ACTIVE')";
 
-        $query = "SELECT * FROM rooms ro
+        $query = "SELECT ro.id FROM rooms ro
                   WHERE ro.id = :room_id AND ro.id IN ( ${unavaliable_rooms} )";
                        
-        return $this->query($query,$params);
+        return $this->query_unique($query,$params);
 
         }
+
+
 
 
 }

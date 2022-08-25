@@ -100,6 +100,24 @@ class RoomsService extends BaseService{
           throw new Exception("Room with id ".$id. " doesn't exist", 404);
         }
       }
+
+
+      public function check_room_availability( $room_id, $check_in,$check_out){
+       
+          $rooms = $this->dao->check_room_availability($room_id, $check_in, $check_out);
+          $room_avaliable = empty($rooms);
+
+          if(!$room_avaliable){
+            throw new Exception("Room id: " .$room_id. " is not avaliable between ". $check_in." and ". $check_out, 400);
+          }
+          
+          if($this->get_by_id($room_id)){
+            return true;
+          }else{
+            throw new Exception("Room id: " .$room_id. " does not exist", 404);
+          }
+          
+      }
   }
 ?>
 

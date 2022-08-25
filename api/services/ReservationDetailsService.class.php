@@ -116,6 +116,8 @@ class ReservationDetailsService extends BaseService{
     return $this->dao->delete_all_details_by_reservation_id($id);
   }
 
+   
+
   public function add_reservation_details($details){
     if(!isset($details['reservation_id'])) throw new Exception("Reservation ID is missing",400);
     if(!isset($details['check_in'])) throw new Exception("Check in date is missing",400);
@@ -130,7 +132,9 @@ class ReservationDetailsService extends BaseService{
     if( $details['check_out'] < $details['check_in'] ) throw new Exception("Check-out date can't be lower than check-in date",400);
     
     $room = $this->roomsDao->check_room_availability($details['room_id'], $details['check_in'], $details['check_out']);
-    if(!empty($room)){
+    $is_avaliable = empty($room);
+
+    if(!$is_avaliable){
       $this->delete_all_details_by_reservation_id($details['reservation_id']);
       throw new Exception("Room id: " .$details['room_id']. " is not avaliable between ". $details['check_in']." and ". $details['check_out'], 400);
     }
@@ -197,6 +201,19 @@ class ReservationDetailsService extends BaseService{
       $reservations = $this->dao->get_reservation_details_by_reservation_id( $reservation_id);
       if(empty($reservations)){
         throw new Exception("Reservation details don't exist", 404);
+      }
+      return $reservations;
+  }else{
+      throw new Exception("You are not allowed",403);
+    }
+  }
+
+  public function get_reservation_details_by_reservation_id_and_room_id($user, $reservation_id, $room_id){
+
+  if( $user['rl'] == "ADMIN" ){
+      $reservations = $this->dao->get_reservation_details_by_reservation_id_and_room_id($reservation_id, $room_id);
+      if(empty($reservations)){
+        throw new Exception("Reservation $reservation_id, details for room $room_id don't exist", 404);
       }
       return $reservations;
   }else{

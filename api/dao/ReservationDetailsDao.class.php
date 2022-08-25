@@ -95,5 +95,37 @@ class ReservationDetailsDao extends BaseDao{
         WHERE r.id = :reservation_id", 
         ["reservation_id" => $reservation_id]);
         }
+     
+        public function get_reservation_details_by_reservation_id_and_room_id($reservation_id, $room_id){
+        return $this->query_unique("SELECT * FROM reservation_details rd
+                              WHERE rd.reservation_id = :reservation_id
+                              AND rd.room_id = :room_id", 
+                              [
+                                "reservation_id" => $reservation_id,
+                                "room_id" => $room_id,
+                            ]);
+        }
+
+
+        public function get_occupied_rooms($reservation_id, $room_id, $check_in, $check_out){
+          
+          $query = "SELECT *
+                    FROM reservation_details rd
+                    JOIN reservations r ON r.id = rd.reservation_id 
+                    WHERE rd.reservation_id != :reservation_id
+                    AND rd.room_id = :room_id
+                    AND STATUS IN ('ACTIVE', 'ACCEPTED')
+                    AND 
+                    ((rd.check_in BETWEEN ':check_in AND ':check_out) OR
+                    (rd.check_out BETWEEN ':check_in AND ':check_out))";
+          
+          return $this->query($query,[
+                                      "reservation_id" => $reservation_id,
+                                      "room_id" => $room_id,
+                                      "check_in" => $check_in,
+                                      "check_out" => $check_out
+                                      ]);
+        }
+
 }
 ?>
