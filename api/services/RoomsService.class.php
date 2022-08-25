@@ -118,6 +118,34 @@ class RoomsService extends BaseService{
           }
           
       }
+
+
+      public function get_rooms_by_avaliability_status($status, $check_in, $check_out){
+        if( $check_out < $check_in ) throw new Exception("Check-out date can't be lower than check-in date");
+        if($status == "AVALIABLE"){
+          return $this->get_unoccupied_rooms($check_in, $check_out);
+        }
+        if($status == "UNAVALIABLE"){
+          return $this->get_occupied_rooms($check_in, $check_out);
+        }
+        else{
+          throw new Exception("Status not valid", 400);
+        }
+      }
+
+
+      public function get_occupied_rooms($check_in, $check_out){
+        if( $check_out < $check_in ) throw new Exception("Check-out date can't be lower than check-in date");
+        return $this->dao->get_occupied_rooms($check_in, $check_out);
+      }
+      
+      public function get_unoccupied_rooms($check_in, $check_out){
+        if( $check_out < $check_in ) throw new Exception("Check-out date can't be lower than check-in date");
+        return $this->dao->get_unoccupied_rooms($check_in, $check_out);
+      }
+
+
+
   }
 ?>
 

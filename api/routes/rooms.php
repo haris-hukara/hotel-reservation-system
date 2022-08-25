@@ -69,6 +69,21 @@ Flight::route('GET /room/@room_id/avaliability', function($room_id){
 });
 
 /**
+ * @OA\Get(path="/rooms/avaliability", tags={"rooms", "admin"},
+ *                     @OA\Parameter( type="string", in="query",name="avaliability_status",  description= "AVALIABLE/UNAVALIABLE", example="AVALIABLE"),
+ *                     @OA\Parameter( type="string", in="query",name="check_in",  description= "date format YYYY-MM-DD", example="2022-01-01"),
+ *                     @OA\Parameter( type="string", in="query",name="check_out",  description= "date format YYYY-MM-DD",  example="2022-01-31"),
+ *     @OA\Response(response="200", description="Returns count of all avaliable rooms ")
+ * )
+ */
+Flight::route('GET /rooms/avaliability', function(){  
+    $check_in = Flight::query('check_in');
+    $check_out = Flight::query('check_out');
+    $avaliability_status = Flight::query('avaliability_status');
+    flight::json(Flight::roomsService()->get_rooms_by_avaliability_status($avaliability_status, $check_in, $check_out));
+});
+
+/**
  * @OA\Get(path="/room/{id}", tags={"rooms"},
 *  @OA\Parameter(@OA\Schema(type="integer"), in="path", name="id", example = "1", description="Id of avaliable room"),
  *     @OA\Response(response="200", description="Returns room info of avaliable room")

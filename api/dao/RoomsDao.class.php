@@ -119,6 +119,45 @@ class RoomsDao extends BaseDao{
 
 
 
+        public function get_occupied_rooms($check_in, $check_out){
+              
+              $unavaliable = "SELECT rd.room_id
+                              FROM reservation_details rd
+                              JOIN reservations r ON r.id = rd.reservation_id
+                              WHERE ((rd.check_in BETWEEN :check_in AND :check_out) OR
+                                    (rd.check_out BETWEEN :check_in AND :check_out))
+                              AND r.status IN ('ACCEPTED','ACTIVE')";
+                    
+              $query ="SELECT GROUP_CONCAT(ro.id) AS rooms
+                      FROM rooms ro 
+                      WHERE ro.id IN ( $unavaliable )";
+      
+              return $this->query_unique($query,[
+                                          "check_in" => $check_in,
+                                          "check_out" => $check_out
+                                          ]);
+            }
+            
+            public function get_unoccupied_rooms($check_in, $check_out){
+              
+              $unavaliable = "SELECT rd.room_id
+                          FROM reservation_details rd
+                          JOIN reservations r ON r.id = rd.reservation_id
+                          WHERE ((rd.check_in BETWEEN :check_in AND :check_out) OR
+                                (rd.check_out BETWEEN :check_in AND :check_out))
+                          AND r.status IN ('ACCEPTED','ACTIVE')";
+                          
+              $query ="SELECT GROUP_CONCAT(ro.id) AS rooms
+                       FROM rooms ro 
+                       WHERE ro.id NOT IN ( $unavaliable )";
+          
+              
+              return $this->query_unique($query,[
+                                          "check_in" => $check_in,
+                                          "check_out" => $check_out
+                                          ]);
+            }
+
 
 }
 ?>
