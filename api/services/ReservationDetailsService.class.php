@@ -11,6 +11,7 @@ class ReservationDetailsService extends BaseService{
    $this->dao = new ReservationDetailsDao();   
    $this->userAccountDao = new UserAccountDao();
    $this->roomsDao = new RoomsDao();
+   $this->reservationsDao = new ReservationsDao();
   }
  
   public function get_reservation_details_by_user_id_and_reservation_id($user, $user_id, $reservation_id){
@@ -180,13 +181,12 @@ class ReservationDetailsService extends BaseService{
       throw new Exception("You are not allowed",403);
     }
   }
-          
+  
   
   public function check_if_details_changable($reservation_id , $room_id, $check_in, $check_out){
     if( $check_out < $check_in ) throw new Exception("Check-out date can't be lower than check-in date",400);
-      
+    
     $is_changable = $this->dao->check_if_details_changable($reservation_id , $room_id, $check_in, $check_out);
-
     if($is_changable){
       return true;
     }else{
@@ -195,6 +195,76 @@ class ReservationDetailsService extends BaseService{
 
   }
 
+
+  public function update_reservation_details ($user, $data){
+    $reservation_id = $data["reservation_id"];
+    $room_id = $data["room_id"];
+    $new_room_id = $data["new_room_id"];
+    $children = $data["children"];
+    $adults = $data["adults"];
+    $check_in = $data["check_in"];
+    $check_out = $data["check_out"];
+
+    $is_changable = $this->check_if_details_changable($reservation_id , $new_room_id, $check_in, $check_out);
+    if ($is_changable){
+     $old_reservation_details =  $this->get_reservation_details_by_reservation_id_and_room_id($user, $reservation_id, $room_id);;
+     $info = $this->update_reservation_details_for_existing_room($user,$data);
+     $new_reservation_details = $this->get_reservation_details_by_reservation_id_and_room_id($user, $reservation_id, $new_room_id);
+     
+     $this->update_reservations_status_on_details_change($old_reservation_details, $new_reservation_details);
+     return $info;
+    }
+    if(!$is_changable){
+      $avaliable_rooms = $this->roomsDao->get_unoccupied_rooms($check_in, $check_out);
+      $rooms_ids = implode(", ", $avaliable_rooms); 
+      throw new Exception("Room " .$new_room_id. " is occupied, avaliable rooms are: ". strval($rooms_ids), 400);
+    }
+
+  }
+
+
+  public function update_reservation_details_for_existing_room($user, $data){
+    if( $user['rl'] == "ADMIN" ){
+      return $update_info = $this->dao->update_reservation_details($data);
+    }else{
+      throw new Exception("You are not allowed",403);
+    }
+  }
+
+
+
+  public function update_reservations_status_on_details_change($old_details, $new_details){
+    $reservation_id = $new_details["reservation_id"];
+    $room_id = $new_details["room_id"];
+    $children = $new_details["children"];
+    $adults = $new_details["adults"];
+    $check_in = $new_details["check_in"];
+    $check_out = $new_details["check_out"];
+
+    $reservation = $this->reservationsDao->get_by_id($reservation_id);
+    $reservation_status = $reservation["status"]; 
+
+    if(in_array($reservation_status, ["FINALISED", "ACTIVE"]) && in_array($status, ["PENDING", "ACCEPTED", "REJECTED"])){
+      throw new Exception("Forbidden change", 404);
+    }
+
+    if(in_array($reservation_status, ["ACCEPTED", "ACTIVE"])){
+
+      $pending = $this->reservationsDao->get_reservations_for_change($reservation_id, $check_in, $check_out, $room_id, "PENDING");
+      if($pending){
+        $this->reservationsDao->update_reservation_status( strval($pending["reservations"]) , "REJECTED");
+      }
+    }
+    
+    
+      // if active or accepted and date > change pending reservations 
+      // if Rejected just change
+      // if finalised just change
+      // if pending just change 
+      // if active or accepted and date < change pending reservations and rejected 
+
+
+  }
 
 }
 ?>

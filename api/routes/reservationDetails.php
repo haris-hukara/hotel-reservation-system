@@ -97,18 +97,26 @@ Flight::route('POST /admin/reservation/details', function(){
 
 
 /**
- * @OA\Get(path="/reservation/{reservation_id}/details/changable", tags={"Reservation Details", "admin"},
- *                     @OA\Parameter( type="string", in="path",name="reservation_id",  description= "Reservation ID", example="1"),
- *                     @OA\Parameter( type="string", in="query",name="room_id",  description= "Room ID", example="3"),
- *                     @OA\Parameter( type="string", in="query",name="check_in",  description= "date format YYYY-MM-DD", example="2022-01-01"),
- *                     @OA\Parameter( type="string", in="query",name="check_out",  description= "date format YYYY-MM-DD",  example="2022-01-31"),
- *     @OA\Response(response="200", description="Returns status if changable ")
- * )
- */
-Flight::route('GET /reservation/@reservation_id/details/changable', function($reservation_id){  
-    $check_in = Flight::query('check_in');
-    $check_out = Flight::query('check_out');
-    $room_id = Flight::query('room_id');
-    flight::json(Flight::reservationDetailsService()->check_if_details_changable($reservation_id , $room_id, $check_in, $check_out));
+ * @OA\Put(path="/admin/reservation/{reservation_id}/details", tags={"Reservation Details", "admin"},security={{"ApiKeyAuth": {}}},
+*  @OA\Parameter( type="string", in="path",name="reservation_id",  description= "Reservation ID", example="1"),
+*  **@OA\RequestBody(description ="Basic reservation details info that is going to be updated", required = true,
+*          @OA\MediaType(mediaType="application/json",
+*                @OA\Schema(
+*                     @OA\Property( type="int", in="query",property="room_id",  description= "Current room ID", example="3"),
+*                     @OA\Property( type="int", in="query",property="new_room_id",  description= "Update current Room ID to new Room ID", example="3"),
+*                     @OA\Property( type="int", in="query",property="adults",  description= "Number of adults", example="3"),
+*                     @OA\Property( type="int", in="query",property="children",  description= "NUmber of children", example="3"),
+*                     @OA\Property( type="string", in="query",property="check_in",  description= "date format YYYY-MM-DD", example="2022-01-01"),
+*                     @OA\Property( type="string", in="query",property="check_out",  description= "date format YYYY-MM-DD",  example="2022-01-31")   
+*            ) 
+*        )
+*   ), 
+*     @OA\Response(response="200", description="Returns status if changable ")
+* )
+*/
+Flight::route('PUT /admin/reservation/@reservation_id/details', function($reservation_id){  
+    $data = Flight::request()->data->getdata();
+    $data["reservation_id"] = $reservation_id;
+    flight::json(Flight::reservationDetailsService()-> update_reservation_details(Flight::get('user'), $data));
 });
 ?>

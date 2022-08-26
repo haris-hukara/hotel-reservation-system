@@ -134,5 +134,32 @@ class ReservationDetailsDao extends BaseDao{
 
         }
 
+        public function update_reservation_details($data){
+
+          $params = [ 
+                      "room_id" => $data["room_id"],
+                      "new_room_id" => $data["new_room_id"],
+                      "adults" => $data["adults"],
+                      "children" => $data["children"],
+                      "check_in" => $data["check_in"],
+                      "check_out" => $data["check_out"],
+                      "reservation_id" => $data["reservation_id"]
+                    ];
+
+          $query = "UPDATE reservation_details
+                    SET room_id = :new_room_id, 
+                       children = :children,
+                         adults = :adults, 
+                       check_in = :check_in,
+                      check_out = :check_out
+                    WHERE reservation_id = :reservation_id AND room_id = :room_id;";
+
+          $this->query($query,$params);
+          return $this->get_reservation_details_by_reservation_id_and_room_id($data["reservation_id"], $data["new_room_id"]);
+
+
+        }
+
+
 }
 ?>
