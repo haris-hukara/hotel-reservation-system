@@ -26,7 +26,7 @@
 
     <div class="form-main user-profile-form-container">
       <form id="profile-form" class="form1" role="form">
-        <a id="edit-profile" class="forgot" onclick="Profile.enableEditing()"
+        <a id="edit-profile" class="forgot" onclick="Admin.enableEditing()"
           >Edit info
           <ion-icon
             class="small-icon md hydrated"
@@ -176,7 +176,7 @@
 <!-- modal -->
 <div id="profile-reservation-modal-overlay" class="modal-overlay">
   <div id="profile-reservation-modal" class="modal">
-    <a class="close-modal" onclick="Profile.closeInfoModal()">
+    <a class="close-modal" onclick="Admin.closeInfoModal()">
       <svg viewBox="0 0 20 20">
         <path
           fill="#000000"
@@ -346,6 +346,7 @@
             id="admin-update-reservation-details"
             class="submit-disabled"
             type="submit"
+            disabled
           >
             Update
           </button>

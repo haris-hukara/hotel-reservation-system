@@ -32,7 +32,7 @@ class Admin {
     $("#profile-page-heading").text("Admin reservations");
   }
 
-  static showUserProfile() {
+  static showUser() {
     $(".user-profile-form-container").removeClass("hidden");
     $("#user-reservations-table").addClass("hidden");
 
@@ -146,6 +146,10 @@ class Admin {
   static closeInfoModal() {
     var elements = $("[id^=profile-reservation-modal]");
     elements.removeClass("active");
+    $("#admin-update-reservation-details")
+      .removeClass("submit")
+      .addClass("submit-disabled");
+    $("#admin-update-reservation-details").addAttr("disabled");
   }
 
   static openInfoModal() {
@@ -235,7 +239,7 @@ class Admin {
     $("#admin-update-reservation-details")
       .removeClass("submit-disabled")
       .addClass("submit");
-
+    $("#admin-update-reservation-details").removeAttr("disabled");
     $("#profile-modal-room-id").removeAttr("readonly");
     $("#profile-modal-room-check-in").removeAttr("readonly");
     $("#profile-modal-room-check-out").removeAttr("readonly");
@@ -248,8 +252,8 @@ class Admin {
     data["new_room_id"] = data["room_id"];
     data["room_id"] = data["old_room_id"];
 
-    const reservation_id = data["reservation_id"];
-    const reservation_room_id = data["old_room_id"];
+    let reservation_id = data["reservation_id"];
+    let reservation_room_id = data["old_room_id"];
 
     delete data.reservation_id;
     delete data.old_room_id;
@@ -264,6 +268,7 @@ class Admin {
       function (data) {
         toastr.success("Reservation details changed");
         Admin.getUserReservations();
+        Admin.closeInfoModal();
       },
       function (jqXHR, textStatus, errorThrown) {
         toastr.error(jqXHR.responseJSON.message);

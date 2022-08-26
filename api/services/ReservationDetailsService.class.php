@@ -225,7 +225,19 @@ class ReservationDetailsService extends BaseService{
 
   public function update_reservation_details_for_existing_room($user, $data){
     if( $user['rl'] == "ADMIN" ){
-      return $update_info = $this->dao->update_reservation_details($data);
+      $update_info;
+      try{
+        $update_info = $this->dao->update_reservation_details($data);
+      } catch (\Exception $e){
+        if(str_contains($e->getMessage(), 'Duplicate entry')){
+          $reservation_id = $data["reservation_id"];
+          $new_room_id = $data["new_room_id"];
+          throw new Exception("Reservation id -> ".$reservation_id." with room id -> ". $new_room_id ." already exists", 400, $e);
+         }else{
+           throw $e;    
+         }    
+      }
+      return  $update_info;
     }else{
       throw new Exception("You are not allowed",403);
     }
