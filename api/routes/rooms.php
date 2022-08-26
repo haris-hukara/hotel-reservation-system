@@ -90,7 +90,7 @@ Flight::route('GET /rooms/avaliability', function(){
  * )
  */
 Flight::route('GET /room/@id', function($id){  
-    Flight::json(Flight::roomsService()->get_by_id($id));
+    Flight::json(Flight::roomsService()->get_room_by_id($id));
 });
 
 
@@ -125,7 +125,7 @@ Flight::route('GET /room/@id', function($id){
 */ 
 Flight::route('PUT /admin/rooms/@id', function($id){  
     $data = Flight::request()->data->getdata();
-    flight::json(Flight::roomsService()->update($id, $data));
+    flight::json(Flight::roomsService()->update_room($id, $data));
 });
 
 

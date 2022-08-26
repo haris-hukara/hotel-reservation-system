@@ -17,6 +17,12 @@ class Admin {
         Admin.createRoom();
       },
     });
+    $("#update-room-form").validate({
+      submitHandler: function (form, event) {
+        event.preventDefault();
+        Admin.updateRoomInfo();
+      },
+    });
   }
 
   static updateUserEmail() {
@@ -283,9 +289,9 @@ class Admin {
     );
   }
 
-  static setRoomPreviewInfo() {
-    let data = jsonize_form("#create-room-form");
-
+  static setRoomPreviewInfo(form_name) {
+    let data = jsonize_form("#" + form_name + "-room-form");
+    console.log(data);
     $("#room-create-name").html(data["name"]);
     $("#room-create-description").html(data["description"]);
     $("#room-create-price").html(data["night_price"]);
@@ -303,5 +309,35 @@ class Admin {
       function (error) {
         toastr.error(error.responseJSON.message);
       };
+  }
+
+  static getRoomInfo() {
+    let room_id = $("#update-room-id").val();
+    RestClient.get(
+      "api/room/" + room_id,
+      function (data) {
+        json2form("#update-room-form", data);
+      },
+      function (error) {
+        toastr.error("Room doesn't exist");
+      }
+    );
+  }
+
+  static updateRoomInfo() {
+    let data = jsonize_form("#update-room-form");
+    let room_id = data["id"];
+    delete data["id"];
+    RestClient.put(
+      "api/admin/rooms/" + room_id,
+      data,
+      function (data) {
+        toastr.success("Room info changed");
+        $("#update-room-form").trigger("reset");
+      },
+      function (jqXHR, textStatus, errorThrown) {
+        toastr.error(jqXHR.responseJSON.message);
+      }
+    );
   }
 }

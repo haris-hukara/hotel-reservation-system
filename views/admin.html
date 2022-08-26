@@ -183,7 +183,108 @@ Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id hic repudiandae ut,
         <a
           id="edit-profile-submit"
           class="submit"
-          onclick="Admin.setRoomPreviewInfo()"
+          onclick="Admin.setRoomPreviewInfo('create')"
+        >
+          Preview
+        </a>
+
+        <button id="create-room-submit" type="submit" class="submit">
+          Submit
+        </button>
+      </form>
+    </div>
+
+    <div class="form-main admin-rooms-container">
+      <form id="update-room-form" class="form1" role="form">
+        <h2 class="profile-info-heading">Update room</h2>
+        <div class="label-title">
+          <label for="name">Room id</label>
+        </div>
+        <div class="input-container">
+          <input
+            id="update-room-id"
+            required=""
+            name="id"
+            class="form-field"
+            type="number"
+            value="1"
+          />
+        </div>
+        <a
+          id="edit-profile-submit"
+          class="submit"
+          style="margin: 0; margin-bottom: 1rem"
+          onclick="Admin.getRoomInfo()"
+        >
+          Get room info
+        </a>
+        <div class="label-title">
+          <label for="name">Room Name</label>
+        </div>
+        <div class="input-container">
+          <input
+            id="update-room-name"
+            required=""
+            name="name"
+            class="form-field"
+            type="text"
+            placeholder="Standard Room 123"
+          />
+        </div>
+
+        <div class="form-2-fields">
+          <div>
+            <div class="label-title">
+              <label for="night_price">Night price</label>
+            </div>
+            <div class="input-container">
+              <input
+                id="update-room-night-price"
+                required=""
+                name="night_price"
+                class="form-field"
+                type="number"
+                placeholder="30"
+                min="1"
+              />
+            </div>
+          </div>
+          <div>
+            <div class="label-title">
+              <label for="image_link">Image Link</label>
+            </div>
+            <div class="input-container">
+              <input
+                id="update-room-image-link"
+                required=""
+                name="image_link"
+                class="form-field"
+                type="text"
+                placeholder="assets/img/room-1.png"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="label-title">
+          <label for="name">Room Description</label>
+        </div>
+        <div class="input-container">
+          <textarea
+            id="update-room-description"
+            required=""
+            name="description"
+            class="form-field"
+            type="text"
+            maxlength="145"
+            style="min-height: 90px; max-width: 535px"
+            placeholder="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id hic repudiandae ut, fugit magni esse minima maiores doloribus possimus nam."
+          ></textarea>
+        </div>
+
+        <a
+          id="edit-profile-submit"
+          class="submit"
+          onclick="Admin.setRoomPreviewInfo('update')"
         >
           Preview
         </a>
@@ -276,7 +377,7 @@ Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id hic repudiandae ut,
                   required=""
                   name="room_id"
                   class="form-field"
-                  type="text"
+                  type="number"
                   placeholder="1"
                 />
               </div>

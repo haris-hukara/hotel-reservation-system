@@ -50,21 +50,20 @@ class RoomsService extends BaseService{
       }
     }
 
+
     public function get_room_by_id($id){
-      return $this->dao->get_room_by_id($id);
+      $room = $this->dao->get_by_id($id);
+      if ($room == false){
+        throw new Exception("Room with id ".$id. " doesn't exist", 404);
+      }
+      return $room;
     }
 
     public function update_room($id, $data){
       
-      if(!isset($data['name'])) throw new Exception("Name is missing");
-      
-      $room = parent::update($id,
-      ["name" => ucwords(strtolower($data['name'])),
-       "unit_price" => $data['unit_price'],
-       "image_link" => $data['image_link'],
-       "gender_category" => $data['gender_category'],
-       "subcategory_id" => $data['subcategory_id']]
-      ); 
+      $this->get_room_by_id($id);
+
+      $room = parent::update($id,$data); 
         return $room;
     }
 
