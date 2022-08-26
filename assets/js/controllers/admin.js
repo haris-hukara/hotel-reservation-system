@@ -168,6 +168,7 @@ class Admin {
     $("#profile-modal-reservation-id").val(id);
     RestClient.get("api/admin/reservation/" + id + "/details", function (data) {
       json2form("#user-reservation-form", data[0]);
+      $("#profile-modal-reservation-old-room-id").val(data[0]["room_id"]);
       Admin.getReservationTotalPrice(id);
       Admin.openReservationInfoInModal();
       Admin.openInfoModal();
@@ -244,6 +245,29 @@ class Admin {
 
   static updateReservationDetails() {
     let data = jsonize_form("#user-reservation-form");
-    console.log(data);
+    data["new_room_id"] = data["room_id"];
+    data["room_id"] = data["old_room_id"];
+
+    const reservation_id = data["reservation_id"];
+    const reservation_room_id = data["old_room_id"];
+
+    delete data.reservation_id;
+    delete data.old_room_id;
+    delete data.room_id;
+
+    RestClient.put(
+      "api/admin/reservation/" +
+        reservation_id +
+        "/details/room/" +
+        reservation_room_id,
+      data,
+      function (data) {
+        toastr.success("Reservation details changed");
+        Admin.getUserReservations();
+      },
+      function (jqXHR, textStatus, errorThrown) {
+        toastr.error(jqXHR.responseJSON.message);
+      }
+    );
   }
 }

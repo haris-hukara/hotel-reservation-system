@@ -97,12 +97,12 @@ Flight::route('POST /admin/reservation/details', function(){
 
 
 /**
- * @OA\Put(path="/admin/reservation/{reservation_id}/details", tags={"Reservation Details", "admin"},security={{"ApiKeyAuth": {}}},
+ * @OA\Put(path="/admin/reservation/{reservation_id}/details/room/{room_id}", tags={"Reservation Details", "admin"},security={{"ApiKeyAuth": {}}},
 *  @OA\Parameter( type="string", in="path",name="reservation_id",  description= "Reservation ID", example="1"),
+*  @OA\Parameter( type="string", in="path",name="room_id",  description= "Reservation room ID", example="1"),
 *  **@OA\RequestBody(description ="Basic reservation details info that is going to be updated", required = true,
 *          @OA\MediaType(mediaType="application/json",
 *                @OA\Schema(
-*                     @OA\Property( type="int", in="query",property="room_id",  description= "Current room ID", example="3"),
 *                     @OA\Property( type="int", in="query",property="new_room_id",  description= "Update current Room ID to new Room ID", example="3"),
 *                     @OA\Property( type="int", in="query",property="adults",  description= "Number of adults", example="3"),
 *                     @OA\Property( type="int", in="query",property="children",  description= "NUmber of children", example="3"),
@@ -114,9 +114,10 @@ Flight::route('POST /admin/reservation/details', function(){
 *     @OA\Response(response="200", description="Returns status if changable ")
 * )
 */
-Flight::route('PUT /admin/reservation/@reservation_id/details', function($reservation_id){  
+Flight::route('PUT /admin/reservation/@reservation_id/details/room/@room_id', function($reservation_id, $room_id){  
     $data = Flight::request()->data->getdata();
     $data["reservation_id"] = $reservation_id;
+    $data["room_id"] = $room_id;
     flight::json(Flight::reservationDetailsService()-> update_reservation_details(Flight::get('user'), $data));
 });
 ?>
