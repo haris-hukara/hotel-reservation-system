@@ -24,142 +24,171 @@
       </button>
     </div>
 
-    <div class="form-main user-profile-form-container">
-      <form id="profile-form" class="form1" role="form">
-        <a id="edit-profile" class="forgot" onclick="Admin.enableEditing()"
-          >Edit info
-          <ion-icon
-            class="small-icon md hydrated"
-            name="pencil-outline"
-            role="img"
-            aria-label="pencil outline"
-          ></ion-icon
-        ></a>
-        <h2 class="profile-info-heading">User detais info</h2>
+    <div class="room-container admin-rooms-container">
+      <figure class="room-figure">
+        <img id="room-create-image-link" alt="" src="assets/img/room-1.png" />
+      </figure>
+      <div class="room-main">
+        <div class="room-main-info">
+          <div class="room-head">
+            <h2>
+              <span id="room-create-name">Standard Room 4</span>
+              <span id="room-id-create" class="room-id hidden">4</span>
+            </h2>
+            <p>
+              From
+              <span class="room-price">
+                <span>$</span><span id="room-create-price">109</span> </span
+              >/night
+            </p>
+          </div>
+          <p id="room-create-description" class="room-description">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id hic
+            repudiandae ut, fugit magni esse minima maiores doloribus possimus
+            nam.
+          </p>
+          <div class="room-services">
+            <div class="room-service">
+              <ion-icon
+                name="wifi-outline"
+                role="img"
+                class="md hydrated"
+                aria-label="wifi outline"
+              ></ion-icon>
+              <p class="room-service-name">Wifi</p>
+            </div>
+            <div class="room-service">
+              <ion-icon
+                name="fast-food-outline"
+                role="img"
+                class="md hydrated"
+                aria-label="fast food outline"
+              ></ion-icon>
+              <p class="room-service-name">Breakfast</p>
+            </div>
+            <div class="room-service">
+              <ion-icon
+                name="car-sport-outline"
+                role="img"
+                class="md hydrated"
+                aria-label="car sport outline"
+              ></ion-icon>
+              <p class="room-service-name">Parking</p>
+            </div>
+            <div class="room-service">
+              <ion-icon
+                name="desktop-outline"
+                role="img"
+                class="md hydrated"
+                aria-label="desktop outline"
+              ></ion-icon>
+              <p class="room-service-name">TV</p>
+            </div>
+            <div class="room-service">
+              <ion-icon
+                name="paw-outline"
+                role="img"
+                class="md hydrated"
+                aria-label="paw outline"
+              ></ion-icon>
+              <p class="room-service-name">Pet free</p>
+            </div>
+            <div class="room-service">
+              <ion-icon
+                name="barbell-outline"
+                role="img"
+                class="md hydrated"
+                aria-label="barbell outline"
+              ></ion-icon>
+              <p class="room-service-name">Gym</p>
+            </div>
+          </div>
+        </div>
+        <div class="flex-col-center">
+          <button class="room-button modal-button" disabled>
+            Make reservation
+          </button>
+          <a class="forgot mt-1" onclick="">See more details </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-main admin-rooms-container">
+      <form id="create-room-form" class="form1" role="form">
+        <h2 class="profile-info-heading">Create room</h2>
         <div class="label-title">
-          <label for="email">Email</label>
+          <label for="name">Room Name</label>
         </div>
         <div class="input-container">
           <input
-            id="profile-email"
+            id="create-room-name"
             required=""
-            name="email"
+            name="name"
             class="form-field"
-            type="email"
-            placeholder="John.Doe@mail.com"
+            type="text"
+            value="Standard Room 23"
           />
         </div>
 
         <div class="form-2-fields">
           <div>
             <div class="label-title">
-              <label for="first_name">First name</label>
+              <label for="night_price">Night price</label>
             </div>
             <div class="input-container">
               <input
-                id="profile-first-name"
+                id="create-room-night-price"
                 required=""
-                name="first_name"
+                name="night_price"
                 class="form-field"
-                type="text"
-                placeholder="John"
-                minlength="2"
+                type="number"
+                value="50"
+                min="1"
               />
             </div>
           </div>
           <div>
             <div class="label-title">
-              <label for="last_name">Last name</label>
+              <label for="image_link">Image Link</label>
             </div>
             <div class="input-container">
               <input
-                id="profile-last-name"
+                id="create-room-image-link"
                 required=""
-                name="last_name"
+                name="image_link"
                 class="form-field"
                 type="text"
-                placeholder="Doe"
-                minlength="2"
+                value="assets/img/room-1.png"
               />
             </div>
           </div>
         </div>
-        <div class="form-2-fields">
-          <div>
-            <div class="label-title">
-              <label for="phone_number">Phone number</label>
-            </div>
-            <div class="input-container">
-              <input
-                id="profile-phone-number"
-                required=""
-                name="phone_number"
-                class="form-field"
-                type="text"
-                placeholder="+387 60 000 000"
-                minlength="9"
-                maxlength="16"
-              />
-            </div>
-          </div>
-          <div>
-            <div class="label-title">
-              <label for="birth_date">Birth date</label>
-            </div>
-            <div class="input-container">
-              <input
-                id="profile-birth-date"
-                required=""
-                name="birth_date"
-                class="form-field form-date"
-                type="date"
-                min="1920-01-01"
-                max="2022-12-31"
-              />
-            </div>
-          </div>
+        <div class="label-title">
+          <label for="name">Room Description</label>
         </div>
-        <div class="form-2-fields">
-          <div>
-            <div class="label-title">
-              <label for="country">Country</label>
-            </div>
-            <div class="input-container">
-              <input
-                id="profile-country"
-                required=""
-                name="country"
-                class="form-field"
-                type="text"
-                placeholder="Croatia"
-                minlength="2"
-              />
-            </div>
-          </div>
-          <div>
-            <div class="label-title">
-              <label for="city">City</label>
-            </div>
-            <div class="input-container">
-              <input
-                id="profile-city"
-                required=""
-                name="city"
-                class="form-field"
-                type="text"
-                placeholder="Zagreb"
-                minlength="2"
-              />
-            </div>
-          </div>
+        <div class="input-container">
+          <textarea
+            id="create-room-description"
+            required=""
+            name="description"
+            class="form-field"
+            type="text"
+            maxlength="145"
+            style="min-height: 90px; max-width: 535px"
+          >
+Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id hic repudiandae ut, fugit magni esse minima maiores doloribus possimus nam.</textarea
+          >
         </div>
 
-        <button
+        <a
           id="edit-profile-submit"
-          type="submit"
-          class="submit-disabled"
-          disabled=""
+          class="submit"
+          onclick="Admin.setRoomPreviewInfo()"
         >
+          Preview
+        </a>
+
+        <button id="create-room-submit" type="submit" class="submit">
           Submit
         </button>
       </form>

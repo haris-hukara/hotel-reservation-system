@@ -10,6 +10,13 @@ class Admin {
         Admin.updateReservationDetails();
       },
     });
+
+    $("#create-room-form").validate({
+      submitHandler: function (form, event) {
+        event.preventDefault();
+        Admin.createRoom();
+      },
+    });
   }
 
   static updateUserEmail() {
@@ -22,7 +29,7 @@ class Admin {
 
   static showUserReservations() {
     $("#user-reservations-table").removeClass("hidden");
-    $(".user-profile-form-container").addClass("hidden");
+    $(".admin-rooms-container").addClass("hidden");
 
     $("#my-profile-btn").removeClass("profile-option-active");
     $("#my-profile-btn").addClass("profile-option-inactive");
@@ -32,8 +39,8 @@ class Admin {
     $("#profile-page-heading").text("Admin reservations");
   }
 
-  static showUser() {
-    $(".user-profile-form-container").removeClass("hidden");
+  static showUserProfile() {
+    $(".admin-rooms-container").removeClass("hidden");
     $("#user-reservations-table").addClass("hidden");
 
     $("#my-profile-btn").removeClass("profile-option-inactive");
@@ -274,5 +281,27 @@ class Admin {
         toastr.error(jqXHR.responseJSON.message);
       }
     );
+  }
+
+  static setRoomPreviewInfo() {
+    let data = jsonize_form("#create-room-form");
+
+    $("#room-create-name").html(data["name"]);
+    $("#room-create-description").html(data["description"]);
+    $("#room-create-price").html(data["night_price"]);
+    $("#room-create-image-link").attr("src", data["image_link"]);
+  }
+
+  static createRoom() {
+    RestClient.post(
+      "api/admin/rooms",
+      jsonize_form("#create-room-form"),
+      function (data) {
+        toastr.success("Room created successfully");
+      }
+    ),
+      function (error) {
+        toastr.error(error.responseJSON.message);
+      };
   }
 }
