@@ -6,25 +6,50 @@ class Home {
   }
 
   static setBasicValues() {
-    var current_date = new Date();
-    var today = current_date.toLocaleDateString("fr-CA", {
-      year: "numeric",
-      month: "numeric",
-      day: "numeric",
-    });
+    var check_in = localStorage.getItem("check-in");
+    var check_out = localStorage.getItem("check-out");
+    var rooms = localStorage.getItem("rooms");
+    var adults = localStorage.getItem("adults");
+    var children = localStorage.getItem("children");
 
-    var future_date = new Date();
-    future_date.setDate(future_date.getDate() + 7);
-    var seven_days = future_date.toLocaleDateString("fr-CA", {
-      year: "numeric",
-      month: "numeric",
-      day: "numeric",
-    });
-    $("#home-check-in").val(today);
-    $("#home-check-out").val(seven_days);
-    $("#home-rooms").val(1);
-    $("#home-adults").val(1);
-    $("#home-children").val(0);
+    if (
+      check_in != null &&
+      check_out != null &&
+      rooms != null &&
+      adults != null &&
+      children != null &&
+      check_in != undefined &&
+      check_out != undefined &&
+      rooms != undefined &&
+      adults != undefined &&
+      children != undefined
+    ) {
+      $("#home-check-in").val(localStorage.getItem("check-in"));
+      $("#home-check-out").val(localStorage.getItem("check-out"));
+      $("#home-rooms").val(localStorage.getItem("rooms"));
+      $("#home-adults").val(localStorage.getItem("adults"));
+      $("#home-children").val(localStorage.getItem("children"));
+    } else {
+      var current_date = new Date();
+      var today = current_date.toLocaleDateString("fr-CA", {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+      });
+
+      var future_date = new Date();
+      future_date.setDate(future_date.getDate() + 7);
+      var seven_days = future_date.toLocaleDateString("fr-CA", {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+      });
+      $("#home-check-in").val(today);
+      $("#home-check-out").val(seven_days);
+      $("#home-rooms").val(1);
+      $("#home-adults").val(1);
+      $("#home-children").val(0);
+    }
   }
 
   static checkAvaliability() {
