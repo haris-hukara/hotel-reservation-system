@@ -84,10 +84,16 @@ class Rooms {
     $("#modal-room-name").val($("#room-" + id + "-name").html());
     $("#modal-room-price").val($("#room-" + id + "-price").html());
 
-    var date1 = new Date(localStorage.getItem("check-in"));
-    var date2 = new Date(localStorage.getItem("check-out"));
-    var diffDays = date2.getDate() - date1.getDate();
-    var total_price = diffDays * $("#modal-room-price").val();
+    let check_in = new Date(localStorage.getItem("check-in"));
+    let check_out = new Date(localStorage.getItem("check-out"));
+
+    const days_between = (check_in, check_out) => {
+      let difference = check_out.getTime() - check_in.getTime();
+      let TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
+      return TotalDays;
+    };
+    let total_price =
+      days_between(check_in, check_out) * $("#modal-room-price").val();
     $("#room-total-price").html("$" + total_price + ".00");
 
     $("#modal-room-adults").val(localStorage.getItem("adults"));
