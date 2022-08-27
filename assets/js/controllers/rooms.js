@@ -158,17 +158,29 @@ class Rooms {
   static get_rooms() {
     var check_in = localStorage.getItem("check-in");
     var check_out = localStorage.getItem("check-out");
+    var rooms = localStorage.getItem("rooms");
+    var adults = localStorage.getItem("adults");
+    var children = localStorage.getItem("children");
 
     var url = "api/rooms";
 
     if (
       check_in != null &&
       check_out != null &&
+      rooms != null &&
+      adults != null &&
+      children != null &&
       check_in != undefined &&
-      check_out != undefined
+      check_out != undefined &&
+      rooms != undefined &&
+      adults != undefined &&
+      children != undefined
     ) {
       $("#reservations-check-in").val(localStorage.getItem("check-in"));
       $("#reservations-check-out").val(localStorage.getItem("check-out"));
+      $("#reservations-rooms").val(localStorage.getItem("rooms"));
+      $("#reservations-adults").val(localStorage.getItem("adults"));
+      $("#reservations-children").val(localStorage.getItem("children"));
       url += "?order=-id&check_in=" + check_in + "&check_out=" + check_out;
     } else {
       var current_date = new Date();
@@ -185,23 +197,14 @@ class Rooms {
         month: "numeric",
         day: "numeric",
       });
+
       $("#reservations-check-in").val(today);
       $("#reservations-check-out").val(seven_days);
+      $("#reservations-rooms").val(1);
+      $("#reservations-adults").val(1);
+      $("#reservations-children").val(0);
     }
 
-    if (localStorage.getItem("rooms") == "") {
-      $("#reservations-rooms").val(localStorage.setItem("rooms", 1));
-    }
-    if (localStorage.getItem("adults") == "") {
-      $("#reservations-rooms").val(localStorage.setItem("adults", 1));
-    }
-    if (localStorage.getItem("children") == "") {
-      $("#reservations-rooms").val(localStorage.setItem("children", 0));
-    }
-
-    $("#reservations-rooms").val(localStorage.getItem("rooms"));
-    $("#reservations-adults").val(localStorage.getItem("adults"));
-    $("#reservations-children").val(localStorage.getItem("children"));
     Rooms.storeParams();
 
     RestClient.get(url, function (data) {
