@@ -188,6 +188,17 @@ class Rooms {
       $("#reservations-check-in").val(today);
       $("#reservations-check-out").val(seven_days);
     }
+
+    if (localStorage.getItem("rooms") == "") {
+      $("#reservations-rooms").val(localStorage.setItem("rooms", 1));
+    }
+    if (localStorage.getItem("adults") == "") {
+      $("#reservations-rooms").val(localStorage.setItem("adults", 1));
+    }
+    if (localStorage.getItem("children") == "") {
+      $("#reservations-rooms").val(localStorage.setItem("children", 0));
+    }
+
     $("#reservations-rooms").val(localStorage.getItem("rooms"));
     $("#reservations-adults").val(localStorage.getItem("adults"));
     $("#reservations-children").val(localStorage.getItem("children"));
