@@ -150,6 +150,9 @@ class Profile {
         $("#UserReservationsTable").DataTable({
           order: [[3, "desc"]],
         });
+        $("#UserReservationsTable").wrap(
+          "<div class='hotel-table-wraper-class'></div>"
+        );
         $("#UserReservationsTable_filter").remove();
         $("#UserReservationsTable_wrapper").prepend($("#table-head"));
         $("#table-head").append($("#UserReservationsTable_length"));
@@ -161,6 +164,7 @@ class Profile {
     let rows = "";
 
     for (var i = 0; i < data.length; i++) {
+      console.log(data);
       let status = data[i].status.toLowerCase();
       let row = `<tr>
     <td>

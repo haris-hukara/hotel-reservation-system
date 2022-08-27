@@ -431,8 +431,7 @@ table.dataTable.order-column.hover tbody tr:hover.selected > .sorting_3 {
 }
 table.dataTable.no-footer {
   border: 1px solid rgba(0, 0, 0, 0.3);
-
-  margin-bottom: 2.6rem;
+  margin-bottom: 1.6rem;
 }
 table.dataTable.compact thead th,
 table.dataTable.compact thead td {
@@ -654,5 +653,16 @@ table.dataTable td {
   }
   .dataTables_wrapper .dataTables_filter {
     margin-top: 0.5em;
+  }
+}
+
+@media screen and (max-width: 815px) {
+  .hotel-table-wraper-class {
+    overflow-x: scroll;
+    overflow-y: none;
+    border: 1px solid rgba(0, 0, 0, 0.3) 90deg;
+    border-bottom: none;
+    border-radius: 10px;
+    margin-bottom: 2.6rem;
   }
 }

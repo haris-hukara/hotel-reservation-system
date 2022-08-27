@@ -82,6 +82,10 @@ class Admin {
       $("#UserReservationsTable").DataTable({
         order: [[5, "asc"]],
       });
+      $("#UserReservationsTable").wrap(
+        "<div class='hotel-table-wraper-class'></div>"
+      );
+
       $("#UserReservationsTable_filter").remove();
       $("#UserReservationsTable_wrapper").prepend($("#table-head"));
       $("#table-head").append($("#UserReservationsTable_length"));
@@ -135,7 +139,8 @@ class Admin {
   }
 
   static generateReservationTable(rows) {
-    let html = `<table id="UserReservationsTable">
+    let html = `
+    <table id="UserReservationsTable">
     <thead>
       <tr>
         <th>Reservation id</th>
