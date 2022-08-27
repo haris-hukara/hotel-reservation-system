@@ -5,16 +5,16 @@ class Config {
     const DATE_FORMAT = "Y-m-d H:i:s";
 
     public static function DB_HOST(){
-      return Config::get_env("DB_HOST", "localhost");
+      return Config::get_env("DB_HOST", "bfcbexmm25ugi4jrbp3d-mysql.services.clever-cloud.com");
     }
     public static function DB_USERNAME(){
-      return Config::get_env("DB_USERNAME", "root");
+      return Config::get_env("DB_USERNAME", "uvshnfgdlriqpcmq");
     }
     public static function DB_PASSWORD(){
-      return Config::get_env("DB_PASSWORD", "root");
+      return Config::get_env("DB_PASSWORD", "rWtBP3Cy9iv1652cpypd");
     }
     public static function DB_SCHEME(){
-      return Config::get_env("DB_SCHEME", "hotelsea");
+      return Config::get_env("DB_SCHEME", "bfcbexmm25ugi4jrbp3d");
     }
     public static function DB_PORT(){
       return Config::get_env("DB_PORT", "3306");
