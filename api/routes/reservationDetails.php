@@ -89,7 +89,7 @@ Flight::route('GET /admin/reservation/@reservation_id/details/room/@room_id', fu
 *  @OA\Response(response="200", description="Added order details")
 * )     
 */ 
-Flight::route('POST /admin/reservation/details', function(){
+Flight::route('POST /reservation/details', function(){
     $data = Flight::request()->data->getdata();
     Flight::json(Flight::reservationDetailsService()->add_reservation_details($data));
 });
