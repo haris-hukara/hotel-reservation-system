@@ -1,9 +1,4 @@
-# hotelsea
-Final project documentation 
-( [Click here to download!](https://github.com/haris-hukara/hotelsea/blob/main/Haris%20Hukara%20Project.docx?raw=true))
-
-Software Eng Project 
-
+# hotel-reservation-system
 Features:
 - Fully functional api (All routes are working properly and can be tested on API page)
 - Fully responsive FE

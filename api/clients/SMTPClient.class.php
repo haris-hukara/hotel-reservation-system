@@ -25,7 +25,7 @@ class SMTPClient {
     $message = (new Swift_Message('Confirm your account'))
       ->setFrom(['haris.hukara@stu.ibu.edu.ba' => 'Hotel Sea'])
       ->setTo([$userAccount['email']])
-      ->setBody('Here is the confirmation link: http://'.$base_url.'/login.html?confirm='.$userAccount['token']);
+      ->setBody('Here is the confirmation link: '.$this->base_url.'/login.html?confirm='.$userAccount['token']);
       
     $this->mailer->send($message);
   }
