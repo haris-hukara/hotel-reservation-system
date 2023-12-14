@@ -17,10 +17,15 @@ class SMTPClient {
   }   
 
   public function send_registration_token($userAccount){
+    $base_url = $this->base_url;
+    if($base_url = "localhost"){
+      $base_url = "localhost/hotelsea";
+    }
+
     $message = (new Swift_Message('Confirm your account'))
       ->setFrom(['haris.hukara@stu.ibu.edu.ba' => 'Hotel Sea'])
       ->setTo([$userAccount['email']])
-      ->setBody('Here is the confirmation link: '.$this->base_url.'/login.html?confirm='.$userAccount['token']);
+      ->setBody('Here is the confirmation link: http://'.$base_url.'/login.html?confirm='.$userAccount['token']);
       
     $this->mailer->send($message);
   }

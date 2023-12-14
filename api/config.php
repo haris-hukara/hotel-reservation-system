@@ -3,8 +3,10 @@
 class Config {
 
     const DATE_FORMAT = "Y-m-d H:i:s";
- 
+
     // remote setup
+  /* */
+
     public static function DB_HOST(){
       return Config::get_env("DB_HOST", "bfcbexmm25ugi4jrbp3d-mysql.services.clever-cloud.com");
     }
@@ -20,9 +22,8 @@ class Config {
     public static function DB_PORT(){
       return Config::get_env("DB_PORT", "3306");
     }
-    
-  /*  */
  
+
   /*
     // local setup
     public static function DB_HOST(){
@@ -32,7 +33,7 @@ class Config {
       return Config::get_env("DB_USERNAME", "root");
     }
     public static function DB_PASSWORD(){
-      return Config::get_env("DB_PASSWORD", "root");
+      return Config::get_env("DB_PASSWORD", "rootroot");
     }
     public static function DB_SCHEME(){
       return Config::get_env("DB_SCHEME", "hotelsea");
@@ -41,6 +42,7 @@ class Config {
       return Config::get_env("DB_PORT", "3306");
     }
 */
+ 
 
 
 
