@@ -1,6 +1,33 @@
 # QA Automation - UI Tests
 Technologies used: Python and Selenium.
 
+## Installation
+---------------------------------------
+
+### Python3
+python3
+
+### Python3 pip (package installer for Python)
+install python3-pip
+pip3 install --upgrade pip
+
+### pip3 packaging
+pip3 install packaging
+
+### WebDriver manager
+pip3 install webdriver-manager
+
+### Selenium
+pip3 install -U selenium
+
+### unittest-xml-reporting
+pip install unittest-xml-reporting
+
+### junit2html
+pip install junit2html
+
+---------------------------------------
+
 
 ### Running individual test
 Each test starts with "test" and it ends with ".py" extension
