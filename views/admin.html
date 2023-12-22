@@ -6,7 +6,7 @@
   <div class="profile-box">
     <div class="profile-options">
       <button
-        id="my-profile-btn"
+        id="admin-rooms-btn"
         class="profile-option-active"
         href=""
         onclick="Admin.showUserProfile()"
@@ -14,7 +14,7 @@
         Rooms
       </button>
       <button
-        id="my-reservations-btn"
+        id="admin-reservations-btn"
         class="profile-option-inactive"
         href=""
         onclick="Admin.showUserReservations()"
@@ -296,7 +296,7 @@ Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id hic repudiandae ut,
     </div>
   </div>
 
-  <div id="user-reservations-table" class="section-table hidden">
+  <div id="admin-reservations-table" class="section-table hidden">
     <div id="table-head">
       <h2 id="my-table-name">Reservations table</h2>
     </div>
@@ -304,8 +304,8 @@ Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id hic repudiandae ut,
 </div>
 
 <!-- modal -->
-<div id="profile-reservation-modal-overlay" class="modal-overlay">
-  <div id="profile-reservation-modal" class="modal">
+<div id="admin-profile-reservation-modal-overlay" class="modal-overlay">
+  <div id="admin-profile-reservation-modal" class="modal">
     <a class="close-modal" onclick="Admin.closeInfoModal()">
       <svg viewBox="0 0 20 20">
         <path
@@ -319,8 +319,8 @@ Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id hic repudiandae ut,
       <h1 class="modal-heading">
         Reservation id: <span id="reservation-info-id"></span>
       </h1>
-      <div id="reservation-form-container" class="">
-        <form id="user-reservation-form" class="" role="form">
+      <div id="admin-reservation-form-container" class="">
+        <form id="admin-user-reservation-form" class="" role="form">
           <a
             id="admin-edit-reservation-details"
             class="forgot"
@@ -339,7 +339,7 @@ Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id hic repudiandae ut,
           <div class="input-container">
             <input
               disabled=""
-              id="profile-modal-room-name"
+              id="admin-profile-modal-room-name"
               required=""
               name="room_name"
               class="form-field"
@@ -350,7 +350,7 @@ Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id hic repudiandae ut,
           <input
             readonly
             hidden
-            id="profile-modal-reservation-id"
+            id="admin-profile-modal-reservation-id"
             required=""
             name="reservation_id"
             class="form-field"
@@ -359,7 +359,7 @@ Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id hic repudiandae ut,
           <input
             readonly
             hidden
-            id="profile-modal-reservation-old-room-id"
+            id="admin-profile-modal-reservation-old-room-id"
             required=""
             name="old_room_id"
             class="form-field"
@@ -373,7 +373,7 @@ Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id hic repudiandae ut,
               <div class="input-container">
                 <input
                   readonly="true"
-                  id="profile-modal-room-id"
+                  id="admin-profile-modal-room-id"
                   required=""
                   name="room_id"
                   class="form-field"
@@ -389,7 +389,7 @@ Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id hic repudiandae ut,
               <div class="input-container">
                 <input
                   disabled
-                  id="profile-modal-room-price"
+                  id="admin-profile-modal-room-price"
                   required=""
                   name="night_price"
                   class="form-field"
@@ -407,7 +407,7 @@ Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id hic repudiandae ut,
               <div class="input-container">
                 <input
                   readonly="true"
-                  id="profile-modal-room-check-in"
+                  id="admin-profile-modal-room-check-in"
                   required=""
                   name="check_in"
                   class="form-field form-date"
@@ -422,7 +422,7 @@ Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id hic repudiandae ut,
               <div class="input-container">
                 <input
                   readonly="true"
-                  id="profile-modal-room-check-out"
+                  id="admin-profile-modal-room-check-out"
                   required=""
                   name="check_out"
                   class="form-field form-date"
@@ -439,7 +439,7 @@ Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id hic repudiandae ut,
               <div class="input-container">
                 <input
                   readonly="true"
-                  id="profile-modal-room-adults"
+                  id="admin-profile-modal-room-adults"
                   required=""
                   name="adults"
                   class="form-field"
@@ -455,7 +455,7 @@ Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id hic repudiandae ut,
               <div class="input-container">
                 <input
                   readonly="true"
-                  id="profile-modal-room-children"
+                  id="admin-profile-modal-room-children"
                   required=""
                   name="children"
                   class="form-field"
@@ -468,7 +468,7 @@ Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id hic repudiandae ut,
 
           <p style="font-size: 1.6rem; text-align: center; margin: 1rem">
             Total price:
-            <span id="profile-modal-room-total-price" class="room-price"
+            <span id="admin-profile-modal-room-total-price" class="room-price"
               >$50.00</span
             >
           </p>
@@ -482,7 +482,7 @@ Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id hic repudiandae ut,
           </button>
         </form>
 
-        <form id="user-details-form" class="" role="form" hidden="">
+        <form id="admin-user-details-form" class="" role="form" hidden="">
           <div class="label-title">
             <label for="email">Email</label>
           </div>

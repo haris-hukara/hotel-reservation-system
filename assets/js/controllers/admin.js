@@ -4,7 +4,7 @@ class Admin {
       Admin.getUserReservations();
     });
 
-    $("#user-reservation-form").validate({
+    $("#admin-user-reservation-form").validate({
       submitHandler: function (form, event) {
         event.preventDefault();
         Admin.updateReservationDetails();
@@ -34,26 +34,26 @@ class Admin {
   }
 
   static showUserReservations() {
-    $("#user-reservations-table").removeClass("hidden");
+    $("#admin-reservations-table").removeClass("hidden");
     $(".admin-rooms-container").addClass("hidden");
 
-    $("#my-profile-btn").removeClass("profile-option-active");
-    $("#my-profile-btn").addClass("profile-option-inactive");
+    $("#admin-rooms-btn").removeClass("profile-option-active");
+    $("#admin-rooms-btn").addClass("profile-option-inactive");
 
-    $("#my-reservations-btn").removeClass("profile-option-inactive");
-    $("#my-reservations-btn").addClass("profile-option-active");
+    $("#admin-reservations-btn").removeClass("profile-option-inactive");
+    $("#admin-reservations-btn").addClass("profile-option-active");
     $("#profile-page-heading").text("Admin reservations");
   }
 
   static showUserProfile() {
     $(".admin-rooms-container").removeClass("hidden");
-    $("#user-reservations-table").addClass("hidden");
+    $("#admin-reservations-table").addClass("hidden");
 
-    $("#my-profile-btn").removeClass("profile-option-inactive");
-    $("#my-profile-btn").addClass("profile-option-active");
+    $("#admin-rooms-btn").removeClass("profile-option-inactive");
+    $("#admin-rooms-btn").addClass("profile-option-active");
 
-    $("#my-reservations-btn").removeClass("profile-option-active");
-    $("#my-reservations-btn").addClass("profile-option-inactive");
+    $("#admin-reservations-btn").removeClass("profile-option-active");
+    $("#admin-reservations-btn").addClass("profile-option-inactive");
     $("#profile-page-heading").text("Admin rooms");
   }
 
@@ -73,22 +73,22 @@ class Admin {
   }
 
   static getUserReservations() {
-    $("#user-reservations-table").empty();
-    $("#user-reservations-table").append(Admin.tableHead);
+    $("#admin-reservations-table").empty();
+    $("#admin-reservations-table").append(Admin.tableHead);
     RestClient.get("api/admin/reservations", function (data) {
       let rows = Admin.generateReservationRow(data);
       let table = Admin.generateReservationTable(rows);
-      $("#user-reservations-table").append(table);
-      $("#UserReservationsTable").DataTable({
+      $("#admin-reservations-table").append(table);
+      $("#AdminReservationsTable").DataTable({
         order: [[5, "asc"]],
       });
-      $("#UserReservationsTable").wrap(
+      $("#AdminReservationsTable").wrap(
         "<div class='hotel-table-wraper-class'></div>"
       );
 
-      $("#UserReservationsTable_filter").remove();
-      $("#UserReservationsTable_wrapper").prepend($("#table-head"));
-      $("#table-head").append($("#UserReservationsTable_length"));
+      $("#AdminReservationsTable_filter").remove();
+      $("#AdminReservationsTable_wrapper").prepend($("#table-head"));
+      $("#table-head").append($("#AdminReservationsTable_length"));
     });
   }
 
@@ -140,7 +140,7 @@ class Admin {
 
   static generateReservationTable(rows) {
     let html = `
-    <table id="UserReservationsTable">
+    <table id="AdminReservationsTable">
     <thead>
       <tr>
         <th>Reservation id</th>
@@ -162,7 +162,7 @@ class Admin {
   }
 
   static closeInfoModal() {
-    var elements = $("[id^=profile-reservation-modal]");
+    var elements = $("[id^=admin-profile-reservation-modal]");
     elements.removeClass("active");
     $("#admin-update-reservation-details")
       .removeClass("submit")
@@ -171,26 +171,26 @@ class Admin {
   }
 
   static openInfoModal() {
-    var elements = $("[id^=profile-reservation-modal]");
+    var elements = $("[id^=admin-profile-reservation-modal]");
     elements.addClass("active");
   }
 
   static openUserInfoInModal() {
-    $("#user-reservation-form").attr("hidden", true);
-    $("#user-details-form").removeAttr("hidden");
+    $("#admin-user-reservation-form").attr("hidden", true);
+    $("#admin-user-details-form").removeAttr("hidden");
   }
 
   static openReservationInfoInModal() {
-    $("#user-details-form").attr("hidden", true);
-    $("#user-reservation-form").removeAttr("hidden");
+    $("#admin-user-details-form").attr("hidden", true);
+    $("#admin-user-reservation-form").removeAttr("hidden");
   }
 
   static openReservationDetails(id) {
     $("#reservation-info-id").html(id);
-    $("#profile-modal-reservation-id").val(id);
+    $("#admin-profile-modal-reservation-id").val(id);
     RestClient.get("api/admin/reservation/" + id + "/details", function (data) {
-      json2form("#user-reservation-form", data[0]);
-      $("#profile-modal-reservation-old-room-id").val(data[0]["room_id"]);
+      json2form("#admin-user-reservation-form", data[0]);
+      $("#admin-profile-modal-reservation-old-room-id").val(data[0]["room_id"]);
       Admin.getReservationTotalPrice(id);
       Admin.openReservationInfoInModal();
       Admin.openInfoModal();
@@ -201,7 +201,7 @@ class Admin {
     RestClient.get(
       "api/admin/reservation/" + reservation_id + "/price",
       function (data) {
-        $("#profile-modal-room-total-price").html(
+        $("#admin-profile-modal-room-total-price").html(
           "$" + data.total_price + ".00"
         );
       }
@@ -214,13 +214,13 @@ class Admin {
         night_price: data.night_price,
         room_name: data.name,
       };
-      json2form("#user-reservation-form", room_info);
+      json2form("#admin-user-reservation-form", room_info);
     });
   }
 
   static openReservationUserDetailsInfo(details_id) {
     RestClient.get("api/user/details/" + details_id, function (data) {
-      json2form("#user-details-form", data);
+      json2form("#admin-user-details-form", data);
       Admin.openUserInfoInModal();
       Admin.openInfoModal();
     });
@@ -258,15 +258,15 @@ class Admin {
       .removeClass("submit-disabled")
       .addClass("submit");
     $("#admin-update-reservation-details").removeAttr("disabled");
-    $("#profile-modal-room-id").removeAttr("readonly");
-    $("#profile-modal-room-check-in").removeAttr("readonly");
-    $("#profile-modal-room-check-out").removeAttr("readonly");
-    $("#profile-modal-room-adults").removeAttr("readonly");
-    $("#profile-modal-room-children").removeAttr("readonly");
+    $("#admin-profile-modal-room-id").removeAttr("readonly");
+    $("#admin-profile-modal-room-check-in").removeAttr("readonly");
+    $("#admin-profile-modal-room-check-out").removeAttr("readonly");
+    $("#admin-profile-modal-room-adults").removeAttr("readonly");
+    $("#admin-profile-modal-room-children").removeAttr("readonly");
   }
 
   static updateReservationDetails() {
-    let data = jsonize_form("#user-reservation-form");
+    let data = jsonize_form("#admin-user-reservation-form");
     data["new_room_id"] = data["room_id"];
     data["room_id"] = data["old_room_id"];
 
