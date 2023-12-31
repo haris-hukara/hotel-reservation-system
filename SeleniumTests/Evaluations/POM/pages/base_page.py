@@ -14,6 +14,7 @@ class BasePage:
                                   'tests.env')
     username = ConfReader.get_value(configurations, 'LOGIN_USERNAME')
     password = ConfReader.get_value(configurations, 'LOGIN_PASSWORD')
+    base_url = ConfReader.get_value(configurations, 'BASE_URL')
 
     def __init__(self, driver):
         self.driver = driver
