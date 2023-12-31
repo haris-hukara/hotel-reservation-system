@@ -2,7 +2,8 @@ import sys, os
 sys.path.append(os.path.abspath(os.path.dirname(os.path.dirname(__file__) + "/../../")))
 from POM.config_tests import *
 from POM.pages.login_page import LoginPage
-
+import time
+from time import sleep
 import xmlrunner
 from POM.helpers import Helpers
 
@@ -17,6 +18,10 @@ class TestLogin(ConfigTests):
     def test_000_check_page_heading(self):
         loginPage = self.loginPage
         loginPage.open_page() 
+        loginPage.send_keys(loginPage.email_textbox_name, "haris.hukara@stu.ibu.edu.ba")
+        loginPage.send_keys(loginPage.password_textbox_name, "password")
+        loginPage.click(loginPage.login_button_id)
+        sleep(4)
  
 
     @classmethod
