@@ -108,8 +108,10 @@ class BasePage(NavigationBar):
     def send_keys(self, locator, text):
         try:
             element_present = EC.presence_of_element_located(locator)
+            print(str(self.wait.until(element_present).get_attribute("value")))
             if str(self.wait.until(element_present).get_attribute("value")) != "":
                 self.wait.until(element_present).send_keys(Keys.CONTROL + "a" + Keys.DELETE)
+                self.wait.until(element_present).clear()
             self.wait.until(element_present).send_keys(text)
 
         except TimeoutException:
