@@ -5,6 +5,8 @@ from time import time
 from datetime import datetime
 
 date_format_reporting_page = '%Y-%m-%d %H:%M'
+date_format_recieved = '%Y-%m-%d'
+date_format_desired = '%d.%m.%Y.'
 date_format_management_page = '%d.%m.%Y %H:%M'
 
 
@@ -28,7 +30,14 @@ def convert_timestamp_to_datetime_string(timestamp, date_format):
 
 
 def convert_datetime_to_timestamp_string(datetime_value, date_format):
-
     datetime_value = datetime.strptime(str(datetime_value), date_format)
     timestamp_string = str(int(datetime.timestamp(datetime_value)))
     return timestamp_string
+
+
+def convert_datetime(datetime_value, current_date_format, desired_date_format):
+    timestamp = convert_datetime_to_timestamp_string(datetime_value, current_date_format)
+    return convert_timestamp_to_datetime_string(timestamp, desired_date_format)
+
+def default_datetime_conversion(datetime_value):
+    return convert_datetime(datetime_value, date_format_recieved, date_format_desired)

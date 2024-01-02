@@ -7,29 +7,14 @@ class RoomsPagePageLocators:
     reservations_children_input_id = (By.ID, "reservations-children")
     check_avaliability_button_id = (By.ID, "reservations-button")
    
+    make_reservation_button_xpath = (By.XPATH, "//*[@id='rooms-box']/div[1]/div/div[2]/button")
+    room_one_name = (By.ID, "room-1-name")
+    room_one_price_id = (By.ID, "room-1-price")
 
+    reservations_modal_room_id_input_id = (By.ID, "modal-room-id")
+    reservations_modal_room_price_input_id = (By.ID, "modal-room-price")
+    reservations_modal_room_checkin_input_id = (By.ID, "modal-room-check-in")
+    reservations_modal_room_checkout_input_id = (By.ID, "modal-room-check-out")
+    reservations_modal_room_adults_input_id = (By.ID, "modal-room-adults")
+    reservations_modal_room_children_input_id = (By.ID, "modal-room-children")
 
-
-    password_textbox_name = (By.NAME, "password")
-    login_button_id = (By.ID, "login-link")
-    register_button_id = (By.ID, "register-link")
-    send_recovery_link_button_xpath = (By.XPATH, "//*[@id='forgot-form']/button[text()='Send recovery link']")
-
-    forgot_password_link_xpath = (By.XPATH, "//a[text()='Forgot Password? ']")
-    forgot_form_back_to_login_link_xpath = (By.XPATH, "//*[@id='forgot-form']/div/a[contains(text(), 'Back to login')]")
-    change_password_form_back_to_login_link_xpath = (By.XPATH, "//*[@id='change-password-form']/div/a[contains(text(), 'Back to login')]")
-    register_form_back_to_login_link_xpath = (By.XPATH, "//*[@id='register-form']/div/a[contains(text(), 'Back to login')]")
-    register_here_link_xpath = (By.XPATH, "//*[@id='login-form']/div/a[contains(text(), 'Register Here')]")
-    
-    forgot_form_email_error_xpath = (By.XPATH, "//*[@id='forgot-form']//*[@id='email-error']")
-    
-    login_form_email_error_xpath = (By.XPATH, "//*[@id='login-form']//*[@id='email-error']")
-    login_form_password_error_xpath = (By.XPATH, "//*[@id='login-form']//*[@id='password-error']")
-    
-    register_form_email_error_xpath = (By.XPATH, "//*[@id='register-form']//*[@id='email-error']")
-    register_form_password_error_xpath = (By.XPATH, "//*[@id='register-form']//*[@id='password-error']")
-    register_form_first_name_error_xpath = (By.XPATH, "//*[@id='register-form']//*[@id='first_name-error']")
-    register_form_last_name_error_xpath = (By.XPATH, "//*[@id='register-form']//*[@id='last_name-error']")
-    register_form_birth_date_error_xpath = (By.XPATH, "//*[@id='register-form']//*[@id='birth_date-error']")
-    register_form_country_error_xpath = (By.XPATH, "//*[@id='register-form']//*[@id='country-error']")
-    register_form_city_error_xpath = (By.XPATH, "//*[@id='register-form']//*[@id='city-error']")
