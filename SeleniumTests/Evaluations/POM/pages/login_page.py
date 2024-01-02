@@ -11,3 +11,5 @@ class LoginPage(LoginPagePageLocators, BasePage):
         self.send_keys(self.password_textbox_name, password)
         self.click(self.login_button_id)
 
+    def get_field_error_message(self,locator):
+        return self.get_element_text(locator)

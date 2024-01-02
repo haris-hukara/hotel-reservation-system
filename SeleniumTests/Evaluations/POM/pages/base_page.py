@@ -4,7 +4,7 @@ from selenium.common import NoSuchElementException
 from selenium.webdriver import Keys
 from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException, ElementNotInteractableException
+from selenium.common.exceptions import TimeoutException, ElementNotInteractableException, ElementClickInterceptedException
 from selenium.webdriver.support.wait import WebDriverWait
 from POM.helpers import ConfReader
 from POM.pages.navigation_bar import *
@@ -88,6 +88,9 @@ class BasePage(NavigationBar):
         try:
             element_present = EC.presence_of_element_located(locator)
             self.wait.until(element_present).click()
+        except ElementClickInterceptedException:
+            element = self.wait.until(EC.element_to_be_clickable(locator))
+            element.click();
         except TimeoutException:
             raise TimeoutException(
                 "TimeoutException: Element not found on page, used selector: By." + locator[0] + "(\"" + locator[
