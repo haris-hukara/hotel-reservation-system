@@ -3,3 +3,4 @@
 config copy.php
 api/config.php
 .DS_Store
+/test-reports

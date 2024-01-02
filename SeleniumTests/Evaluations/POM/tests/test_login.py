@@ -15,13 +15,18 @@ class TestLogin(ConfigTests):
         cls.driver = super().init_driver(cls)
         cls.loginPage = LoginPage(cls.driver)
 
-    def test_000_check_page_heading(self):
+    def test_000_check_login(self):
         loginPage = self.loginPage
         loginPage.open_page() 
-        loginPage.send_keys(loginPage.email_textbox_name, "haris.hukara@stu.ibu.edu.ba")
-        loginPage.send_keys(loginPage.password_textbox_name, "password")
+        loginPage.send_keys(loginPage.email_textbox_name, loginPage.email)
+        loginPage.send_keys(loginPage.password_textbox_name, loginPage.password)
         loginPage.click(loginPage.login_button_id)
-        sleep(4)
+        sleep(3)
+        assert loginPage.get_current_url() == "http://localhost/hotelsea/index.html#homepage"
+
+    def test_001_check_logout(self):
+        loginPage = self.loginPage
+        loginPage.click_log_out_bar()
  
 
     @classmethod

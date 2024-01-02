@@ -7,12 +7,12 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, ElementNotInteractableException
 from selenium.webdriver.support.wait import WebDriverWait
 from POM.helpers import ConfReader
+from POM.pages.navigation_bar import *
 
-
-class BasePage:
+class BasePage(NavigationBar):
     configurations = os.path.join(os.path.abspath(os.path.dirname(os.path.dirname(__file__) + "/../tests/")),
                                   'tests.env')
-    username = ConfReader.get_value(configurations, 'LOGIN_USERNAME')
+    email = ConfReader.get_value(configurations, 'LOGIN_EMAIL')
     password = ConfReader.get_value(configurations, 'LOGIN_PASSWORD')
     base_url = ConfReader.get_value(configurations, 'BASE_URL')
 
